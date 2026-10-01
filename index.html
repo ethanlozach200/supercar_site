@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>F80 — Private Showroom</title>
+<meta name="description" content="An ultra-exclusive, cinematic showroom and configurator for the Ferrari F80 hypercar — a fan-made concept experience.">
+<meta name="theme-color" content="#030303">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23030303'/%3E%3Cpath d='M6 22 L12 10 H26 L24 14 H15 L14 17 H22 L20 21 H10 L9 22Z' fill='%23FF2800'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          obsidian: '#030303',
+          carbon: '#0b0b0d',
+          graphite: '#16171a',
+          titanium: '#9aa1aa',
+          accent: 'rgb(var(--accent-rgb) / <alpha-value>)'
+        },
+        fontFamily: {
+          display: ['Syncopate', 'sans-serif'],
+          sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif']
+        }
+      }
+    }
+  };
+</script>
+<script defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
+<style>
+  :root {
+    --accent-rgb: 255 40 0;
+    --obsidian: #030303;
+    --line: rgba(255, 255, 255, .09);
+    --titanium: #9aa1aa;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: var(--obsidian); -webkit-text-size-adjust: 100%; }
+  html.lock, html.lock body { overflow: hidden; }
+  body {
+    margin: 0;
+    background: var(--obsidian);
+    color: #e9eaec;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  [x-cloak] { display: none !important; }
+  ::selection { background: rgb(var(--accent-rgb)); color: #050505; }
+  :focus-visible { outline: 2px solid rgb(var(--accent-rgb)); outline-offset: 3px; }
+  button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #050505; }
+  ::-webkit-scrollbar-thumb { background: #2a2c31; border-radius: 10px; }
+
+  /* Film grain + global atmosphere */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .055; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .carbon {
+    background-color: #0a0a0c;
+    background-image:
+      linear-gradient(45deg, #131316 25%, transparent 25%, transparent 75%, #131316 75%),
+      linear-gradient(45deg, #131316 25%, transparent 25%, transparent 75%, #131316 75%);
+    background-size: 8px 8px; background-position: 0 0, 4px 4px;
+  }
+
+  /* Typography helpers */
+  .font-display { font-family: 'Syncopate', sans-serif; }
+  .eyebrow { font-size: .68rem; letter-spacing: .38em; text-transform: uppercase; color: rgb(var(--accent-rgb)); font-weight: 600; }
+  .h2 { font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; line-height: 1.05; font-size: clamp(1.7rem, 4.4vw, 3.6rem); letter-spacing: -.01em; }
+  .lede { color: rgba(255,255,255,.58); font-weight: 300; line-height: 1.75; font-size: clamp(.95rem, 1.2vw, 1.1rem); }
+  .label { font-size: .64rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.45); font-weight: 600; }
+  .text-accent { color: rgb(var(--accent-rgb)); }
+
+  /* Surfaces */
+  .glass {
+    background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
+    border: 1px solid rgba(255,255,255,.11);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 30px 60px -30px rgba(0,0,0,.9);
+    -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  /* Buttons */
+  .btn {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .7rem;
+    padding: .95rem 1.7rem; border-radius: 999px; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; font-weight: 700;
+    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s, background-color .4s, color .4s, border-color .4s;
+    will-change: transform; overflow: hidden; isolation: isolate;
+  }
+  .btn-accent { background: rgb(var(--accent-rgb)); color: #050505; box-shadow: 0 10px 40px -10px rgb(var(--accent-rgb) / .7); }
+  .btn-accent::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%); transform: translateX(-120%); transition: transform .8s; }
+  .btn-accent:hover::after { transform: translateX(120%); }
+  .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -8px rgb(var(--accent-rgb) / .85); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.22); color: #fff; background: rgba(255,255,255,.03); }
+  .btn-ghost:hover { border-color: rgb(var(--accent-rgb)); color: rgb(var(--accent-rgb)); transform: translateY(-2px); }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+
+  .chip { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+
+  /* Hero */
+  .line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+  .line-inner { display: block; will-change: transform; }
+  .hero-vignette { background: radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(3,3,3,.55) 60%, #030303 100%), linear-gradient(to bottom, rgba(3,3,3,.55), transparent 22%, transparent 70%, #030303 100%); }
+  .hero-glow { background: radial-gradient(ellipse 60% 50% at 75% 55%, rgb(var(--accent-rgb) / .16), transparent 70%); transition: background .6s; }
+  .ghost-word { position: absolute; right: -2vw; bottom: -4vw; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: clamp(8rem, 30vw, 30rem); line-height: .8; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.05); pointer-events: none; user-select: none; }
+
+  .hud-card { position: relative; border-radius: 22px; padding: 1.35rem 1.4rem 1.25rem; transform-style: preserve-3d; will-change: transform; overflow: hidden; }
+  .hud-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgb(var(--accent-rgb) / .22), transparent 60%); opacity: .8; }
+  .hud-card .bar { height: 3px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; margin-top: 1rem; }
+  .hud-card .bar i { display: block; height: 100%; width: 0; background: rgb(var(--accent-rgb)); box-shadow: 0 0 14px rgb(var(--accent-rgb)); }
+  .hud-corner { position: absolute; top: 14px; right: 14px; width: 9px; height: 9px; border-radius: 50%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 12px rgb(var(--accent-rgb)); animation: pulse 2.4s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+
+  .scroll-cue { width: 1px; height: 54px; background: linear-gradient(to bottom, rgb(var(--accent-rgb)), transparent); position: relative; overflow: hidden; }
+  .scroll-cue::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: #fff; animation: cue 2.2s ease-in-out infinite; }
+  @keyframes cue { to { top: 110%; } }
+
+  /* Marquee */
+  .marquee { overflow: hidden; border-block: 1px solid var(--line); background: rgba(255,255,255,.015); }
+  .marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+  .marquee-track span { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.4); padding: 1.15rem 2.2rem; white-space: nowrap; }
+  .marquee-track span b { color: rgb(var(--accent-rgb)); font-weight: 700; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* Stage */
+  .stage { background: radial-gradient(ellipse at 50% 30%, #15161a 0%, #070708 70%); }
+  .stage canvas { touch-action: pan-y; cursor: grab; }
+  .stage canvas:active { cursor: grabbing; }
+  .stage-vignette { background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.65) 100%); }
+  .no-webgl::after { content: "WebGL is unavailable on this device — the 3D showcase cannot render."; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 2rem; color: rgba(255,255,255,.5); font-size: .9rem; }
+
+  .hotspot { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; display: grid; place-items: center; pointer-events: auto; opacity: 0; transition: opacity .35s; will-change: transform; z-index: 2; }
+  .hs-dot { width: 12px; height: 12px; border-radius: 50%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 0 3px rgba(0,0,0,.55), 0 0 18px rgb(var(--accent-rgb)); transition: transform .3s; }
+  .hs-ring { position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgb(var(--accent-rgb)); animation: ring 2.4s ease-out infinite; }
+  @keyframes ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+  .hotspot:hover .hs-dot, .hotspot:focus-visible .hs-dot { transform: scale(1.35); }
+  .hs-label { position: absolute; left: 50px; top: 50%; transform: translate(-6px, -50%); white-space: nowrap; padding: .45rem .8rem; border-radius: 999px; background: rgba(5,5,6,.82); border: 1px solid rgba(255,255,255,.14); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .hotspot:hover .hs-label, .hotspot:focus-visible .hs-label { opacity: 1; transform: translate(0, -50%); }
+
+  /* Stat bars + swatches */
+  .meter { height: 3px; border-radius: 3px; background: rgba(255,255,255,.09); overflow: hidden; }
+  .meter i { display: block; height: 100%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 12px rgb(var(--accent-rgb) / .8); transition: width .3s linear; }
+  .swatch { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(255,255,255,.15); box-shadow: inset 0 0 0 3px #050505; transition: transform .3s, border-color .3s; }
+  .swatch:hover { transform: scale(1.12); }
+  .swatch[aria-pressed="true"] { border-color: rgb(var(--accent-rgb)); transform: scale(1.12); }
+  .stroke-accent { stroke: rgb(var(--accent-rgb)); }
+  .stop-accent { stop-color: rgb(var(--accent-rgb)); }
+
+  /* Pedal */
+  .pedal { position: relative; width: 100%; padding: 1.4rem 1rem; border-radius: 22px; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(180deg, #1a1b1f, #0b0b0d); font-family: 'Syncopate', sans-serif; font-weight: 700; letter-spacing: .22em; font-size: .78rem; text-transform: uppercase; user-select: none; -webkit-user-select: none; touch-action: none; transition: transform .12s, border-color .3s, box-shadow .3s; overflow: hidden; }
+  .pedal.on { transform: translateY(3px) scale(.985); border-color: rgb(var(--accent-rgb)); box-shadow: 0 0 40px -6px rgb(var(--accent-rgb) / .8), inset 0 0 30px rgb(var(--accent-rgb) / .25); }
+  .pedal::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px); }
+
+  /* Matrix */
+  .mx-row { transition: background-color .4s; }
+  .mx-row:hover { background: rgba(255,255,255,.025); }
+  .mx-cell { position: relative; display: block; padding: .9rem 1.4rem; transition: background-color .35s, color .35s; }
+  .mx-cell.hot { background: rgb(var(--accent-rgb) / .07); }
+  .mx-cell.sub { box-shadow: inset 0 0 0 1px rgb(var(--accent-rgb) / .3); background: rgb(var(--accent-rgb) / .05); }
+  .mx-bar { display: block; height: 2px; margin-top: .7rem; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
+  .mx-bar i { display: block; height: 100%; background: rgba(255,255,255,.55); transition: width .9s cubic-bezier(.2,.8,.2,1); }
+  .mx-cell.sub .mx-bar i { background: rgb(var(--accent-rgb)); }
+  .mx-drawer { display: grid; transition: grid-template-rows .6s cubic-bezier(.2,.8,.2,1); }
+  .mx-plus { transition: transform .5s cubic-bezier(.2,.8,.2,1), border-color .3s, color .3s; }
+
+  /* Form */
+  .field { position: relative; }
+  .field input, .field select, .field textarea { width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(255,255,255,.2); padding: 1.65rem 0 .6rem; color: #fff; font-size: .95rem; outline: none; border-radius: 0; transition: border-color .3s; appearance: none; -webkit-appearance: none; font-family: inherit; }
+  .field textarea { resize: none; }
+  .field select { cursor: pointer; padding-right: 1.6rem; }
+  .field option { background: #0b0b0d; color: #fff; }
+  .field label { position: absolute; left: 0; top: 1.45rem; font-size: .9rem; color: rgba(255,255,255,.45); pointer-events: none; transition: top .25s, font-size .25s, letter-spacing .25s, color .25s; }
+  .field input:focus ~ label, .field input:not(:placeholder-shown) ~ label,
+  .field textarea:focus ~ label, .field textarea:not(:placeholder-shown) ~ label,
+  .field select:focus ~ label, .field select.filled ~ label { top: .3rem; font-size: .6rem; letter-spacing: .24em; text-transform: uppercase; color: rgb(var(--accent-rgb)); }
+  .field .ln { position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 10px rgb(var(--accent-rgb)); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+  .field input:focus ~ .ln, .field select:focus ~ .ln, .field textarea:focus ~ .ln { transform: scaleX(1); }
+  .field.err input, .field.err select { border-bottom-color: #ff5a4d; }
+  .field .caret { position: absolute; right: 2px; bottom: .85rem; pointer-events: none; color: rgba(255,255,255,.5); }
+  .err-msg { color: #ff7a6e; font-size: .72rem; margin-top: .4rem; }
+  .opt { display: inline-flex; align-items: center; padding: .6rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.16); font-size: .74rem; letter-spacing: .06em; transition: border-color .3s, background-color .3s, color .3s; }
+  .opt:hover { border-color: rgba(255,255,255,.4); }
+  .opt[aria-pressed="true"] { border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .12); color: #fff; }
+
+  .check-ring { stroke-dasharray: 166; stroke-dashoffset: 166; }
+  .check-tick { stroke-dasharray: 48; stroke-dashoffset: 48; }
+
+  .progress { position: fixed; left: 0; top: 0; height: 2px; width: 100%; z-index: 95; background: rgb(var(--accent-rgb)); box-shadow: 0 0 14px rgb(var(--accent-rgb)); transform: scaleX(0); transform-origin: left; }
+
+  .rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track, .hs-ring, .hud-corner, .scroll-cue::after { animation: none !important; }
+    html { scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+
+<body>
+<noscript><p style="padding:2rem;text-align:center">This experience requires JavaScript.</p></noscript>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ============================ NAV ============================ -->
+<header x-data="{ open: false, scrolled: false }" @scroll.window.passive.throttle.100ms="scrolled = window.scrollY > 40"
+        class="fixed inset-x-0 top-0 z-50 transition-colors duration-500"
+        :class="(scrolled || open) ? 'bg-obsidian/80 backdrop-blur-xl border-b border-white/5' : 'border-b border-transparent'">
+  <div class="mx-auto max-w-[1800px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3 font-display font-bold text-[11px] md:text-xs tracking-[.32em]" aria-label="F80 Private Showroom — top">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_14px_rgb(var(--accent-rgb))]"></span>
+      F80 <span class="text-white/35 hidden sm:inline">/ Private Showroom</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[.26em] text-white/60" aria-label="Primary">
+      <a class="hover:text-white transition-colors" href="#showcase">Showcase</a>
+      <a class="hover:text-white transition-colors" href="#sound">Sound</a>
+      <a class="hover:text-white transition-colors" href="#engineering">Engineering</a>
+      <a class="hover:text-white transition-colors" href="#reserve">Reserve</a>
+    </nav>
+    <div class="hidden md:block"><a href="#reserve" class="btn btn-ghost !py-2.5 !px-5">Request allocation</a></div>
+    <button class="md:hidden w-10 h-10 grid place-items-center" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+      <span class="relative block w-6 h-3">
+        <span class="absolute left-0 top-0 h-px w-full bg-white transition-transform duration-300" :class="open ? 'translate-y-[6px] rotate-45' : ''"></span>
+        <span class="absolute left-0 bottom-0 h-px w-full bg-white transition-transform duration-300" :class="open ? '-translate-y-[5px] -rotate-45' : ''"></span>
+      </span>
+    </button>
+  </div>
+  <nav x-show="open" x-cloak x-transition.opacity class="md:hidden px-5 pb-8 pt-2 flex flex-col gap-1" aria-label="Mobile">
+    <a @click="open=false" href="#showcase" class="py-4 border-b border-white/10 font-display text-sm tracking-[.2em] uppercase">Showcase</a>
+    <a @click="open=false" href="#sound" class="py-4 border-b border-white/10 font-display text-sm tracking-[.2em] uppercase">Sound</a>
+    <a @click="open=false" href="#engineering" class="py-4 border-b border-white/10 font-display text-sm tracking-[.2em] uppercase">Engineering</a>
+    <a @click="open=false" href="#reserve" class="mt-6 btn btn-accent">Request allocation</a>
+  </nav>
+</header>
+
+<main>
+<!-- ============================ HERO ============================ -->
+<section id="top" class="relative min-h-screen overflow-hidden" aria-label="Introduction">
+  <canvas id="hero-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+  <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+  <div class="absolute inset-0 carbon opacity-[.22] pointer-events-none" style="-webkit-mask-image: radial-gradient(ellipse at 70% 60%, #000 0%, transparent 65%); mask-image: radial-gradient(ellipse at 70% 60%, #000 0%, transparent 65%);"></div>
+  <div class="absolute inset-0 hero-vignette pointer-events-none"></div>
+  <div class="ghost-word" aria-hidden="true">F80</div>
+
+  <div class="relative z-10 mx-auto max-w-[1800px] px-5 md:px-10 pt-28 md:pt-32 pb-20 min-h-screen grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    <div class="lg:col-span-7">
+      <p class="eyebrow mb-6 md:mb-8" data-hero="fade">Maranello &nbsp;·&nbsp; Private Allocation 2026</p>
+      <h1 class="font-display font-bold uppercase leading-[.98] tracking-tight" style="font-size: clamp(2.5rem, 8vw, 7rem);">
+        <span class="line"><span class="line-inner">Ferrari</span></span>
+        <span class="line"><span class="line-inner text-accent" style="text-shadow: 0 0 60px rgb(var(--accent-rgb) / .45)">F80</span></span>
+        <span class="line"><span class="line-inner text-white/90">Unleashed</span></span>
+      </h1>
+      <p class="lede max-w-xl mt-8 md:mt-10" data-hero="fade">
+        Twelve hundred horsepower of hybrid fury, wrapped in a carbon monocoque and sculpted by the wind.
+        Limited to 799 examples worldwide — and by invitation only.
+      </p>
+      <div class="flex flex-wrap gap-4 mt-10" data-hero="fade">
+        <a href="#showcase" class="btn btn-accent">Enter the configurator</a>
+        <a href="#reserve" class="btn btn-ghost">Request allocation</a>
+      </div>
+    </div>
+
+    <!-- Floating glassmorphism spec HUD -->
+    <div class="lg:col-span-5" x-data>
+      <div class="grid grid-cols-2 gap-3 md:gap-5 max-w-xl lg:max-w-none mx-auto" style="perspective: 1200px;">
+        <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
+          <span class="hud-corner"></span>
+          <p class="label">Top Speed</p>
+          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="350">350</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">km/h</small></p>
+          <div class="bar"><i data-fill="100"></i></div>
+        </div></div>
+        <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
+          <span class="hud-corner"></span>
+          <p class="label">0 – 100 km/h</p>
+          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="2.15" data-dec="2">2.15</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">s</small></p>
+          <div class="bar"><i data-fill="94"></i></div>
+        </div></div>
+        <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
+          <span class="hud-corner"></span>
+          <p class="label">Horsepower</p>
+          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="1200" data-sep="1">1,200</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">cv</small></p>
+          <div class="bar"><i data-fill="100"></i></div>
+        </div></div>
+        <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
+          <span class="hud-corner"></span>
+          <p class="label">Downforce @ 250</p>
+          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="1050" data-sep="1">1,050</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">kg</small></p>
+          <div class="bar"><i data-fill="88"></i></div>
+        </div></div>
+      </div>
+      <p class="text-[.65rem] tracking-[.2em] uppercase text-white/30 mt-5 text-center lg:text-left">Peak figures · Corsa mode · indicative</p>
+    </div>
+  </div>
+
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-3" data-hero="fade" aria-hidden="true">
+    <span class="label">Scroll</span><span class="scroll-cue"></span>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>799 units <b>•</b> 1,200 cv <b>•</b> 350 km/h <b>•</b> 2.15 s <b>•</b> 1,050 kg downforce <b>•</b> carbon monocoque <b>•</b> hybrid V6 <b>•</b> by invitation only <b>•</b></span>
+    <span>799 units <b>•</b> 1,200 cv <b>•</b> 350 km/h <b>•</b> 2.15 s <b>•</b> 1,050 kg downforce <b>•</b> carbon monocoque <b>•</b> hybrid V6 <b>•</b> by invitation only <b>•</b></span>
+  </div>
+</div>
+
+<!-- ============================ SHOWCASE / CONFIGURATOR ============================ -->
+<section id="showcase" class="relative py-24 md:py-36" x-data="showcase" aria-labelledby="showcase-title">
+  <div class="mx-auto max-w-[1800px] px-5 md:px-10">
+    <div class="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16" data-reveal>
+      <div class="lg:col-span-7">
+        <p class="eyebrow mb-5">01 &nbsp;/&nbsp; Showcase &amp; Configurator</p>
+        <h2 id="showcase-title" class="h2">Three characters.<br><span class="text-white/35">One machine.</span></h2>
+      </div>
+      <p class="lede lg:col-span-5">Switch the manettino and the whole room reacts — light, aero, power delivery. Drag to orbit, then tap a pulsing point to inspect the chassis.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-5 md:gap-6">
+      <!-- 3D Stage -->
+      <div class="lg:col-span-8 relative stage rounded-[26px] md:rounded-[32px] overflow-hidden border border-white/10 self-start lg:sticky lg:top-24" id="stage" data-reveal>
+        <canvas id="car-canvas" class="block w-full h-[60vh] min-h-[400px] lg:h-[740px]" aria-label="Interactive 3D model of the car. Drag to rotate."></canvas>
+        <div class="absolute inset-0 stage-vignette pointer-events-none"></div>
+
+        <div class="absolute left-4 top-4 md:left-7 md:top-7 pointer-events-none">
+          <p class="label mb-2">Active mode</p>
+          <p class="font-display font-bold text-xl md:text-3xl uppercase text-accent leading-none" x-text="mode.label + ' / ' + mode.sub"></p>
+        </div>
+        <div class="absolute right-4 top-4 md:right-7 md:top-7 pointer-events-none hidden sm:block text-right">
+          <p class="label">Drag · orbit &nbsp;|&nbsp; Scroll · zoom</p>
+        </div>
+
+        <!-- Hotspots -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden" role="group" aria-label="Inspection points">
+          <template x-for="h in $store.drawer.items" :key="h.id">
+            <button type="button" data-hotspot :data-id="h.id" class="hotspot" @click="$store.drawer.open(h.id)" :aria-label="'Inspect: ' + h.title">
+              <span class="hs-ring"></span><span class="hs-dot"></span>
+              <span class="hs-label" x-text="h.num + ' · ' + h.title"></span>
+            </button>
+          </template>
+        </div>
+
+        <!-- Camera presets -->
+        <div class="absolute inset-x-0 bottom-4 md:bottom-7 flex justify-center px-3">
+          <div class="glass rounded-full p-1.5 flex gap-1 max-w-full overflow-x-auto" role="group" aria-label="Camera angle">
+            <template x-for="v in views" :key="v.id">
+              <button type="button" @click="setView(v.id)" class="px-4 md:px-5 py-2.5 rounded-full text-[10px] md:text-[11px] uppercase tracking-[.2em] font-semibold whitespace-nowrap transition-colors duration-300"
+                      :class="view === v.id ? 'bg-accent text-black' : 'text-white/65 hover:text-white'" :aria-pressed="view === v.id" x-text="v.label"></button>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control panel -->
+      <div class="lg:col-span-4 flex flex-col gap-5 md:gap-6" data-reveal>
+        <div class="glass rounded-[26px] p-5 md:p-7">
+          <p class="label mb-4">Drive mode</p>
+          <div class="relative grid grid-cols-3 p-1 rounded-full border border-white/10 bg-black/40" role="group" aria-label="Driving mode">
+            <div class="absolute top-1 bottom-1 left-1 w-[calc((100%-.5rem)/3)] rounded-full bg-accent transition-transform duration-500 ease-out" :style="`transform: translateX(${$store.drive.idx * 100}%)`"></div>
+            <template x-for="id in $store.drive.order" :key="id">
+              <button type="button" @click="$store.drive.set(id)" class="relative z-10 py-3 text-[10px] md:text-[11px] uppercase tracking-[.2em] font-bold transition-colors duration-300"
+                      :class="$store.drive.id === id ? 'text-black' : 'text-white/70 hover:text-white'" :aria-pressed="$store.drive.id === id" x-text="$store.drive.modes[id].label"></button>
+            </template>
+          </div>
+          <div class="mt-6 min-h-[8.5rem]">
+            <p class="font-display font-bold text-sm md:text-base uppercase tracking-wide" x-text="mode.tagline"></p>
+            <p class="lede !text-sm mt-3" x-text="mode.desc"></p>
+          </div>
+          <dl class="grid grid-cols-2 gap-x-5 gap-y-4 mt-5 pt-5 border-t border-white/10">
+            <template x-for="t in mode.traits" :key="t[0]">
+              <div><dt class="label !text-[.58rem]" x-text="t[0]"></dt><dd class="text-[.82rem] mt-1 text-white/85" x-text="t[1]"></dd></div>
+            </template>
+          </dl>
+        </div>
+
+        <div class="glass rounded-[26px] p-5 md:p-7">
+          <p class="label mb-5">Performance envelope</p>
+          <div class="grid grid-cols-2 gap-x-6 gap-y-6">
+            <div><p class="label !text-[.58rem]">Power</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.hp"></span> <small class="text-xs text-white/40">cv</small></p><div class="meter mt-3"><i :style="`width:${bars.hp}%`"></i></div></div>
+            <div><p class="label !text-[.58rem]">0–100 km/h</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.zero"></span> <small class="text-xs text-white/40">s</small></p><div class="meter mt-3"><i :style="`width:${bars.zero}%`"></i></div></div>
+            <div><p class="label !text-[.58rem]">Top speed</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.top"></span> <small class="text-xs text-white/40">km/h</small></p><div class="meter mt-3"><i :style="`width:${bars.top}%`"></i></div></div>
+            <div><p class="label !text-[.58rem]">Downforce</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.down"></span> <small class="text-xs text-white/40">kg</small></p><div class="meter mt-3"><i :style="`width:${bars.down}%`"></i></div></div>
+          </div>
+
+          <div class="mt-7 pt-6 border-t border-white/10">
+            <div class="flex items-center justify-between mb-3">
+              <p class="label">Power &amp; torque curve</p>
+              <p class="text-[.6rem] tracking-[.18em] uppercase text-white/40"><span class="inline-block w-3 h-[2px] bg-accent align-middle mr-1.5"></span>cv &nbsp;<span class="inline-block w-3 border-t border-dashed border-white/60 align-middle mr-1.5 ml-2"></span>Nm</p>
+            </div>
+            <svg viewBox="0 0 400 190" class="w-full h-auto overflow-visible" role="img" aria-label="Power and torque curve versus engine speed for the selected mode">
+              <defs>
+                <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" class="stop-accent" stop-opacity=".42"/>
+                  <stop offset="1" class="stop-accent" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g stroke="rgba(255,255,255,.07)" stroke-width="1">
+                <line x1="0" y1="10" x2="400" y2="10"/><line x1="0" y1="52" x2="400" y2="52"/><line x1="0" y1="94" x2="400" y2="94"/><line x1="0" y1="136" x2="400" y2="136"/><line x1="0" y1="170" x2="400" y2="170" stroke="rgba(255,255,255,.2)"/>
+                <line x1="133" y1="10" x2="133" y2="170"/><line x1="266" y1="10" x2="266" y2="170"/><line x1="399" y1="10" x2="399" y2="170"/>
+              </g>
+              <path :d="curve.area" fill="url(#areaG)"/>
+              <path :d="curve.tq" fill="none" stroke="#c9ced5" stroke-width="1.4" stroke-dasharray="4 4" stroke-linecap="round" opacity=".8"/>
+              <path :d="curve.hp" fill="none" class="stroke-accent" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgb(var(--accent-rgb) / .8))"/>
+              <g fill="rgba(255,255,255,.4)" font-size="9" letter-spacing="1.5" font-family="Plus Jakarta Sans, sans-serif">
+                <text x="0" y="186">0</text><text x="125" y="186">3000</text><text x="258" y="186">6000</text><text x="372" y="186">9000 rpm</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="glass rounded-[26px] p-5 md:p-7">
+          <p class="label mb-4">Exterior · <span class="text-white/85 normal-case tracking-normal font-medium text-[.8rem]" x-text="paints.find(p => p.id === paint).name"></span></p>
+          <div class="flex flex-wrap gap-3">
+            <template x-for="p in paints" :key="p.id">
+              <button type="button" class="swatch" :style="`background:${p.hex}`" :aria-label="p.name" :aria-pressed="paint === p.id" @click="setPaint(p.id)"></button>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SOUND LAB ============================ -->
+<section id="sound" class="relative py-24 md:py-36 border-t border-white/5" x-data="soundLab" aria-labelledby="sound-title">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 50% at 50% 0%, rgb(var(--accent-rgb) / .08), transparent 70%);"></div>
+  <div class="relative mx-auto max-w-[1800px] px-5 md:px-10">
+    <div class="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16" data-reveal>
+      <div class="lg:col-span-7">
+        <p class="eyebrow mb-5">02 &nbsp;/&nbsp; Sound &amp; Sensory</p>
+        <h2 id="sound-title" class="h2">Hear it<br><span class="text-white/35">before you own it.</span></h2>
+      </div>
+      <p class="lede lg:col-span-5">A synthetic engine, generated live in your browser with the Web Audio API. Ignite it, then hold the throttle — the note, the turbo and the crackle follow the drive mode you picked above.</p>
+    </div>
+
+    <div class="glass rounded-[26px] md:rounded-[32px] p-4 md:p-8 grid lg:grid-cols-12 gap-6 md:gap-8" data-reveal>
+      <div class="lg:col-span-8">
+        <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-black/60">
+          <canvas x-ref="viz" class="block w-full h-[250px] md:h-[360px]" aria-label="Live audio frequency visualizer"></canvas>
+          <div class="absolute left-4 top-4 flex items-center gap-3 pointer-events-none">
+            <span class="chip"><span class="w-1.5 h-1.5 rounded-full" :class="on ? 'bg-accent animate-pulse' : 'bg-white/30'"></span><span x-text="on ? 'Engine running' : 'Engine off'"></span></span>
+            <span class="chip hidden sm:inline-flex" x-text="$store.drive.modes[$store.drive.id].label"></span>
+          </div>
+          <p class="absolute right-4 bottom-3 text-[.58rem] tracking-[.22em] uppercase text-white/30 pointer-events-none">Synthetic · 3.0 V6 hybrid · 120°</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col gap-5">
+        <div class="relative mx-auto w-full max-w-[280px]">
+          <svg viewBox="0 0 200 150" class="w-full h-auto" aria-hidden="true">
+            <path d="M 30.72 140 A 80 80 0 1 1 169.28 140" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 30.72 140 A 80 80 0 1 1 169.28 140" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-dasharray="1.5 7" transform="translate(0 0) scale(1)" opacity=".0"/>
+            <path x-ref="arc" d="M 30.72 140 A 80 80 0 1 1 169.28 140" fill="none" class="stroke-accent" stroke-width="8" stroke-linecap="round" stroke-dasharray="335.1" stroke-dashoffset="335.1" style="filter: drop-shadow(0 0 8px rgb(var(--accent-rgb) / .9))"/>
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center pt-2">
+            <p x-ref="rpm" class="font-display font-bold text-4xl md:text-[2.6rem] leading-none tabular-nums">0000</p>
+            <p class="label mt-2">rpm</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div><p class="label !text-[.58rem]">Throttle</p><div class="meter mt-2.5"><i x-ref="thr" style="width:0%"></i></div></div>
+          <div><p class="label !text-[.58rem]">Boost</p><div class="meter mt-2.5"><i x-ref="boost" style="width:0%"></i></div></div>
+        </div>
+
+        <button type="button" class="btn w-full" :class="on ? 'btn-ghost' : 'btn-accent'" @click="toggle()" x-text="on ? 'Shut down engine' : 'Ignite engine'"></button>
+
+        <button type="button" class="pedal" :class="pressed ? 'on' : ''" :disabled="false"
+                @pointerdown.prevent="press()" @pointerup="release()" @pointerleave="release()" @pointercancel="release()" @contextmenu.prevent
+                @keydown.space.prevent="press()" @keyup.space="release()" @keydown.enter.prevent="press()" @keyup.enter="release()" @blur="release()"
+                aria-label="Throttle pedal. Press and hold to rev the engine.">
+          <span class="relative" x-text="pressed ? 'Full throttle' : 'Hold to rev'"></span>
+        </button>
+        <p class="text-[.66rem] text-white/35 leading-relaxed text-center">Tip: lift off at high revs in Sport or Corsa for the exhaust crackle. Audio starts only after you interact; keep volume reasonable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ENGINEERING MATRIX ============================ -->
+<section id="engineering" class="relative py-24 md:py-36 border-t border-white/5" x-data="matrix" aria-labelledby="eng-title">
+  <div class="mx-auto max-w-[1800px] px-5 md:px-10">
+    <div class="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16" data-reveal>
+      <div class="lg:col-span-7">
+        <p class="eyebrow mb-5">03 &nbsp;/&nbsp; Engineering Matrix</p>
+        <h2 id="eng-title" class="h2">Measured against<br><span class="text-white/35">its own legends.</span></h2>
+      </div>
+      <p class="lede lg:col-span-5">The F80 beside the two hybrid hypercars that came before it. Tap any row to open the engineering notes.</p>
+    </div>
+
+    <div class="rounded-[22px] md:rounded-[28px] border border-white/10 bg-carbon/70 overflow-hidden" data-reveal>
+      <div class="hidden md:grid grid-cols-[210px_repeat(3,minmax(0,1fr))] border-b border-white/10 bg-white/[.02]">
+        <div class="px-6 py-5 label self-end">Specification</div>
+        <template x-for="(c, ci) in cars" :key="c.name">
+          <div class="px-[1.4rem] py-5" :class="ci === 0 ? 'bg-accent/[.07]' : ''" @mouseenter="hc = ci" @mouseleave="hc = null">
+            <p class="font-display font-bold text-[.8rem] uppercase tracking-wider" :class="ci === 0 ? 'text-accent' : 'text-white'" x-text="c.name"></p>
+            <p class="label !text-[.56rem] mt-1.5" x-text="c.tag"></p>
+          </div>
+        </template>
+      </div>
+
+      <template x-for="(r, i) in rows" :key="r.k">
+        <div class="border-b border-white/10 last:border-b-0 mx-row">
+          <button type="button" class="w-full text-left md:grid md:grid-cols-[210px_repeat(3,minmax(0,1fr))] items-stretch group" @click="toggle(i)" :aria-expanded="open === i" :aria-controls="'mx-d-' + i">
+            <span class="flex items-center justify-between md:justify-start gap-4 px-5 md:px-6 py-5 md:py-6">
+              <span class="font-display font-bold text-[.72rem] uppercase tracking-[.18em] group-hover:text-accent transition-colors" x-text="r.k"></span>
+              <span class="mx-plus grid place-items-center w-7 h-7 rounded-full border border-white/20 text-white/70 group-hover:border-accent group-hover:text-accent" :class="open === i ? 'rotate-45 !border-accent !text-accent' : ''">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 0v10M0 5h10"/></svg>
+              </span>
+            </span>
+            <template x-for="(c, ci) in r.cells" :key="ci">
+              <span class="mx-cell" :class="[ci === 0 ? 'sub' : '', hc === ci ? 'hot' : '']" @mouseenter="hc = ci" @mouseleave="hc = null">
+                <span class="md:hidden label !text-[.56rem] block mb-1.5" x-text="cars[ci].name"></span>
+                <span class="block text-[.92rem] font-semibold text-white" x-text="c.v"></span>
+                <span class="block text-[.74rem] text-white/45 mt-1 leading-snug" x-text="c.s"></span>
+                <span class="mx-bar" x-show="c.p" aria-hidden="true"><i :style="`width:${(open === i || ready) ? c.p : 0}%`"></i></span>
+              </span>
+            </template>
+          </button>
+          <div class="mx-drawer" :id="'mx-d-' + i" :style="open === i ? 'grid-template-rows:1fr' : 'grid-template-rows:0fr'">
+            <div class="overflow-hidden">
+              <div class="px-5 md:px-6 py-6 md:py-8 grid md:grid-cols-[210px_1fr] gap-4 md:gap-0 border-t border-white/5 bg-black/30">
+                <p class="label md:pt-1">Engineering notes</p>
+                <div class="grid lg:grid-cols-3 gap-6 md:pl-[1.4rem]">
+                  <p class="lede !text-[.9rem] lg:col-span-2" x-text="r.note"></p>
+                  <ul class="text-[.8rem] text-white/70 space-y-2.5">
+                    <template x-for="b in r.bullets" :key="b"><li class="flex gap-3"><span class="mt-[.55rem] w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span><span x-text="b"></span></li></template>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+    <p class="text-[.7rem] text-white/30 mt-5 leading-relaxed" data-reveal>Figures are rounded approximations compiled from public manufacturer information and shown for illustration only.</p>
+  </div>
+</section>
+
+<!-- ============================ RESERVATION ============================ -->
+<section id="reserve" class="relative py-24 md:py-36 border-t border-white/5 overflow-hidden" x-data="reserve" aria-labelledby="reserve-title">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 60% at 85% 70%, rgb(var(--accent-rgb) / .12), transparent 70%);"></div>
+  <div class="relative mx-auto max-w-[1800px] px-5 md:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <div class="lg:col-span-5 lg:sticky lg:top-32" data-reveal>
+      <p class="eyebrow mb-5">04 &nbsp;/&nbsp; Private Concierge</p>
+      <h2 id="reserve-title" class="h2">Request your<br><span class="text-accent">allocation.</span></h2>
+      <p class="lede mt-7 max-w-md">There are 799 cars and a great many people who want one. Allocation is personal: tell us who you are and where you are, and your dedicated concierge will reply within 48 hours.</p>
+
+      <ol class="mt-10 space-y-6">
+        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">01</span><div><p class="font-semibold text-[.95rem]">Submit your request</p><p class="text-[.82rem] text-white/45 mt-1">Your details and the country quota you will be registered under.</p></div></li>
+        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">02</span><div><p class="font-semibold text-[.95rem]">Private atelier call</p><p class="text-[.82rem] text-white/45 mt-1">A personal call to discuss specification, colour and delivery.</p></div></li>
+        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">03</span><div><p class="font-semibold text-[.95rem]">Allocation confirmed</p><p class="text-[.82rem] text-white/45 mt-1">Your build slot is locked and your car enters production.</p></div></li>
+      </ol>
+
+      <div class="mt-10 glass rounded-2xl p-5">
+        <div class="flex items-end justify-between">
+          <div><p class="label !text-[.58rem]">VIP quota · <span x-text="form.country || 'select a country'"></span></p>
+            <p class="font-display font-bold text-3xl mt-2"><span x-text="selected ? selected.q : '—'"></span><small class="text-xs text-white/40 ml-2 tracking-widest" x-show="selected">remaining</small></p></div>
+          <p class="label !text-[.58rem]" x-show="selected" x-text="'of ' + (selected ? selected.t : 0)"></p>
+        </div>
+        <div class="flex gap-1.5 mt-4" aria-hidden="true">
+          <template x-for="n in 20" :key="n"><span class="h-1.5 flex-1 rounded-full transition-colors duration-500" :class="selected && n <= Math.ceil(20 * selected.q / selected.t) ? 'bg-accent' : 'bg-white/10'"></span></template>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7" data-reveal>
+      <div class="glass rounded-[26px] md:rounded-[32px] p-6 md:p-10 relative overflow-hidden" x-ref="card">
+        <canvas x-ref="fx" class="absolute inset-0 w-full h-full pointer-events-none z-20" aria-hidden="true"></canvas>
+
+        <!-- FORM -->
+        <form x-show="!done" @submit.prevent="submit()" novalidate class="grid gap-7" x-ref="form" aria-label="Private allocation request">
+          <div class="flex items-center justify-between">
+            <p class="font-display font-bold text-xs md:text-sm uppercase tracking-[.2em]">Allocation request</p>
+            <span class="chip"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>Confidential</span>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-x-8 gap-y-7">
+            <div class="field" :class="errors.name && 'err'">
+              <input id="f-name" type="text" placeholder=" " autocomplete="name" x-model.trim="form.name" :aria-invalid="!!errors.name">
+              <label for="f-name">Full name</label><span class="ln"></span>
+              <p class="err-msg" x-show="errors.name" x-text="errors.name"></p>
+            </div>
+            <div class="field" :class="errors.email && 'err'">
+              <input id="f-email" type="email" placeholder=" " autocomplete="email" x-model.trim="form.email" :aria-invalid="!!errors.email">
+              <label for="f-email">Private email</label><span class="ln"></span>
+              <p class="err-msg" x-show="errors.email" x-text="errors.email"></p>
+            </div>
+            <div class="field">
+              <input id="f-phone" type="tel" placeholder=" " autocomplete="tel" x-model.trim="form.phone">
+              <label for="f-phone">Phone (optional)</label><span class="ln"></span>
+            </div>
+            <div class="field" :class="errors.country && 'err'">
+              <select id="f-country" x-model="form.country" :class="form.country && 'filled'" :aria-invalid="!!errors.country">
+                <option value="" disabled hidden></option>
+                <template x-for="c in countries" :key="c.n"><option :value="c.n" x-text="c.n"></option></template>
+              </select>
+              <label for="f-country">Country · VIP quota</label><span class="ln"></span>
+              <svg class="caret" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4l4 4 4-4"/></svg>
+              <p class="err-msg" x-show="errors.country" x-text="errors.country"></p>
+            </div>
+          </div>
+
+          <div>
+            <p class="label mb-3">Intended use</p>
+            <div class="flex flex-wrap gap-2.5" role="group" aria-label="Intended use">
+              <template x-for="u in uses" :key="u">
+                <button type="button" class="opt" :aria-pressed="form.use === u" @click="form.use = u" x-text="u"></button>
+              </template>
+            </div>
+          </div>
+
+          <div>
+            <p class="label mb-3">Preferred exterior · <span class="normal-case tracking-normal text-white/80 font-medium text-[.8rem]" x-text="swatches.find(s => s.id === form.color).name"></span></p>
+            <div class="flex flex-wrap gap-3">
+              <template x-for="s in swatches" :key="s.id">
+                <button type="button" class="swatch" :style="`background:${s.hex}`" :aria-label="s.name" :aria-pressed="form.color === s.id" @click="form.color = s.id"></button>
+              </template>
+            </div>
+          </div>
+
+          <div class="field">
+            <textarea id="f-note" rows="2" placeholder=" " x-model="form.note"></textarea>
+            <label for="f-note">Message to your concierge (optional)</label><span class="ln"></span>
+          </div>
+
+          <div>
+            <label class="flex gap-3.5 items-start cursor-pointer text-[.78rem] text-white/55 leading-relaxed">
+              <input type="checkbox" class="mt-1 w-4 h-4 accent-[#ff2800] shrink-0" x-model="form.consent">
+              <span>I agree to be contacted privately about this allocation request.</span>
+            </label>
+            <p class="err-msg" x-show="errors.consent" x-text="errors.consent"></p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-5">
+            <button type="submit" class="btn btn-accent w-full sm:w-auto" :disabled="sending">
+              <svg x-show="sending" class="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/></svg>
+              <span x-text="sending ? stage : 'Secure my allocation'"></span>
+            </button>
+            <p class="text-[.68rem] text-white/30 leading-relaxed">Concept demonstration — nothing you type here leaves your browser.</p>
+          </div>
+        </form>
+
+        <!-- SUCCESS -->
+        <div x-show="done" x-cloak class="text-center py-6 md:py-10" x-ref="success" aria-live="polite">
+          <svg class="mx-auto" width="92" height="92" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+            <circle class="check-ring stroke-accent" cx="30" cy="30" r="26.5" stroke-width="2.2" stroke-linecap="round" x-ref="ring"/>
+            <path class="check-tick stroke-accent" d="M18 31l8 8 16-17" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" x-ref="tick"/>
+          </svg>
+          <p class="eyebrow mt-7" data-s>Request received</p>
+          <h3 class="h2 mt-4 !text-[clamp(1.5rem,3.6vw,2.6rem)]" data-s>Allocation <span class="text-accent">reserved</span></h3>
+          <p class="lede max-w-md mx-auto mt-5" data-s>Thank you, <span class="text-white font-medium" x-text="form.name.split(' ')[0]"></span>. A private concierge will contact you within 48 hours to open your personal file.</p>
+
+          <div class="mt-9 grid sm:grid-cols-3 gap-3 text-left max-w-2xl mx-auto">
+            <div class="rounded-2xl border border-white/10 bg-black/40 p-4" data-s><p class="label !text-[.56rem]">Reference</p><p class="font-display font-bold text-[.85rem] mt-2 tracking-wider" x-text="ref"></p></div>
+            <div class="rounded-2xl border border-white/10 bg-black/40 p-4" data-s><p class="label !text-[.56rem]">Provisional slot</p><p class="font-display font-bold text-[.85rem] mt-2 tracking-wider" x-text="'№ ' + slot + ' / 799'"></p></div>
+            <div class="rounded-2xl border border-white/10 bg-black/40 p-4" data-s><p class="label !text-[.56rem]" x-text="form.country + ' quota'"></p><p class="font-display font-bold text-[.85rem] mt-2 tracking-wider text-accent" x-text="(selected ? selected.q : 0) + ' left'"></p></div>
+          </div>
+          <button type="button" class="btn btn-ghost mt-9" data-s @click="reset()">New request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="border-t border-white/10 py-14 md:py-16">
+  <div class="mx-auto max-w-[1800px] px-5 md:px-10 grid md:grid-cols-12 gap-10">
+    <div class="md:col-span-5">
+      <p class="font-display font-bold text-sm tracking-[.3em] flex items-center gap-3"><span class="inline-block w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_14px_rgb(var(--accent-rgb))]"></span>F80 / Private Showroom</p>
+      <p class="text-[.8rem] text-white/40 mt-5 max-w-sm leading-relaxed">A cinematic web experience built with Three.js, GSAP, Alpine.js and the Web Audio API — one HTML file, zero build steps.</p>
+    </div>
+    <div class="md:col-span-7 md:text-right">
+      <p class="text-[.7rem] text-white/30 leading-relaxed md:ml-auto max-w-xl">Independent fan-made concept. Not affiliated with, authorised, endorsed or sponsored by Ferrari S.p.A. Ferrari and F80 are trademarks of their respective owner. All specifications are approximations from public sources. The allocation form is a non-functional demonstration.</p>
+      <a href="#top" class="inline-block mt-6 label hover:text-accent transition-colors">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ HOTSPOT DRAWER ============================ -->
+<div x-data>
+  <div x-show="$store.drawer.isOpen" x-cloak x-transition.opacity.duration.400ms class="fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm" @click="$store.drawer.close()" aria-hidden="true"></div>
+  <aside x-show="$store.drawer.isOpen" x-cloak
+         x-transition:enter="transition ease-[cubic-bezier(.2,.8,.2,1)] duration-[600ms]" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+         x-transition:leave="transition ease-in duration-400" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
+         @keydown.escape.window="$store.drawer.close()"
+         class="fixed right-0 top-0 bottom-0 z-[85] w-full sm:w-[520px] md:w-[600px] overflow-y-auto bg-[#08080a] border-l border-white/10 shadow-[-40px_0_80px_rgba(0,0,0,.7)]"
+         role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+    <div class="absolute inset-x-0 top-0 h-px" style="background: linear-gradient(90deg, rgb(var(--accent-rgb)), transparent)"></div>
+    <div class="p-6 sm:p-10 md:p-12" x-show="$store.drawer.item">
+      <div class="flex items-start justify-between gap-6">
+        <p class="eyebrow" x-text="'Inspection ' + $store.drawer.item?.num + ' / 0' + $store.drawer.items.length"></p>
+        <button id="drawer-close" type="button" @click="$store.drawer.close()" class="w-11 h-11 shrink-0 rounded-full border border-white/20 grid place-items-center hover:border-accent hover:text-accent transition-colors" aria-label="Close panel">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l12 12M13 1L1 13"/></svg>
+        </button>
+      </div>
+      <h3 id="drawer-title" class="font-display font-bold uppercase text-2xl sm:text-3xl leading-[1.1] mt-8" x-text="$store.drawer.item?.title"></h3>
+      <p class="mt-6 text-lg text-white/80 font-light leading-relaxed" x-text="$store.drawer.item?.lede"></p>
+
+      <div class="grid grid-cols-2 gap-3 mt-9">
+        <template x-for="m in ($store.drawer.item?.metrics || [])" :key="m[0]">
+          <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4"><p class="label !text-[.56rem]" x-text="m[0]"></p><p class="font-display font-bold text-lg mt-2" x-text="m[1]"></p></div>
+        </template>
+      </div>
+
+      <div class="mt-9 space-y-5">
+        <template x-for="(p, i) in ($store.drawer.item?.body || [])" :key="i"><p class="lede !text-[.92rem]" x-text="p"></p></template>
+      </div>
+
+      <blockquote class="mt-10 pl-5 border-l-2 border-accent">
+        <p class="font-display text-[.82rem] uppercase leading-relaxed tracking-wide" x-text="$store.drawer.item?.quote"></p>
+      </blockquote>
+
+      <div class="flex items-center justify-between mt-12 pt-7 border-t border-white/10">
+        <button type="button" @click="$store.drawer.step(-1)" class="label hover:text-accent transition-colors">← Previous</button>
+        <button type="button" @click="$store.drawer.step(1)" class="label hover:text-accent transition-colors">Next →</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ============================ SCRIPTS ============================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+/* ------------------------------------------------------------------
+   Page logic: Alpine stores/components, audio engine, scroll motion
+------------------------------------------------------------------- */
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var gsap = window.gsap;
+
+  var MODES = {
+    strada: {
+      id: 'strada', label: 'Strada', sub: 'E-Mode', rgb: [143, 211, 255],
+      hp: 780, zero: 3.1, top: 285, down: 420, tq: 650, up: 0.56, ut: 0.2,
+      tagline: 'Silent. Electric. Effortless.',
+      desc: 'Front-axle electric motors lead, the V6 sleeps until you ask for it. Suspension relaxes, the wing lies flat and the cabin turns into a quiet lounge at any speed.',
+      traits: [['Powertrain', 'eDrive · V6 on demand'], ['Suspension', 'Comfort · lifted nose'], ['Aero', 'Low drag · wing stowed'], ['Shifts', 'Smooth · 90 ms']]
+    },
+    sport: {
+      id: 'sport', label: 'Sport', sub: 'Dynamic', rgb: [255, 40, 0],
+      hp: 1000, zero: 2.6, top: 320, down: 760, tq: 780, up: 0.72, ut: 0.4,
+      tagline: 'The everyday weapon.',
+      desc: 'Combustion and electric power blend in full harmony. Throttle response sharpens, the dampers firm up and the active wing opens to its balanced mid position.',
+      traits: [['Powertrain', 'Hybrid · torque fill'], ['Suspension', 'Sport · adaptive'], ['Aero', 'Balanced · wing mid'], ['Shifts', 'Crisp · 60 ms']]
+    },
+    corsa: {
+      id: 'corsa', label: 'Corsa', sub: 'Pista', rgb: [255, 196, 0],
+      hp: 1200, zero: 2.15, top: 350, down: 1050, tq: 900, up: 0.88, ut: 0.58,
+      tagline: 'No compromise. Only lap time.',
+      desc: 'All 1,200 cv released. The car drops onto its springs, the rear wing rises to its maximum angle and launch control arms. This is the car the engineers actually wanted to build.',
+      traits: [['Powertrain', 'Full hybrid · peak boost'], ['Suspension', 'Track · lowered'], ['Aero', 'Max downforce · wing high'], ['Shifts', 'Violent · 40 ms']]
+    }
+  };
+
+  var HOTSPOTS = [
+    { id: 'aero', num: '01', title: 'Active Aerodynamics', metrics: [['Downforce @ 250 km/h', '1,050 kg'], ['Rear wing', 'Active · 3 positions'], ['Front flaps', 'Independent'], ['Underbody', 'Venturi tunnels']],
+      lede: 'The F80 does not fight the wind. It negotiates with it — hundreds of times a second.',
+      body: ['Where earlier cars used fixed surfaces, the F80 treats air as a variable. A rear wing that changes its angle, movable elements at the nose and a heavily sculpted underbody work together as one system, shifting the aerodynamic balance between the axles as speed, steering and braking demand.',
+             'In low-drag trim the wing lies flush with the bodywork and the car slips through the air. Under braking it rises steeply, adding stability when you need it most; through a fast corner it holds the rear planted while the nose keeps its bite. Ground-effect tunnels do the heavy lifting, creating suction without the penalty of a giant wing.'],
+      quote: '“Downforce is not a number. It is the confidence to arrive at a corner faster than reason suggests.”' },
+    { id: 'engine', num: '02', title: 'V6 Hybrid Powertrain', metrics: [['Engine', '3.0 L V6 · 120°'], ['Combined output', '1,200 cv'], ['Electric motors', '3 · axle-mounted'], ['Redline', '9,000 rpm']],
+      lede: 'A turbocharged heart that screams like a racing engine, with an electric surge that arrives before you finish the thought.',
+      body: ['The twin-turbo V6 is a direct descendant of Ferrari’s endurance-racing programme: compact, light and happy to spin far beyond what a road-car engine should. Mounted low behind the cabin, it forms a stressed part of the structure and keeps the centre of gravity close to the ground.',
+             'Three electric motors — two on the front axle, one at the rear — fill every gap in the power band and enable true torque vectoring. They fire the car out of corners, recover energy under braking and let it glide silently through town in Strada mode. Power is delivered through an eight-speed dual-clutch gearbox that shifts faster than you can blink.'],
+      quote: '“Two hearts, one pulse. The electric motors never replace the sound — they make sure it arrives sooner.”' },
+    { id: 'mono', num: '03', title: 'Carbon Monocoque', metrics: [['Structure', 'Carbon composite'], ['Material', 'Aerospace grade'], ['Cure', 'Autoclave'], ['Safety cell', 'Integrated']],
+      lede: 'The quietest part of the car, and the most important. Everything else is bolted to it.',
+      body: ['At the centre of the F80 sits a single moulded carbon-fibre tub, built from aerospace-grade composites and cured under heat and pressure. It is extraordinarily stiff and astonishingly light, giving the suspension a perfectly stable platform to work from — which is what makes the car feel so direct beneath your hands.',
+             'The same structure doubles as a survival cell. Crash structures, the battery and the powertrain are all designed around it, and its strength allows the cabin to remain compact, low and visually clean. Look closely at the exposed weave and you are looking at hundreds of hand-laid layers.'],
+      quote: '“Stiffness is the foundation of feel. If the chassis does not flex, the driver hears every word the road says.”' },
+    { id: 'wheels', num: '04', title: 'Forged Carbon Wheels', metrics: [['Material', 'Carbon composite'], ['Wheel weight', 'Substantially lower'], ['Brakes', 'Carbon-ceramic'], ['Tyres', 'Semi-slick option']],
+      lede: 'The lightest mass on the car is also the most important: the part that touches the road.',
+      body: ['Unsprung weight is the enemy of grip, so the wheels are made from carbon fibre. Compared with forged aluminium they are dramatically lighter, which lets the suspension react faster, the tyres stay in contact with the road and the steering feel sharper and more detailed.',
+             'Behind each spoke sits a carbon-ceramic brake system capable of repeated stops from extreme speed without fade. The wheels are shaped to pull hot air away from the discs and pass it smoothly along the flanks, so that even the rotating parts of the car contribute to its aerodynamic efficiency.'],
+      quote: '“Every gram you remove from the wheels is worth several grams removed from the body.”' }
+  ];
+
+  var ACCENT = { r: 255, g: 40, b: 0 };
+  var accentTween = null;
+  function applyAccent() {
+    document.documentElement.style.setProperty('--accent-rgb', (ACCENT.r | 0) + ' ' + (ACCENT.g | 0) + ' ' + (ACCENT.b | 0));
+  }
+
+  /* ---------------- Synthetic V6 engine (Web Audio) ---------------- */
+  var AUDIO = {
+    strada: { k: 3, cut: 0.5, vol: 0.62, whine: 0.9, turbo: 0.15, g: [0.5, 0.25, 0.4, 0.1], rate: 1.2 },
+    sport:  { k: 9, cut: 0.9, vol: 0.85, whine: 0.25, turbo: 0.45, g: [0.6, 0.45, 0.5, 0.25], rate: 2.0 },
+    corsa:  { k: 22, cut: 1.25, vol: 1.0, whine: 0.1, turbo: 0.8, g: [0.65, 0.6, 0.55, 0.4], rate: 3.0 }
+  };
+
+  function EngineSim() {
+    this.ctx = null; this.running = false; this.rpm = 0; this.idle = 1100; this.redline = 9000;
+    this.throttle = 0; this.thrTarget = 0; this.mode = 'sport'; this.cut = 0; this.boost = 0; this.pops = [];
+    this.curves = {};
+  }
+  EngineSim.prototype.makeCurve = function (k) {
+    var n = 1024, c = new Float32Array(n);
+    for (var i = 0; i < n; i++) { var x = i * 2 / n - 1; c[i] = (1 + k) * x / (1 + k * Math.abs(x)); }
+    return c;
+  };
+  EngineSim.prototype.build = function () {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    var c = this.ctx = new AC();
+    this.master = c.createGain(); this.master.gain.value = 0;
+    this.comp = c.createDynamicsCompressor();
+    this.comp.threshold.value = -16; this.comp.ratio.value = 6; this.comp.attack.value = 0.005; this.comp.release.value = 0.2;
+    this.analyser = c.createAnalyser(); this.analyser.fftSize = 1024; this.analyser.smoothingTimeConstant = 0.78;
+    this.filter = c.createBiquadFilter(); this.filter.type = 'lowpass'; this.filter.Q.value = 1.1; this.filter.frequency.value = 600;
+    this.shaper = c.createWaveShaper(); this.shaper.oversample = '2x';
+    this.bus = c.createGain(); this.bus.gain.value = 1;
+
+    var self = this, kinds = ['sawtooth', 'sawtooth', 'square', 'triangle'];
+    this.oscs = kinds.map(function (t, i) {
+      var o = c.createOscillator(); o.type = t; o.frequency.value = 60; if (i === 1) o.detune.value = 9;
+      var g = c.createGain(); g.gain.value = 0; o.connect(g); g.connect(self.bus); o.start();
+      return { o: o, g: g };
+    });
+    this.bus.connect(this.shaper); this.shaper.connect(this.filter); this.filter.connect(this.master);
+
+    // Turbo / intake noise
+    var len = c.sampleRate * 2, buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+    for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    this.noiseBuf = buf;
+    this.noise = c.createBufferSource(); this.noise.buffer = buf; this.noise.loop = true;
+    this.turboF = c.createBiquadFilter(); this.turboF.type = 'bandpass'; this.turboF.Q.value = 1.4; this.turboF.frequency.value = 1500;
+    this.turboG = c.createGain(); this.turboG.gain.value = 0;
+    this.noise.connect(this.turboF); this.turboF.connect(this.turboG); this.turboG.connect(this.master); this.noise.start();
+
+    // Electric whine
+    this.whine = c.createOscillator(); this.whine.type = 'sine'; this.whine.frequency.value = 600;
+    this.whineG = c.createGain(); this.whineG.gain.value = 0;
+    this.whine.connect(this.whineG); this.whineG.connect(this.master); this.whine.start();
+
+    this.master.connect(this.comp); this.comp.connect(this.analyser); this.analyser.connect(c.destination);
+    this.freq = new Uint8Array(this.analyser.frequencyBinCount);
+    for (var m in AUDIO) this.curves[m] = this.makeCurve(AUDIO[m].k);
+    this.shaper.curve = this.curves[this.mode];
+    return true;
+  };
+  EngineSim.prototype.start = function () {
+    var self = this;
+    if (!this.ctx && !this.build()) return Promise.resolve(false);
+    return this.ctx.resume().then(function () {
+      self.running = true; if (self.rpm < self.idle) self.rpm = 600; return true;
+    }).catch(function () { return false; });
+  };
+  EngineSim.prototype.stop = function () {
+    var self = this; this.running = false; this.thrTarget = 0;
+    if (!this.ctx) return;
+    this.master.gain.setTargetAtTime(0, this.ctx.currentTime, 0.12);
+    setTimeout(function () { if (!self.running && self.ctx && self.ctx.state === 'running') self.ctx.suspend(); }, 700);
+  };
+  EngineSim.prototype.setMode = function (m) {
+    this.mode = m;
+    if (this.shaper && this.curves[m]) this.shaper.curve = this.curves[m];
+  };
+  EngineSim.prototype.pop = function (delay) {
+    var c = this.ctx, t = c.currentTime + delay;
+    var s = c.createBufferSource(); s.buffer = this.noiseBuf;
+    var f = c.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 200 + Math.random() * 600; f.Q.value = 0.9;
+    var g = c.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.5 + Math.random() * 0.4, t + 0.004); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
+    s.connect(f); f.connect(g); g.connect(this.master);
+    s.start(t, Math.random() * 1.5, 0.1);
+    s.onended = function () { s.disconnect(); f.disconnect(); g.disconnect(); };
+  };
+  EngineSim.prototype.update = function (dt) {
+    var p = AUDIO[this.mode], prevThr = this.throttle;
+    this.throttle += (this.thrTarget - this.throttle) * (1 - Math.exp(-9 * dt));
+    if (!this.running) { this.rpm += (0 - this.rpm) * Math.min(1, dt * 3); this.boost *= 0.95; return; }
+
+    var target = this.idle + this.throttle * (this.redline - this.idle);
+    if (this.cut > 0) { this.cut -= dt; target = this.redline * 0.9; }
+    else if (this.rpm > this.redline - 130 && this.throttle > 0.5) { this.cut = 0.09; }
+    var rate = target > this.rpm ? p.rate : 1.1;
+    this.rpm += (target - this.rpm) * (1 - Math.exp(-rate * dt));
+
+    // Lift-off crackle
+    if (this.ctx && prevThr > 0.65 && this.throttle < prevThr - 0.04 && this.rpm > 4500 && this.mode !== 'strada' && this.thrTarget < 0.2 && this.pops.length === 0) {
+      var n = this.mode === 'corsa' ? 5 + (Math.random() * 4 | 0) : 2 + (Math.random() * 3 | 0), tt = 0.05;
+      for (var i = 0; i < n; i++) { tt += 0.04 + Math.random() * 0.16; this.pops.push(tt); }
+      for (var j = 0; j < this.pops.length; j++) this.pop(this.pops[j]);
+      var self = this; setTimeout(function () { self.pops.length = 0; }, tt * 1000 + 100);
+    }
+
+    var rn = Math.min(1, this.rpm / this.redline), t = this.ctx.currentTime, f = this.rpm / 60 * 3;
+    for (var k = 0; k < 4; k++) {
+      var fr = k === 2 ? f / 2 : k === 3 ? f * 2 : f;
+      this.oscs[k].o.frequency.setTargetAtTime(fr, t, 0.03);
+      this.oscs[k].g.gain.setTargetAtTime(p.g[k] * 0.22, t, 0.08);
+    }
+    this.filter.frequency.setTargetAtTime((350 + this.rpm * 0.6 + this.throttle * 1800) * p.cut, t, 0.05);
+    this.master.gain.setTargetAtTime((0.14 + 0.32 * this.throttle + 0.06 * rn) * p.vol, t, 0.05);
+    this.boost += ((p.turbo * this.throttle * rn) - this.boost) * Math.min(1, dt * 2.5);
+    this.turboG.gain.setTargetAtTime(this.boost * 0.14, t, 0.08);
+    this.turboF.frequency.setTargetAtTime(1200 + rn * 4800, t, 0.1);
+    this.whine.frequency.setTargetAtTime(500 + this.rpm * 0.95, t, 0.05);
+    this.whineG.gain.setTargetAtTime(p.whine * 0.05 * (0.35 + rn), t, 0.08);
+  };
+  EngineSim.prototype.dispose = function () {
+    if (this.ctx) { try { this.ctx.close(); } catch (e) {} this.ctx = null; }
+    this.running = false;
+  };
+
+  /* ---------------- Alpine ---------------- */
+  document.addEventListener('alpine:init', function () {
+    var Alpine = window.Alpine;
+
+    Alpine.store('drive', {
+      id: 'sport', modes: MODES, order: ['strada', 'sport', 'corsa'],
+      get idx() { return this.order.indexOf(this.id); },
+      set: function (id) {
+        var m = MODES[id];
+        if (!m || id === this.id) return;
+        this.id = id;
+        if (accentTween) accentTween.kill();
+        if (reduce) { ACCENT.r = m.rgb[0]; ACCENT.g = m.rgb[1]; ACCENT.b = m.rgb[2]; applyAccent(); }
+        else accentTween = gsap.to(ACCENT, { r: m.rgb[0], g: m.rgb[1], b: m.rgb[2], duration: 0.9, ease: 'power2.inOut', onUpdate: applyAccent });
+        window.dispatchEvent(new CustomEvent('drive:mode', { detail: { id: id, rgb: m.rgb } }));
+      }
+    });
+
+    Alpine.store('drawer', {
+      isOpen: false, item: null, idx: 0, items: HOTSPOTS, last: null,
+      open: function (id) {
+        var i = this.items.findIndex(function (h) { return h.id === id; });
+        if (i < 0) return;
+        this.idx = i; this.item = this.items[i];
+        if (!this.isOpen) {
+          this.last = document.activeElement; this.isOpen = true;
+          document.documentElement.classList.add('lock');
+          setTimeout(function () { var b = document.getElementById('drawer-close'); if (b) b.focus(); }, 90);
+        }
+        window.dispatchEvent(new CustomEvent('showroom:view', { detail: { id: id } }));
+      },
+      close: function () {
+        if (!this.isOpen) return;
+        this.isOpen = false; document.documentElement.classList.remove('lock');
+        if (this.last && this.last.focus) this.last.focus();
+      },
+      step: function (d) { this.open(this.items[(this.idx + d + this.items.length) % this.items.length].id); }
+    });
+
+    /* HUD card tilt */
+    Alpine.directive('tilt', function (el, _v, utils) {
+      if (reduce || window.matchMedia('(hover: none)').matches) return;
+      var rx = gsap.quickTo(el, 'rotationX', { duration: 0.5, ease: 'power3.out' });
+      var ry = gsap.quickTo(el, 'rotationY', { duration: 0.5, ease: 'power3.out' });
+      gsap.set(el, { transformPerspective: 900 });
+      var raf = 0, last = null;
+      function move(e) {
+        last = e;
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = 0;
+          var r = el.getBoundingClientRect(), px = (last.clientX - r.left) / r.width, py = (last.clientY - r.top) / r.height;
+          ry((px - 0.5) * 18); rx(-(py - 0.5) * 18);
+          el.style.setProperty('--mx', (px * 100).toFixed(1) + '%'); el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+        });
+      }
+      function leave() { rx(0); ry(0); el.style.setProperty('--mx', '50%'); el.style.setProperty('--my', '0%'); }
+      el.addEventListener('pointermove', move, { passive: true });
+      el.addEventListener('pointerleave', leave);
+      utils.cleanup(function () {
+        el.removeEventListener('pointermove', move); el.removeEventListener('pointerleave', leave);
+        if (raf) cancelAnimationFrame(raf);
+      });
+    });
+
+    /* Showcase */
+    Alpine.data('showcase', function () {
+      var cs = { hp: 1000, zero: 2.6, top: 320, down: 760, tq: 780, up: 0.72, ut: 0.4 };
+      var tw = null;
+      function g(u, c, sl, sr) { var d = u - c, s = d < 0 ? sl : sr; return Math.exp(-(d * d) / (2 * s * s)); }
+      function buildCurves() {
+        var N = 64, W = 400, top = 10, bot = 170, hpPts = [], tqPts = [], maxP = 0, maxT = 0, i, u;
+        for (i = 0; i <= N; i++) {
+          u = i / N;
+          var p = (1 - Math.exp(-u * 7)) * (0.2 + 0.8 * g(u, cs.up, 0.38, 0.28));
+          var t = (0.55 + 0.45 * g(u, cs.ut, 0.4, 0.3)) * (0.92 + 0.08 * Math.min(1, u * 8));
+          hpPts.push(p); tqPts.push(t); if (p > maxP) maxP = p; if (t > maxT) maxT = t;
+        }
+        var hp = '', tq = '';
+        for (i = 0; i <= N; i++) {
+          var x = (i / N * W).toFixed(1);
+          var yp = (bot - (hpPts[i] / maxP) * (cs.hp / 1250) * (bot - top)).toFixed(1);
+          var yt = (bot - (tqPts[i] / maxT) * (cs.tq / 950) * (bot - top)).toFixed(1);
+          hp += (i ? 'L' : 'M') + x + ' ' + yp; tq += (i ? 'L' : 'M') + x + ' ' + yt;
+        }
+        return { hp: hp, tq: tq, area: hp + 'L' + W + ' ' + bot + 'L0 ' + bot + 'Z' };
+      }
+      return {
+        views: [{ id: 'front', label: 'Front ¾' }, { id: 'side', label: 'Profile' }, { id: 'rear', label: 'Rear ¾' }, { id: 'top', label: 'Plan' }],
+        view: 'front', paint: 'rosso',
+        paints: [
+          { id: 'rosso', name: 'Rosso Corsa', hex: '#d10a0a' }, { id: 'giallo', name: 'Giallo Modena', hex: '#f2c200' },
+          { id: 'nero', name: 'Nero Daytona', hex: '#0d0d10' }, { id: 'bianco', name: 'Bianco Avus', hex: '#e9e9e6' },
+          { id: 'titanio', name: 'Grigio Titanio', hex: '#80858e' }
+        ],
+        stats: { hp: '1,000', zero: '2.60', top: 320, down: 760 },
+        bars: { hp: 83, zero: 83, top: 91, down: 72 },
+        curve: { hp: '', tq: '', area: '' },
+        get mode() { return MODES[this.$store.drive.id]; },
+        init: function () {
+          var self = this;
+          this.applyMode(this.$store.drive.id, true);
+          this.$watch('$store.drive.id', function (id) { self.applyMode(id, false); });
+          window.addEventListener('showroom:view', function (e) { if (['front', 'side', 'rear', 'top'].indexOf(e.detail.id) > -1) self.view = e.detail.id; else self.view = ''; });
+        },
+        applyMode: function (id, instant) {
+          var self = this, m = MODES[id], target = { hp: m.hp, zero: m.zero, top: m.top, down: m.down, tq: m.tq, up: m.up, ut: m.ut };
+          if (tw) tw.kill();
+          if (instant || reduce) { Object.assign(cs, target); this.sync(); return; }
+          tw = gsap.to(cs, Object.assign({ duration: 1.1, ease: 'power3.inOut', onUpdate: function () { self.sync(); } }, target));
+        },
+        sync: function () {
+          this.stats = { hp: Math.round(cs.hp).toLocaleString('en-US'), zero: cs.zero.toFixed(2), top: Math.round(cs.top), down: Math.round(cs.down) };
+          this.bars = { hp: Math.min(100, cs.hp / 12), zero: Math.min(100, 2.15 / cs.zero * 100), top: Math.min(100, cs.top / 3.5), down: Math.min(100, cs.down / 10.5) };
+          this.curve = buildCurves();
+        },
+        setView: function (id) {
+          this.view = id;
+          window.dispatchEvent(new CustomEvent('showroom:view', { detail: { id: id } }));
+        },
+        setPaint: function (id) {
+          this.paint = id;
+          var p = this.paints.find(function (x) { return x.id === id; });
+          window.dispatchEvent(new CustomEvent('showroom:paint', { detail: { hex: p.hex, id: id } }));
+        }
+      };
+    });
+
+    /* Sound lab */
+    Alpine.data('soundLab', function () {
+      var sim = new EngineSim(), raf = 0, last = 0, visible = false, ctx2d = null, cw = 0, ch = 0, dpr = 1;
+      var bars = 56, disp = new Float32Array(bars), peaks = new Float32Array(bars), ro = null, io = null;
+      var rpmEl, arcEl, thrEl, boostEl, canvas, self;
+
+      function size() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cw = canvas.clientWidth; ch = canvas.clientHeight;
+        canvas.width = Math.max(1, cw * dpr); canvas.height = Math.max(1, ch * dpr);
+        ctx2d.setTransform(dpr, 0, 0, dpr, 0, 0);
+        bars = cw < 520 ? 36 : 56; disp = new Float32Array(bars); peaks = new Float32Array(bars);
+      }
+      function draw(t) {
+        var w = cw, h = ch, mid = h * 0.52, rn = Math.min(1, sim.rpm / sim.redline), n = bars, i;
+        ctx2d.clearRect(0, 0, w, h);
+        var r = ACCENT.r | 0, gg = ACCENT.g | 0, b = ACCENT.b | 0;
+
+        ctx2d.strokeStyle = 'rgba(255,255,255,0.05)'; ctx2d.lineWidth = 1; ctx2d.beginPath();
+        for (i = 1; i < 5; i++) { var yy = Math.round(h * i / 5) + 0.5; ctx2d.moveTo(0, yy); ctx2d.lineTo(w, yy); }
+        ctx2d.stroke();
+
+        var live = sim.running && sim.analyser;
+        if (live) sim.analyser.getByteFrequencyData(sim.freq);
+        var bw = w / n, gap = Math.max(2, bw * 0.28);
+        for (i = 0; i < n; i++) {
+          var tv;
+          if (live) {
+            var lo = Math.floor(Math.pow(i / n, 2) * 170) + 1, hi = Math.floor(Math.pow((i + 1) / n, 2) * 170) + 2, mx = 0;
+            for (var k = lo; k < hi; k++) if (sim.freq[k] > mx) mx = sim.freq[k];
+            tv = Math.pow(mx / 255, 1.35);
+          } else {
+            tv = (0.025 + 0.03 * Math.sin(t * 0.0016 + i * 0.5)) * (1 - i / n * 0.6);
+          }
+          disp[i] += (tv - disp[i]) * 0.35;
+          if (disp[i] > peaks[i]) peaks[i] = disp[i]; else peaks[i] = Math.max(disp[i], peaks[i] - 0.006);
+          var bh = Math.max(2, disp[i] * mid * 0.95), x = i * bw + gap / 2, a = 0.35 + 0.65 * disp[i];
+          ctx2d.fillStyle = 'rgba(' + r + ',' + gg + ',' + b + ',' + a.toFixed(3) + ')';
+          ctx2d.fillRect(x, mid - bh, bw - gap, bh);
+          ctx2d.fillStyle = 'rgba(' + r + ',' + gg + ',' + b + ',' + (a * 0.22).toFixed(3) + ')';
+          ctx2d.fillRect(x, mid + 2, bw - gap, bh * 0.55);
+          ctx2d.fillStyle = 'rgba(255,255,255,0.8)';
+          ctx2d.fillRect(x, mid - peaks[i] * mid * 0.95 - 4, bw - gap, 1.5);
+        }
+
+        // Waveform trace
+        var amp = (0.05 + 0.4 * Math.max(sim.throttle, rn * 0.4)) * (sim.running ? 1 : 0.12) * h * 0.25;
+        var cyc = 2 + rn * 10, ph = t * 0.012 * (1 + rn * 3);
+        ctx2d.beginPath(); ctx2d.lineWidth = 1.6; ctx2d.strokeStyle = 'rgba(255,255,255,0.85)';
+        ctx2d.shadowColor = 'rgb(' + r + ',' + gg + ',' + b + ')'; ctx2d.shadowBlur = 10;
+        for (var x2 = 0; x2 <= w; x2 += 4) {
+          var u = x2 / w, env = Math.sin(u * Math.PI);
+          var y2 = mid + env * amp * (Math.sin(u * cyc * 6.283 + ph) + 0.45 * Math.sin(u * cyc * 12.566 + ph * 1.3) + 0.2 * Math.sin(u * cyc * 25.1 - ph));
+          if (x2 === 0) ctx2d.moveTo(x2, y2); else ctx2d.lineTo(x2, y2);
+        }
+        ctx2d.stroke(); ctx2d.shadowBlur = 0;
+      }
+      function gauge() {
+        var rn = Math.min(1, sim.rpm / sim.redline);
+        rpmEl.textContent = String(Math.round(sim.rpm / 10) * 10).padStart(4, '0');
+        arcEl.style.strokeDashoffset = (335.1 * (1 - rn)).toFixed(1);
+        thrEl.style.width = (sim.throttle * 100).toFixed(0) + '%';
+        boostEl.style.width = Math.min(100, sim.boost * 130).toFixed(0) + '%';
+      }
+      function frame(t) {
+        raf = requestAnimationFrame(frame);
+        var dt = Math.min(0.05, (t - last) / 1000); last = t;
+        sim.update(dt); draw(t); gauge();
+      }
+      function run() { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+      function halt() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+      return {
+        on: false, pressed: false,
+        init: function () {
+          self = this; canvas = this.$refs.viz; ctx2d = canvas.getContext('2d');
+          rpmEl = this.$refs.rpm; arcEl = this.$refs.arc; thrEl = this.$refs.thr; boostEl = this.$refs.boost;
+          size();
+          sim.setMode(this.$store.drive.id);
+          this.$watch('$store.drive.id', function (id) { sim.setMode(id); });
+          ro = new ResizeObserver(function () { size(); }); ro.observe(canvas);
+          io = new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) run(); else halt(); }, { rootMargin: '100px' });
+          io.observe(canvas);
+          document.addEventListener('visibilitychange', function () { if (document.hidden) { halt(); if (sim.running) { sim.thrTarget = 0; } } else run(); });
+          window.addEventListener('pagehide', function () { halt(); sim.dispose(); if (ro) ro.disconnect(); if (io) io.disconnect(); });
+        },
+        toggle: function () {
+          var s = this;
+          if (this.on) { sim.stop(); this.on = false; this.release(); return Promise.resolve(); }
+          return sim.start().then(function (ok) { s.on = !!ok; if (!ok) s.on = false; });
+        },
+        press: function () {
+          var s = this;
+          if (!sim.ctx || !sim.running) {
+            this.pressed = true;
+            sim.start().then(function (ok) { s.on = !!ok; if (ok && s.pressed) sim.thrTarget = 1; });
+            return;
+          }
+          this.pressed = true; sim.thrTarget = 1;
+        },
+        release: function () { this.pressed = false; sim.thrTarget = 0; }
+      };
+    });
+
+    /* Engineering matrix */
+    Alpine.data('matrix', function () {
+      return {
+        open: null, hc: null, ready: false,
+        cars: [
+          { name: 'Ferrari F80', tag: '2025 · Subject' },
+          { name: 'LaFerrari', tag: '2013 · Predecessor' },
+          { name: 'SF90 Stradale', tag: '2019 · Plug-in hybrid' }
+        ],
+        rows: [
+          { k: 'Engine',
+            cells: [{ v: '3.0 L V6 twin-turbo', s: '120° · racing-derived · 9,000 rpm + 3 e-motors' }, { v: '6.3 L V12 naturally aspirated', s: '65° · 9,250 rpm + HY-KERS' }, { v: '4.0 L V8 twin-turbo', s: '90° · 8,000 rpm + 3 e-motors' }],
+            note: 'The F80 trades cylinders for revs and boost. Its compact V6 comes straight from Ferrari’s endurance-racing programme and is paired with three electric motors, making it the most powerful road-going Ferrari of its generation.',
+            bullets: ['Race-derived turbocharged architecture', 'Electric torque fill on both axles', 'Motors enable true torque vectoring'] },
+          { k: 'Output',
+            cells: [{ v: '1,200 cv', s: 'Combined · peak', p: 100 }, { v: '963 cv', s: 'Combined · peak', p: 80 }, { v: '1,000 cv', s: 'Combined · peak', p: 83 }],
+            note: 'More than any Ferrari road car before it, delivered without a single pause in power thanks to instant electric torque.',
+            bullets: ['Combined thermal and electric peak', 'Power delivery varies by drive mode'] },
+          { k: 'Transmission',
+            cells: [{ v: '8-speed dual-clutch', s: 'Rear-biased · front e-axle', }, { v: '7-speed dual-clutch', s: 'Rear-wheel drive' }, { v: '8-speed dual-clutch', s: 'Four-wheel drive · e-axle' }],
+            note: 'A compact eight-speed dual-clutch gearbox keeps the drivetrain short and low, and shifts in a few hundredths of a second while the electric motors fill the torque gap between gears.',
+            bullets: ['Shifts without interrupting torque', 'Integrated reverse via electric motor', 'Tight ratios tuned for track use'] },
+          { k: 'Dry Weight',
+            cells: [{ v: '≈ 1,525 kg', s: 'Lightest of the three per cv', p: 95 }, { v: '≈ 1,255 kg', s: 'Lightest overall', p: 78 }, { v: '≈ 1,570 kg', s: 'Heaviest of the three', p: 98 }],
+            note: 'The F80 carries a heavier hybrid system than the LaFerrari, but with 1,200 cv its power-to-weight ratio is the best of the trio.',
+            bullets: ['Power-to-weight is the headline figure', 'Battery positioned low for balance'] },
+          { k: 'Chassis',
+            cells: [{ v: 'Carbon monocoque', s: 'Aerospace-grade composites · integrated cell' }, { v: 'Carbon monocoque', s: 'Four types of carbon fibre' }, { v: 'Aluminium + carbon', s: 'Aluminium spaceframe · carbon body' }],
+            note: 'A full carbon-fibre tub is the rigid core of the F80. The structure carries the powertrain as a stressed member and doubles as the main safety cell, so the car can stay light, stiff and low.',
+            bullets: ['Hundreds of hand-laid layers', 'Stressed powertrain mounting', 'Integrated crash structures'] }
+        ],
+        init: function () {
+          var s = this;
+          var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { s.ready = true; io.disconnect(); } }, { threshold: 0.25 });
+          io.observe(this.$el);
+        },
+        toggle: function (i) { this.open = this.open === i ? null : i; }
+      };
+    });
+
+    /* Reservation */
+    Alpine.data('reserve', function () {
+      return {
+        countries: [['Monaco', 6, 12], ['United Arab Emirates', 24, 45], ['United States', 92, 150], ['United Kingdom', 38, 70], ['Germany', 41, 75], ['Switzerland', 22, 40], ['France', 29, 50], ['Italy', 34, 60], ['Japan', 27, 48], ['China', 55, 90], ['Saudi Arabia', 16, 30], ['Singapore', 14, 25], ['Hong Kong', 12, 22], ['Australia', 15, 28], ['Other regions', 20, 40]]
+          .map(function (c) { return { n: c[0], q: c[1], t: c[2] }; }),
+        uses: ['Private collection', 'Track programme', 'Concours & display', 'Gift for a collector'],
+        swatches: [
+          { id: 'rosso', name: 'Rosso Corsa', hex: '#d10a0a' }, { id: 'giallo', name: 'Giallo Modena', hex: '#f2c200' },
+          { id: 'nero', name: 'Nero Daytona', hex: '#0d0d10' }, { id: 'bianco', name: 'Bianco Avus', hex: '#e9e9e6' },
+          { id: 'titanio', name: 'Grigio Titanio', hex: '#80858e' }
+        ],
+        form: { name: '', email: '', phone: '', country: '', use: 'Private collection', color: 'rosso', note: '', consent: false },
+        errors: {}, sending: false, done: false, stage: '', ref: '', slot: '',
+        get selected() { var c = this.form.country; return this.countries.find(function (x) { return x.n === c; }) || null; },
+        validate: function () {
+          var e = {}, f = this.form;
+          if (f.name.length < 2) e.name = 'Please enter your full name.';
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email)) e.email = 'Please enter a valid email address.';
+          if (!f.country) e.country = 'Select the country of your allocation quota.';
+          if (!f.consent) e.consent = 'Consent is required to process your request.';
+          this.errors = e; return Object.keys(e).length === 0;
+        },
+        submit: function () {
+          var s = this;
+          if (this.sending) return;
+          if (!this.validate()) {
+            var first = this.$refs.form.querySelector('.err input, .err select');
+            if (first) first.focus();
+            if (!reduce) gsap.fromTo(this.$refs.form, { x: -8 }, { x: 0, duration: 0.6, ease: 'elastic.out(1,.25)' });
+            return;
+          }
+          this.sending = true; this.stage = 'Verifying identity…';
+          setTimeout(function () { s.stage = 'Checking quota…'; }, 700);
+          setTimeout(function () { s.stage = 'Locking allocation…'; }, 1400);
+          setTimeout(function () { s.finish(); }, 2200);
+        },
+        finish: function () {
+          var s = this, sel = this.selected;
+          if (sel && sel.q > 0) sel.q -= 1;
+          var abc = Math.random().toString(36).slice(2, 6).toUpperCase();
+          this.ref = 'F80-' + abc + '-' + String(1000 + (Math.random() * 8999 | 0));
+          this.slot = String(1 + (Math.random() * 798 | 0)).padStart(3, '0');
+          this.sending = false; this.done = true;
+          this.$nextTick(function () { s.celebrate(); });
+        },
+        celebrate: function () {
+          var s = this, els = this.$refs.success.querySelectorAll('[data-s]');
+          if (reduce) { gsap.set([this.$refs.ring, this.$refs.tick], { strokeDashoffset: 0 }); return; }
+          gsap.timeline()
+            .fromTo(this.$refs.success, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'power3.out' })
+            .to(this.$refs.ring, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 0.1)
+            .to(this.$refs.tick, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, 0.8)
+            .fromTo(els, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power3.out' }, 0.7)
+            .add(function () { s.burst(); }, 0.8);
+        },
+        burst: function () {
+          var cv = this.$refs.fx, card = this.$refs.card, dpr = Math.min(window.devicePixelRatio || 1, 2);
+          var w = card.clientWidth, h = card.clientHeight;
+          cv.width = w * dpr; cv.height = h * dpr;
+          var g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+          var rr = ACCENT.r | 0, gg = ACCENT.g | 0, bb = ACCENT.b | 0, P = [], i;
+          for (i = 0; i < 100; i++) { var a = Math.random() * 6.283, sp = 2 + Math.random() * 8; P.push({ x: w / 2, y: h * 0.2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 2.5, l: 1, d: 0.01 + Math.random() * 0.014, r: 1 + Math.random() * 2.2 }); }
+          var id = 0;
+          function step() {
+            g.clearRect(0, 0, w, h); var alive = 0;
+            for (var j = 0; j < P.length; j++) {
+              var p = P[j]; if (p.l <= 0) continue; alive++;
+              p.x += p.vx; p.y += p.vy; p.vy += 0.13; p.vx *= 0.985; p.l -= p.d;
+              g.fillStyle = 'rgba(' + rr + ',' + gg + ',' + bb + ',' + Math.max(p.l, 0).toFixed(3) + ')';
+              g.beginPath(); g.arc(p.x, p.y, p.r, 0, 6.283); g.fill();
+            }
+            if (alive) id = requestAnimationFrame(step); else g.clearRect(0, 0, w, h);
+          }
+          step();
+        },
+        reset: function () {
+          this.done = false; this.errors = {};
+          this.form = { name: '', email: '', phone: '', country: '', use: 'Private collection', color: 'rosso', note: '', consent: false };
+        }
+      };
+    });
+  });
+
+  /* ---------------- Scroll / entrance motion ---------------- */
+  function boot() {
+    if (!gsap) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    var fills = document.querySelectorAll('[data-fill]');
+    var counts = document.querySelectorAll('[data-count]');
+
+    if (reduce) {
+      fills.forEach(function (f) { f.style.width = f.dataset.fill + '%'; });
+    } else {
+      gsap.set('.line-inner', { yPercent: 118 });
+      gsap.set('[data-hero="fade"]', { opacity: 0, y: 26 });
+      gsap.set('[data-hero="hud"]', { opacity: 0, y: 50 });
+      var tl = gsap.timeline({ delay: 0.2, defaults: { ease: 'power4.out' } });
+      tl.to('[data-hero="fade"]', { opacity: 1, y: 0, duration: 1, stagger: 0.12 }, 0)
+        .to('.line-inner', { yPercent: 0, duration: 1.3, stagger: 0.16 }, 0.1)
+        .to('[data-hero="hud"]', { opacity: 1, y: 0, duration: 1.1, stagger: 0.12 }, 0.7)
+        .to(fills, { width: function (i, el) { return el.dataset.fill + '%'; }, duration: 1.6, ease: 'power3.out', stagger: 0.1 }, 1.0);
+
+      counts.forEach(function (el) {
+        var end = parseFloat(el.dataset.count), dec = parseInt(el.dataset.dec || '0', 10), sep = el.dataset.sep === '1', o = { v: 0 };
+        gsap.to(o, { v: end, duration: 2.2, delay: 0.9, ease: 'power3.out', onUpdate: function () {
+          var s = o.v.toFixed(dec); el.textContent = sep ? Number(s).toLocaleString('en-US') : s;
+        }, onComplete: function () { el.textContent = sep ? end.toLocaleString('en-US') : end.toFixed(dec); } });
+      });
+
+      document.querySelectorAll('.hud-float').forEach(function (el, i) {
+        gsap.to(el, { y: i % 2 ? -9 : 9, duration: 3 + i * 0.4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.8 + i * 0.2 });
+      });
+
+      gsap.utils.toArray('[data-reveal]').forEach(function (el) {
+        gsap.from(el, { y: 50, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
+      });
+
+      gsap.to('.ghost-word', { yPercent: -18, ease: 'none', scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true } });
+    }
+
+    gsap.to('#progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: 0.2 } });
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const gsap = window.gsap;
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const disposers = [];
+const accent = { r: 255, g: 40, b: 0 };
+const accentSubs = [];
+let accentTween = null;
+
+window.addEventListener('drive:mode', (e) => {
+  const [r, g, b] = e.detail.rgb;
+  if (accentTween) accentTween.kill();
+  accentTween = gsap.to(accent, { r, g, b, duration: reduce ? 0 : 1, ease: 'power2.inOut', onUpdate: () => accentSubs.forEach((f) => f()) });
+});
+
+const $ = (id) => document.getElementById(id);
+const setC = (color, a) => color.setRGB(a.r / 255, a.g / 255, a.b / 255, THREE.SRGBColorSpace);
+
+/* ============================================================
+   HERO — particle dust + carbon matrix
+============================================================ */
+function initHero() {
+  const canvas = $('hero-canvas'), section = $('top');
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' }); }
+  catch (err) { return; }
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  renderer.setPixelRatio(dpr);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 80);
+  camera.position.set(0, 0, 8);
+
+  const mouse = new THREE.Vector2(), mouseT = new THREE.Vector2(), mouseW = new THREE.Vector2();
+  const U = {
+    uTime: { value: 0 }, uMouse: { value: mouseW }, uMouseN: { value: mouse }, uPx: { value: dpr },
+    uColor: { value: new THREE.Color() }
+  };
+  const syncColor = () => setC(U.uColor.value, accent);
+  syncColor(); accentSubs.push(syncColor);
+
+  // Dust
+  const small = window.innerWidth < 768, N = small ? 1500 : 4200;
+  const pos = new Float32Array(N * 3), seed = new Float32Array(N), size = new Float32Array(N), acc = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 26; pos[i * 3 + 1] = (Math.random() - 0.5) * 14; pos[i * 3 + 2] = (Math.random() - 0.5) * 14 - 1;
+    seed[i] = Math.random(); size[i] = 0.6 + Math.random() * 2.4; acc[i] = Math.random() < 0.13 ? 1 : 0;
+  }
+  const dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  dustGeo.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
+  dustGeo.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
+  dustGeo.setAttribute('aAcc', new THREE.BufferAttribute(acc, 1));
+  const dustMat = new THREE.ShaderMaterial({
+    uniforms: U, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      uniform float uTime; uniform vec2 uMouse; uniform float uPx;
+      attribute float aSeed; attribute float aSize; attribute float aAcc;
+      varying float vA; varying float vAcc;
+      void main() {
+        vec3 p = position;
+        p.y = mod(p.y + 7.0 + uTime * (0.12 + aSeed * 0.3), 14.0) - 7.0;
+        p.x += sin(uTime * 0.3 + aSeed * 20.0) * 0.4;
+        p.z += cos(uTime * 0.25 + aSeed * 13.0) * 0.4;
+        vec2 dv = p.xy - uMouse;
+        float f = smoothstep(2.4, 0.0, length(dv));
+        p.xy += normalize(dv + 1e-4) * f * 0.9;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        gl_PointSize = aSize * uPx * (14.0 / -mv.z) * (1.0 + aAcc * 0.6);
+        gl_Position = projectionMatrix * mv;
+        vA = (0.25 + 0.75 * aSeed) * (0.55 + 0.45 * sin(uTime * 1.5 + aSeed * 50.0)) * (0.6 + f);
+        vAcc = aAcc;
+      }`,
+    fragmentShader: `
+      uniform vec3 uColor; varying float vA; varying float vAcc;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        float a = smoothstep(0.5, 0.0, d) * vA;
+        vec3 c = mix(vec3(0.72, 0.75, 0.8), uColor, vAcc);
+        gl_FragColor = vec4(c, a);
+      }`
+  });
+  const dust = new THREE.Points(dustGeo, dustMat);
+  scene.add(dust);
+
+  // Carbon matrix floor
+  const cols = small ? 44 : 72, rows = small ? 26 : 40, sp = 0.5;
+  const gp = new Float32Array(cols * rows * 3);
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+    const o = (j * cols + i) * 3; gp[o] = (i - cols / 2) * sp; gp[o + 1] = 0; gp[o + 2] = 4 - j * sp;
+  }
+  const gridGeo = new THREE.BufferGeometry();
+  gridGeo.setAttribute('position', new THREE.BufferAttribute(gp, 3));
+  const gridMat = new THREE.ShaderMaterial({
+    uniforms: U, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      uniform float uTime; uniform vec2 uMouseN; uniform float uPx;
+      varying float vG; varying float vD;
+      void main() {
+        vec3 p = position;
+        p.y += sin(p.x * 0.45 + uTime * 0.7) * 0.22 + sin(p.z * 0.5 - uTime * 0.6) * 0.22;
+        vec2 c = vec2(uMouseN.x * 10.0, -4.0 + uMouseN.y * 3.0);
+        float d = distance(p.xz, c);
+        float bump = exp(-d * d * 0.06);
+        p.y += bump * (0.5 + 0.45 * sin(uTime * 2.5 - d * 1.6));
+        vG = bump;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        vD = clamp(1.0 - (-mv.z - 4.0) / 22.0, 0.0, 1.0);
+        gl_PointSize = (1.4 + bump * 3.0) * uPx * (10.0 / -mv.z) * 1.6;
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      uniform vec3 uColor; varying float vG; varying float vD;
+      void main() {
+        vec2 q = abs(gl_PointCoord - 0.5);
+        float shape = smoothstep(0.5, 0.18, q.x + q.y);
+        float a = shape * (0.12 + 0.5 * vD) + shape * vG * 0.6;
+        vec3 c = mix(vec3(0.5, 0.53, 0.58), uColor, clamp(vG * 1.6, 0.0, 1.0));
+        gl_FragColor = vec4(c, a);
+      }`
+  });
+  const grid = new THREE.Points(gridGeo, gridMat);
+  grid.position.y = -3.3;
+  scene.add(grid);
+
+  const halfH = 8 * Math.tan((55 / 2) * Math.PI / 180);
+  function resize() {
+    const w = section.clientWidth, h = section.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / Math.max(1, h); camera.updateProjectionMatrix();
+  }
+  resize();
+  const ro = new ResizeObserver(() => resize()); ro.observe(section);
+
+  const onMove = (e) => { mouseT.set((e.clientX / window.innerWidth) * 2 - 1, -((e.clientY / window.innerHeight) * 2 - 1)); };
+  window.addEventListener('pointermove', onMove, { passive: true });
+
+  let raf = 0, visible = true, last = performance.now(), time = 0;
+  const speed = reduce ? 0.12 : 1;
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt * speed;
+    mouse.lerp(mouseT, 0.05);
+    mouseW.set(mouse.x * halfH * camera.aspect, mouse.y * halfH);
+    U.uTime.value = time;
+    camera.position.x = mouse.x * 0.5; camera.position.y = mouse.y * 0.3; camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  }
+  const run = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  const halt = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+  const io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; visible ? run() : halt(); }, { rootMargin: '50px' });
+  io.observe(section);
+  const onVis = () => (document.hidden ? halt() : run());
+  document.addEventListener('visibilitychange', onVis);
+  run();
+
+  disposers.push(() => {
+    halt(); io.disconnect(); ro.disconnect();
+    window.removeEventListener('pointermove', onMove); document.removeEventListener('visibilitychange', onVis);
+    dustGeo.dispose(); dustMat.dispose(); gridGeo.dispose(); gridMat.dispose();
+    renderer.dispose(); renderer.forceContextLoss();
+  });
+}
+
+/* ============================================================
+   SHOWCASE — procedural supercar
+============================================================ */
+function spline(keys) {
+  const n = keys.length, m = [];
+  for (let i = 0; i < n; i++) {
+    const a = keys[Math.max(0, i - 1)], b = keys[Math.min(n - 1, i + 1)];
+    m.push((b[1] - a[1]) / ((b[0] - a[0]) || 1));
+  }
+  return (s) => {
+    if (s <= keys[0][0]) return keys[0][1];
+    if (s >= keys[n - 1][0]) return keys[n - 1][1];
+    let i = 1; while (s > keys[i][0]) i++;
+    const [x0, y0] = keys[i - 1], [x1, y1] = keys[i], h = x1 - x0, t = (s - x0) / h, t2 = t * t, t3 = t2 * t;
+    return (2 * t3 - 3 * t2 + 1) * y0 + (t3 - 2 * t2 + t) * h * m[i - 1] + (-2 * t3 + 3 * t2) * y1 + (t3 - t2) * h * m[i];
+  };
+}
+
+const L = 4.7;
+const P = {
+  yb: spline([[0, 0.24], [0.1, 0.2], [0.5, 0.2], [0.9, 0.26], [1, 0.34]]),
+  yt: spline([[0, 0.34], [0.08, 0.42], [0.25, 0.58], [0.4, 0.68], [0.55, 0.76], [0.72, 0.86], [0.86, 0.84], [1, 0.7]]),
+  w: spline([[0, 0.55], [0.1, 0.78], [0.25, 0.9], [0.4, 0.84], [0.55, 0.86], [0.7, 0.98], [0.85, 0.92], [1, 0.7]]),
+  cb: spline([[0, 0], [0.1, 0.12], [0.3, 0.3], [0.5, 0.38], [0.7, 0.34], [0.88, 0.2], [1, 0.02]]),
+  cw: spline([[0, 0.5], [0.2, 0.68], [0.5, 0.72], [0.8, 0.62], [1, 0.4]])
+};
+const EB = 2.4, ET = 2.4;
+const sNorm = (x) => (L / 2 - x) / L;
+const surfY = (s, z) => {
+  const yb = P.yb(s), yt = P.yt(s), w = P.w(s), zf = Math.min(0.999, Math.abs(z) / w);
+  return (yb + yt) / 2 + ((yt - yb) / 2) * Math.pow(1 - Math.pow(zf, ET), 1 / ET);
+};
+
+function loft(prof, { n = 96, m = 56, s0 = 0, s1 = 1, eT = 2.4, eB = 3.2 } = {}) {
+  const R = n + 3, pos = new Float32Array(R * m * 3), idx = [];
+  const sg = Math.sign, ab = Math.abs, pw = Math.pow;
+  for (let r = 0; r < R; r++) {
+    const cap = r === 0 || r === R - 1;
+    const i = r === 0 ? 0 : r === R - 1 ? n : r - 1;
+    const s = s0 + (s1 - s0) * (i / n), { yb, yt, w } = prof(s);
+    const cy = (yb + yt) / 2, hy = (yt - yb) / 2, x = L / 2 - s * L, k = cap ? 0.0001 : 1;
+    for (let j = 0; j < m; j++) {
+      const a = (j / m) * Math.PI * 2, ca = Math.cos(a), sa = Math.sin(a), e = sa >= 0 ? eT : eB;
+      const z = w * sg(ca) * pw(ab(ca), 2 / e), y = cy + hy * sg(sa) * pw(ab(sa), 2 / e), o = (r * m + j) * 3;
+      pos[o] = x; pos[o + 1] = cy + (y - cy) * k; pos[o + 2] = z * k;
+    }
+  }
+  for (let r = 0; r < R - 1; r++) for (let j = 0; j < m; j++) {
+    const a = r * m + j, b = r * m + ((j + 1) % m), c = (r + 1) * m + j, d = (r + 1) * m + ((j + 1) % m);
+    idx.push(a, b, c, b, d, c);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setIndex(idx); g.computeVertexNormals();
+  return g;
+}
+
+function radialTex(stops, size = 256) {
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+  stops.forEach(([o, col]) => gr.addColorStop(o, col));
+  g.fillStyle = gr; g.fillRect(0, 0, size, size);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+
+function initStage() {
+  const canvas = $('car-canvas'), stage = $('stage');
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' }); }
+  catch (err) { stage.classList.add('no-webgl'); return; }
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  renderer.setPixelRatio(dpr);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x060607);
+  scene.fog = new THREE.Fog(0x060607, 10, 26);
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04);
+  scene.environment = envRT.texture;
+
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 80);
+  camera.position.set(5.4, 1.7, 4.6);
+  const controls = new OrbitControls(camera, canvas);
+  controls.target.set(0, 0.55, 0);
+  controls.enableDamping = true; controls.dampingFactor = 0.06; controls.enablePan = false;
+  controls.minDistance = 3.8; controls.maxDistance = 11; controls.maxPolarAngle = 1.5;
+  controls.autoRotate = !reduce; controls.autoRotateSpeed = 0.55;
+  canvas.style.touchAction = 'pan-y';
+
+  // Materials
+  const paint = new THREE.MeshPhysicalMaterial({ color: new THREE.Color('#d10a0a'), metalness: 0.5, roughness: 0.26, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.25 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0x040507, metalness: 0.2, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 1.8 });
+  const carbonM = new THREE.MeshStandardMaterial({ color: 0x0c0d0f, metalness: 0.7, roughness: 0.42, envMapIntensity: 0.9 });
+  const tyre = new THREE.MeshStandardMaterial({ color: 0x070708, metalness: 0.1, roughness: 0.85 });
+  const rimM = new THREE.MeshStandardMaterial({ color: 0x1f2126, metalness: 0.9, roughness: 0.3, envMapIntensity: 1.2 });
+  const spokeM = new THREE.MeshStandardMaterial({ color: 0x8b9098, metalness: 1, roughness: 0.25, envMapIntensity: 1.3 });
+  const accentM = new THREE.MeshStandardMaterial({ color: 0xff2800, emissive: 0xff2800, emissiveIntensity: 0.9, metalness: 0.3, roughness: 0.4 });
+  const ledW = new THREE.MeshBasicMaterial({ color: 0xf2f6ff });
+  const ledR = new THREE.MeshBasicMaterial({ color: 0xff1a1a });
+
+  const car = new THREE.Group(); scene.add(car);
+  const occluders = [];
+
+  const bodyGeo = loft((s) => ({ yb: P.yb(s), yt: P.yt(s), w: P.w(s) }), { eT: EB, eB: 3.2 });
+  const body = new THREE.Mesh(bodyGeo, paint); car.add(body); occluders.push(body);
+
+  const cS0 = 0.34, cS1 = 0.7;
+  const canopyGeo = loft((s) => {
+    const sh = P.yt(s), u = (s - cS0) / (cS1 - cS0);
+    return { yb: sh - 0.12, yt: sh + P.cb(u), w: P.w(s) * P.cw(u) };
+  }, { s0: cS0, s1: cS1, n: 56, eT: 2.2, eB: 3 });
+  const canopy = new THREE.Mesh(canopyGeo, glass); car.add(canopy); occluders.push(canopy);
+
+  // Details
+  const box = (w, h, d, mat, x, y, z, parent = car) => { const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); mesh.position.set(x, y, z); parent.add(mesh); return mesh; };
+  // splitter + diffuser
+  box(0.6, 0.02, 1.6, carbonM, 2.15, 0.17, 0);
+  const diff = box(0.55, 0.07, 1.2, carbonM, -2.22, 0.27, 0); diff.rotation.z = 0.25;
+  // headlights, tail light
+  [-1, 1].forEach((sd) => {
+    const hx = L / 2 - 0.12 * L, hl = box(0.3, 0.012, 0.045, ledW, hx, surfY(0.12, 0.5) + 0.005, sd * 0.5); hl.rotation.y = sd * 0.35;
+    box(0.35, 0.01, 0.2, carbonM, L / 2 - 0.22 * L, surfY(0.22, 0.34) + 0.004, sd * 0.34);
+    box(0.7 + 0.2, 0.14, 0.03, carbonM, L / 2 - 0.58 * L, 0.4, sd * (P.w(0.58) - 0.005));
+    box(0.5, 0.1, 0.03, carbonM, L / 2 - 0.3 * L, 0.34, sd * (P.w(0.3) - 0.005));
+  });
+  box(0.03, 0.03, 1.15, ledR, -2.31, 0.66, 0);
+  for (let i = 0; i < 6; i++) { const s = 0.62 + i * 0.034; box(0.03, 0.012, 0.8, carbonM, L / 2 - s * L, surfY(s, 0) + 0.004, 0); }
+  // exhaust
+  [-1, 1].forEach((sd) => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.18, 24), carbonM); p.rotation.z = Math.PI / 2; p.position.set(-2.3, 0.44, sd * 0.3); car.add(p); });
+  // mirrors
+  [-1, 1].forEach((sd) => box(0.14, 0.05, 0.16, paint, 0.62, 0.62, sd * 0.76));
+
+  // Rear active wing
+  const wing = new THREE.Group(); wing.position.set(-2.05, 0.95, 0); car.add(wing);
+  box(0.5, 0.025, 1.55, carbonM, 0, 0, 0, wing);
+  [-1, 1].forEach((sd) => { box(0.045, 0.34, 0.045, carbonM, 0.05, -0.17, sd * 0.35, wing); box(0.5, 0.06, 0.02, accentM, 0, 0.02, sd * 0.775, wing); });
+  const aeroAnchor = new THREE.Object3D(); aeroAnchor.position.set(0, 0.12, 0.5); wing.add(aeroAnchor);
+
+  // Wheels
+  const spinners = [], accentMats = [accentM];
+  const calM = new THREE.MeshStandardMaterial({ color: 0xff2800, emissive: 0xff2800, emissiveIntensity: 0.5, roughness: 0.4, metalness: 0.4 }); accentMats.push(calM);
+  const tyreGeoF = new THREE.CylinderGeometry(0.38, 0.38, 0.3, 56).rotateX(Math.PI / 2);
+  const tyreGeoR = new THREE.CylinderGeometry(0.4, 0.4, 0.38, 56).rotateX(Math.PI / 2);
+  const rimGeoF = new THREE.CylinderGeometry(0.27, 0.27, 0.31, 40).rotateX(Math.PI / 2);
+  const rimGeoR = new THREE.CylinderGeometry(0.28, 0.28, 0.39, 40).rotateX(Math.PI / 2);
+  const spokeGeo = new THREE.BoxGeometry(0.26, 0.045, 0.025);
+  const capGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.03, 20).rotateX(Math.PI / 2);
+  const calGeo = new THREE.BoxGeometry(0.16, 0.2, 0.06);
+  function wheel(x, rear, sd) {
+    const w = rear ? 0.38 : 0.3, grp = new THREE.Group();
+    const y = rear ? 0.4 : 0.38, s = sNorm(x), z = sd * (P.w(s) - 0.02);
+    grp.position.set(x, y, z);
+    const spin = new THREE.Group(); grp.add(spin);
+    spin.add(new THREE.Mesh(rear ? tyreGeoR : tyreGeoF, tyre));
+    spin.add(new THREE.Mesh(rear ? rimGeoR : rimGeoF, rimM));
+    for (const face of [-1, 1]) {
+      for (let k = 0; k < 10; k++) {
+        const p = new THREE.Group(); p.rotation.z = (k / 10) * Math.PI * 2;
+        const sp = new THREE.Mesh(spokeGeo, spokeM); sp.position.set(0.14, 0, face * (w / 2 + 0.002)); p.add(sp); spin.add(p);
+      }
+      const cp = new THREE.Mesh(capGeo, accentM); cp.position.z = face * (w / 2 + 0.01); spin.add(cp);
+    }
+    const cal = new THREE.Mesh(calGeo, calM); cal.position.set(0.17, 0.07, sd * (w / 2 - 0.08)); grp.add(cal);
+    car.add(grp); spinners.push(spin); return grp;
+  }
+  const fwx = 1.38, rwx = -1.3;
+  const wFL = wheel(fwx, false, 1); wheel(fwx, false, -1); wheel(rwx, true, 1); wheel(rwx, true, -1);
+  const wheelAnchor = new THREE.Object3D(); wheelAnchor.position.set(0, 0, 0.18); wFL.add(wheelAnchor);
+
+  const engAnchor = new THREE.Object3D(); engAnchor.position.set(-1.1, surfY(sNorm(-1.1), 0) + 0.05, 0); car.add(engAnchor);
+  const monoAnchor = new THREE.Object3D(); monoAnchor.position.set(0.12, P.yt(sNorm(0.12)) + P.cb((sNorm(0.12) - cS0) / (cS1 - cS0)) + 0.03, 0); car.add(monoAnchor);
+  const anchors = { aero: aeroAnchor, engine: engAnchor, mono: monoAnchor, wheels: wheelAnchor };
+
+  // Floor, rings, glow
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(16, 96).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0x08080a, metalness: 0.15, roughness: 0.72, envMapIntensity: 0.25 }));
+  scene.add(floor);
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0xff2800, transparent: true, opacity: 0.85 });
+  const ring1 = new THREE.Mesh(new THREE.RingGeometry(3.55, 3.575, 128).rotateX(-Math.PI / 2), ringMat); ring1.position.y = 0.004; scene.add(ring1);
+  const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.08 });
+  const ring2 = new THREE.Mesh(new THREE.RingGeometry(5.2, 5.215, 128).rotateX(-Math.PI / 2), ring2Mat); ring2.position.y = 0.004; scene.add(ring2);
+  const glowTex = radialTex([[0, 'rgba(255,255,255,1)'], [0.45, 'rgba(255,255,255,.35)'], [1, 'rgba(255,255,255,0)']]);
+  const glowMat = new THREE.MeshBasicMaterial({ map: glowTex, color: 0xff2800, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false });
+  const glow = new THREE.Mesh(new THREE.PlaneGeometry(9, 9).rotateX(-Math.PI / 2), glowMat); glow.position.y = 0.006; scene.add(glow);
+  const shadowTex = radialTex([[0, 'rgba(0,0,0,.85)'], [0.6, 'rgba(0,0,0,.45)'], [1, 'rgba(0,0,0,0)']]);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(6.8, 3.2).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
+  shadow.position.y = 0.012; scene.add(shadow);
+
+  // Lights
+  const key = new THREE.SpotLight(0xffffff, 520, 24, 0.55, 0.7, 2); key.position.set(4, 9, 3); key.target.position.set(0, 0.4, 0); scene.add(key, key.target);
+  const fill = new THREE.DirectionalLight(0xaec6ff, 0.7); fill.position.set(-5, 3, 4); scene.add(fill);
+  const rim1 = new THREE.PointLight(0xff2800, 38, 14, 2); rim1.position.set(-4, 1.6, -3.2); scene.add(rim1);
+  const rim2 = new THREE.PointLight(0xff2800, 30, 14, 2); rim2.position.set(4.2, 1.2, -3.8); scene.add(rim2);
+
+  // Mode state
+  const MODE3D = { strada: { wingY: 0.86, wingRot: 0, ride: 0.014 }, sport: { wingY: 0.95, wingRot: 0.1, ride: 0 }, corsa: { wingY: 1.05, wingRot: 0.3, ride: -0.02 } };
+  const st = { wingY: MODE3D.sport.wingY, wingRot: MODE3D.sport.wingRot, ride: 0, spin: 1.4 };
+  const applyState = () => { wing.position.y = st.wingY; wing.rotation.z = st.wingRot; car.position.y = st.ride; };
+  applyState();
+  const syncAccent = () => {
+    setC(ringMat.color, accent); setC(glowMat.color, accent); setC(rim1.color, accent); setC(rim2.color, accent);
+    accentMats.forEach((m) => { setC(m.color, accent); setC(m.emissive, accent); });
+  };
+  syncAccent(); accentSubs.push(syncAccent);
+  let modeTw = null;
+  window.addEventListener('drive:mode', (e) => {
+    const t = MODE3D[e.detail.id], spin = { strada: 0.5, sport: 1.4, corsa: 2.8 }[e.detail.id];
+    if (modeTw) modeTw.kill();
+    modeTw = gsap.to(st, { wingY: t.wingY, wingRot: t.wingRot, ride: t.ride, spin, duration: reduce ? 0 : 1.2, ease: 'power3.inOut', onUpdate: applyState });
+  });
+  window.addEventListener('showroom:paint', (e) => {
+    const c = new THREE.Color(e.detail.hex);
+    gsap.to(paint.color, { r: c.r, g: c.g, b: c.b, duration: reduce ? 0 : 0.7, ease: 'power2.out' });
+  });
+
+  // Camera views
+  const VIEWS = {
+    front: [[5.4, 1.7, 4.6], [0, 0.55, 0]], side: [[0.01, 1.0, 7.6], [0, 0.55, 0]], rear: [[-5.6, 1.9, -4.4], [0, 0.55, 0]], top: [[0.01, 9.2, 0.9], [0, 0.4, 0]],
+    aero: [[-5.0, 2.0, 3.6], [-1.8, 0.8, 0]], engine: [[-3.6, 3.0, 3.4], [-1.0, 0.75, 0]], mono: [[1.8, 1.9, 5.8], [0, 0.8, 0]], wheels: [[3.6, 0.85, 3.5], [1.35, 0.4, 0.9]]
+  };
+  let camTw = null, idleT = 0;
+  const armIdle = () => { clearTimeout(idleT); if (!reduce) idleT = setTimeout(() => { controls.autoRotate = true; }, 12000); };
+  window.addEventListener('showroom:view', (e) => {
+    const v = VIEWS[e.detail.id]; if (!v) return;
+    controls.autoRotate = false; armIdle();
+    const s = { px: camera.position.x, py: camera.position.y, pz: camera.position.z, tx: controls.target.x, ty: controls.target.y, tz: controls.target.z };
+    if (camTw) camTw.kill();
+    camTw = gsap.to(s, { px: v[0][0], py: v[0][1], pz: v[0][2], tx: v[1][0], ty: v[1][1], tz: v[1][2], duration: reduce ? 0 : 1.7, ease: 'power3.inOut',
+      onUpdate: () => { camera.position.set(s.px, s.py, s.pz); controls.target.set(s.tx, s.ty, s.tz); } });
+  });
+  const onStart = () => { controls.autoRotate = false; if (camTw) camTw.kill(); clearTimeout(idleT); };
+  controls.addEventListener('start', onStart); controls.addEventListener('end', armIdle);
+
+  // Hotspot projection
+  const hs = [], v3 = new THREE.Vector3(), pr = new THREE.Vector3(), dir = new THREE.Vector3(), ray = new THREE.Raycaster();
+  const refreshHs = () => {
+    hs.length = 0;
+    stage.querySelectorAll('[data-hotspot]').forEach((el) => { const a = anchors[el.dataset.id]; if (a) hs.push({ el, a, hidden: null, occ: false }); });
+  };
+  function updateHotspots(frame) {
+    if (!hs.length) { if (frame % 15 === 0) refreshHs(); return; }
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    for (const o of hs) {
+      o.a.getWorldPosition(v3);
+      const dist = camera.position.distanceTo(v3);
+      pr.copy(v3).project(camera);
+      const behind = pr.z > 1;
+      o.el.style.transform = `translate3d(${((pr.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-pr.y * 0.5 + 0.5) * h).toFixed(1)}px,0)`;
+      if (frame % 4 === 0) {
+        dir.copy(v3).sub(camera.position).normalize(); ray.set(camera.position, dir);
+        const hit = ray.intersectObjects(occluders, false)[0];
+        o.occ = !!hit && hit.distance < dist - 0.1;
+      }
+      const hide = behind || o.occ;
+      if (hide !== o.hidden) { o.hidden = hide; o.el.style.opacity = hide ? '0' : '1'; o.el.style.pointerEvents = hide ? 'none' : 'auto'; }
+    }
+  }
+
+  // Resize + loop
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    const a = w / h; camera.aspect = a; camera.zoom = Math.min(1, Math.max(0.55, a * 1.02)); camera.updateProjectionMatrix();
+  }
+  resize();
+  const ro = new ResizeObserver(() => resize()); ro.observe(canvas);
+
+  let raf = 0, visible = false, last = performance.now(), frame = 0;
+  function tick(now) {
+    raf = requestAnimationFrame(tick);
+    const dt = Math.min(0.05, (now - last) / 1000); last = now; frame++;
+    controls.update();
+    for (const s of spinners) s.rotation.z -= st.spin * dt * 1.2;
+    updateHotspots(frame);
+    renderer.render(scene, camera);
+  }
+  const run = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(tick); } };
+  const halt = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+  const io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; visible ? run() : halt(); }, { rootMargin: '80px' });
+  io.observe(canvas);
+  const onVis = () => (document.hidden ? halt() : run());
+  document.addEventListener('visibilitychange', onVis);
+  const onLost = (e) => { e.preventDefault(); halt(); };
+  canvas.addEventListener('webglcontextlost', onLost);
+
+  disposers.push(() => {
+    halt(); clearTimeout(idleT); io.disconnect(); ro.disconnect();
+    document.removeEventListener('visibilitychange', onVis); canvas.removeEventListener('webglcontextlost', onLost);
+    controls.removeEventListener('start', onStart); controls.removeEventListener('end', armIdle); controls.dispose();
+    scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); if (o.material) { const ms = Array.isArray(o.material) ? o.material : [o.material]; ms.forEach((m) => { if (m.map) m.map.dispose(); m.dispose(); }); } });
+    envRT.dispose(); pmrem.dispose(); renderer.dispose(); renderer.forceContextLoss();
+  });
+}
+
+function boot() {
+  try { initHero(); } catch (err) { console.warn('Hero scene unavailable:', err); }
+  try { initStage(); } catch (err) { console.warn('Showcase scene unavailable:', err); $('stage').classList.add('no-webgl'); }
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+window.addEventListener('pagehide', () => { disposers.splice(0).forEach((fn) => { try { fn(); } catch (e) { /* noop */ } }); });
+</script>
+</body>
+</html>
