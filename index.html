@@ -1,37 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>F80 — Private Showroom</title>
-<meta name="description" content="An ultra-exclusive, cinematic showroom and configurator for the Ferrari F80 hypercar — a fan-made concept experience.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' blob:; worker-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<title>Lamborghini Revuelto — Salon privé & configurateur hypercar V12 hybride</title>
+<meta name="description" content="Entrez dans le salon privé de la Lamborghini Revuelto : vue éclatée 3D pièce par pièce, configurateur de modes de conduite, simulateur sonore V12 et demande d’allocation VIP. 1 015 ch, V12 6,5 L, trois moteurs électriques.">
+<meta name="keywords" content="Lamborghini Revuelto, hypercar hybride rechargeable, V12 hybride, supercar, configurateur Revuelto, vue éclatée 3D, allocation VIP, voiture de luxe, 1015 ch, Sant’Agata Bolognese">
+<meta name="author" content="Salon privé Revuelto — concept indépendant">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#030303">
 <meta name="color-scheme" content="dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23030303'/%3E%3Cpath d='M6 22 L12 10 H26 L24 14 H15 L14 17 H22 L20 21 H10 L9 22Z' fill='%23FF2800'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://example.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Revuelto — Salon privé">
+<meta property="og:title" content="Lamborghini Revuelto — L’hypercar V12 hybride, en vue éclatée">
+<meta property="og:description" content="Désassemblez la Revuelto pièce par pièce, éprouvez ses trois modes de conduite, écoutez son V12 et demandez votre allocation privée.">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:image" content="https://example.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lamborghini Revuelto — salon privé et vue éclatée 3D">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lamborghini Revuelto — L’hypercar V12 hybride, en vue éclatée">
+<meta name="twitter:description" content="Vue éclatée 3D, modes de conduite, simulateur V12 et allocation VIP. Un salon privé entièrement dédié à la Revuelto.">
+<meta name="twitter:image" content="https://example.com/og-image.jpg">
+<meta name="twitter:image:alt" content="Lamborghini Revuelto — salon privé et vue éclatée 3D">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23030303'/%3E%3Cpath d='M16 4l9 5.2v10.4L16 28l-9-8.4V9.2z' fill='none' stroke='%2310B981' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M11.5 12.5L16 21l4.5-8.5' fill='none' stroke='%2310B981' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Revuelto — Salon privé",
+  "inLanguage": "fr-FR",
+  "description": "Salon virtuel, configurateur et vue éclatée 3D de la Lamborghini Revuelto. Concept indépendant."
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
 
 <script type="importmap">
 {
   "imports": {
     "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
     "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.160.0/build/three.module.js": "sha384-61S/Nu32S3E5+n+KpCOTb2eRYps6fVKm+9Gz1QBvSePFthb46f063Aa/qe/lykFZ",
+    "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js": "sha384-qlO/ZugKPxAQUAvTlQoo0QECzxJIJySZmCF/DHdb2Xn/hHndFwX/vfUAC9Hbk6LP",
+    "https://unpkg.com/three@0.160.0/examples/jsm/environments/RoomEnvironment.js": "sha384-ZGqh+dJjt6z9NHsWYYt+TPDFj8y+2If7naI6a6AkkyNZyH51CVS3HTWFh0njp4k6"
   }
 }
 </script>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com/3.4.17" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
           obsidian: '#030303',
-          carbon: '#0b0b0d',
-          graphite: '#16171a',
-          titanium: '#9aa1aa',
+          titane: '#1F1F1F',
           accent: 'rgb(var(--accent-rgb) / <alpha-value>)'
         },
         fontFamily: {
@@ -42,26 +79,19 @@
     }
   };
 </script>
-<script defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js" integrity="sha384-X9kJyAubVxnP0hcA+AMMs21U445qsnqhnUF8EBlEpP3a42Kh/JwWjlv2ZcvGfphb" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
   :root {
-    --accent-rgb: 255 40 0;
+    --accent-rgb: 16 185 129;
     --obsidian: #030303;
+    --titane: #1F1F1F;
     --line: rgba(255, 255, 255, .09);
-    --titanium: #9aa1aa;
   }
   *, *::before, *::after { box-sizing: border-box; }
-  html { background: var(--obsidian); -webkit-text-size-adjust: 100%; }
+  html { background: var(--obsidian); -webkit-text-size-adjust: 100%; overflow-x: hidden; }
   html.lock, html.lock body { overflow: hidden; }
-  body {
-    margin: 0;
-    background: var(--obsidian);
-    color: #e9eaec;
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
+  body { margin: 0; background: var(--obsidian); color: #e9eaec; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   [x-cloak] { display: none !important; }
   ::selection { background: rgb(var(--accent-rgb)); color: #050505; }
   :focus-visible { outline: 2px solid rgb(var(--accent-rgb)); outline-offset: 3px; }
@@ -69,44 +99,27 @@
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: #050505; }
   ::-webkit-scrollbar-thumb { background: #2a2c31; border-radius: 10px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-  /* Film grain + global atmosphere */
-  body::after {
-    content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .055; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  }
+  body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .055; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
 
-  .carbon {
-    background-color: #0a0a0c;
-    background-image:
-      linear-gradient(45deg, #131316 25%, transparent 25%, transparent 75%, #131316 75%),
-      linear-gradient(45deg, #131316 25%, transparent 25%, transparent 75%, #131316 75%);
-    background-size: 8px 8px; background-position: 0 0, 4px 4px;
-  }
+  .carbon { background-color: #0a0a0c;
+    background-image: linear-gradient(45deg, #151518 25%, transparent 25%, transparent 75%, #151518 75%), linear-gradient(45deg, #151518 25%, transparent 25%, transparent 75%, #151518 75%);
+    background-size: 8px 8px; background-position: 0 0, 4px 4px; }
 
-  /* Typography helpers */
   .font-display { font-family: 'Syncopate', sans-serif; }
-  .eyebrow { font-size: .68rem; letter-spacing: .38em; text-transform: uppercase; color: rgb(var(--accent-rgb)); font-weight: 600; }
-  .h2 { font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; line-height: 1.05; font-size: clamp(1.7rem, 4.4vw, 3.6rem); letter-spacing: -.01em; }
-  .lede { color: rgba(255,255,255,.58); font-weight: 300; line-height: 1.75; font-size: clamp(.95rem, 1.2vw, 1.1rem); }
-  .label { font-size: .64rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.45); font-weight: 600; }
+  .eyebrow { font-size: .68rem; letter-spacing: .34em; text-transform: uppercase; color: rgb(var(--accent-rgb)); font-weight: 600; }
+  .h2 { font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; line-height: 1.08; font-size: clamp(1.6rem, 4.2vw, 3.4rem); letter-spacing: -.02em; overflow-wrap: break-word; }
+  .lede { color: rgba(255,255,255,.6); font-weight: 300; line-height: 1.75; font-size: clamp(.95rem, 1.2vw, 1.1rem); }
+  .label { font-size: .64rem; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.48); font-weight: 600; }
   .text-accent { color: rgb(var(--accent-rgb)); }
 
-  /* Surfaces */
-  .glass {
-    background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
-    border: 1px solid rgba(255,255,255,.11);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 30px 60px -30px rgba(0,0,0,.9);
-    -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%);
-  }
+  .glass { background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.015)); border: 1px solid rgba(255,255,255,.11);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 30px 60px -30px rgba(0,0,0,.9); -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%); }
 
-  /* Buttons */
-  .btn {
-    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .7rem;
-    padding: .95rem 1.7rem; border-radius: 999px; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; font-weight: 700;
-    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s, background-color .4s, color .4s, border-color .4s;
-    will-change: transform; overflow: hidden; isolation: isolate;
-  }
+  .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .7rem; padding: .95rem 1.6rem; border-radius: 999px; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; text-align: center;
+    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s, color .4s, border-color .4s; will-change: transform; overflow: hidden; isolation: isolate; }
   .btn-accent { background: rgb(var(--accent-rgb)); color: #050505; box-shadow: 0 10px 40px -10px rgb(var(--accent-rgb) / .7); }
   .btn-accent::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%); transform: translateX(-120%); transition: transform .8s; }
   .btn-accent:hover::after { transform: translateX(120%); }
@@ -114,50 +127,55 @@
   .btn-ghost { border: 1px solid rgba(255,255,255,.22); color: #fff; background: rgba(255,255,255,.03); }
   .btn-ghost:hover { border-color: rgb(var(--accent-rgb)); color: rgb(var(--accent-rgb)); transform: translateY(-2px); }
   .btn[disabled] { opacity: .6; cursor: progress; }
+  .chip { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.72); }
 
-  .chip { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.7); }
-
-  /* Hero */
   .line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
   .line-inner { display: block; will-change: transform; }
   .hero-vignette { background: radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(3,3,3,.55) 60%, #030303 100%), linear-gradient(to bottom, rgba(3,3,3,.55), transparent 22%, transparent 70%, #030303 100%); }
-  .hero-glow { background: radial-gradient(ellipse 60% 50% at 75% 55%, rgb(var(--accent-rgb) / .16), transparent 70%); transition: background .6s; }
-  .ghost-word { position: absolute; right: -2vw; bottom: -4vw; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: clamp(8rem, 30vw, 30rem); line-height: .8; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.05); pointer-events: none; user-select: none; }
+  .hero-glow { background: radial-gradient(ellipse 60% 50% at 75% 55%, rgb(var(--accent-rgb) / .16), transparent 70%); }
+  .ghost-word { position: absolute; right: -2vw; bottom: -3vw; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: clamp(7rem, 24vw, 26rem); line-height: .8; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.05); pointer-events: none; user-select: none; max-width: 100vw; overflow: hidden; }
 
-  .hud-card { position: relative; border-radius: 22px; padding: 1.35rem 1.4rem 1.25rem; transform-style: preserve-3d; will-change: transform; overflow: hidden; }
+  .hud-card { position: relative; border-radius: 22px; padding: 1.2rem 1.25rem 1.1rem; transform-style: preserve-3d; will-change: transform; overflow: hidden; }
   .hud-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgb(var(--accent-rgb) / .22), transparent 60%); opacity: .8; }
   .hud-card .bar { height: 3px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; margin-top: 1rem; }
   .hud-card .bar i { display: block; height: 100%; width: 0; background: rgb(var(--accent-rgb)); box-shadow: 0 0 14px rgb(var(--accent-rgb)); }
   .hud-corner { position: absolute; top: 14px; right: 14px; width: 9px; height: 9px; border-radius: 50%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 12px rgb(var(--accent-rgb)); animation: pulse 2.4s infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
-
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
   .scroll-cue { width: 1px; height: 54px; background: linear-gradient(to bottom, rgb(var(--accent-rgb)), transparent); position: relative; overflow: hidden; }
   .scroll-cue::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: #fff; animation: cue 2.2s ease-in-out infinite; }
   @keyframes cue { to { top: 110%; } }
 
-  /* Marquee */
   .marquee { overflow: hidden; border-block: 1px solid var(--line); background: rgba(255,255,255,.015); }
-  .marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
-  .marquee-track span { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.4); padding: 1.15rem 2.2rem; white-space: nowrap; }
-  .marquee-track span b { color: rgb(var(--accent-rgb)); font-weight: 700; }
+  .marquee-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
+  .marquee-track span { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: .74rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.4); padding: 1.15rem 2.2rem; white-space: nowrap; }
+  .marquee-track span b { color: rgb(var(--accent-rgb)); }
   @keyframes marquee { to { transform: translateX(-50%); } }
 
-  /* Stage */
-  .stage { background: radial-gradient(ellipse at 50% 30%, #15161a 0%, #070708 70%); }
+  .xv-vignette { background: radial-gradient(ellipse at 55% 50%, transparent 40%, rgba(3,3,3,.8) 100%), linear-gradient(to top, rgba(3,3,3,.85), transparent 35%); }
+  .callout { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; will-change: transform, opacity; }
+  .callout .dot { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 0 4px rgb(var(--accent-rgb) / .25), 0 0 18px rgb(var(--accent-rgb)); }
+  .callout .tag { position: absolute; left: 26px; top: -16px; white-space: nowrap; padding: .45rem .8rem; border-radius: 10px; background: rgba(5,5,6,.78); border: 1px solid rgba(255,255,255,.14); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .callout .tag::before { content: ""; position: absolute; left: -22px; top: 50%; width: 22px; height: 1px; background: rgb(var(--accent-rgb)); }
+  .callout[data-side="l"] .tag { left: auto; right: 26px; }
+  .callout[data-side="l"] .tag::before { left: auto; right: -22px; }
+  .fiche { grid-area: 1 / 1; opacity: 0; will-change: opacity, transform; }
+  .xv-tick { width: 2px; height: 34px; border-radius: 2px; background: rgba(255,255,255,.16); transition: background-color .4s, height .4s, box-shadow .4s; }
+  .xv-tick.on { background: rgb(var(--accent-rgb)); height: 56px; box-shadow: 0 0 14px rgb(var(--accent-rgb)); }
+
+  .stage { background: radial-gradient(ellipse at 50% 30%, #17181b 0%, #070708 70%); }
   .stage canvas { touch-action: pan-y; cursor: grab; }
   .stage canvas:active { cursor: grabbing; }
   .stage-vignette { background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.65) 100%); }
-  .no-webgl::after { content: "WebGL is unavailable on this device — the 3D showcase cannot render."; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 2rem; color: rgba(255,255,255,.5); font-size: .9rem; }
+  .no-webgl::after { content: "WebGL est indisponible sur cet appareil : la scène 3D ne peut pas s’afficher."; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 2rem; color: rgba(255,255,255,.5); font-size: .9rem; }
 
   .hotspot { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; display: grid; place-items: center; pointer-events: auto; opacity: 0; transition: opacity .35s; will-change: transform; z-index: 2; }
   .hs-dot { width: 12px; height: 12px; border-radius: 50%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 0 3px rgba(0,0,0,.55), 0 0 18px rgb(var(--accent-rgb)); transition: transform .3s; }
   .hs-ring { position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgb(var(--accent-rgb)); animation: ring 2.4s ease-out infinite; }
   @keyframes ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
   .hotspot:hover .hs-dot, .hotspot:focus-visible .hs-dot { transform: scale(1.35); }
-  .hs-label { position: absolute; left: 50px; top: 50%; transform: translate(-6px, -50%); white-space: nowrap; padding: .45rem .8rem; border-radius: 999px; background: rgba(5,5,6,.82); border: 1px solid rgba(255,255,255,.14); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .hs-label { position: absolute; left: 50px; top: 50%; transform: translate(-6px, -50%); white-space: nowrap; padding: .45rem .8rem; border-radius: 999px; background: rgba(5,5,6,.85); border: 1px solid rgba(255,255,255,.14); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
   .hotspot:hover .hs-label, .hotspot:focus-visible .hs-label { opacity: 1; transform: translate(0, -50%); }
 
-  /* Stat bars + swatches */
   .meter { height: 3px; border-radius: 3px; background: rgba(255,255,255,.09); overflow: hidden; }
   .meter i { display: block; height: 100%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 12px rgb(var(--accent-rgb) / .8); transition: width .3s linear; }
   .swatch { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(255,255,255,.15); box-shadow: inset 0 0 0 3px #050505; transition: transform .3s, border-color .3s; }
@@ -166,15 +184,17 @@
   .stroke-accent { stroke: rgb(var(--accent-rgb)); }
   .stop-accent { stop-color: rgb(var(--accent-rgb)); }
 
-  /* Pedal */
-  .pedal { position: relative; width: 100%; padding: 1.4rem 1rem; border-radius: 22px; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(180deg, #1a1b1f, #0b0b0d); font-family: 'Syncopate', sans-serif; font-weight: 700; letter-spacing: .22em; font-size: .78rem; text-transform: uppercase; user-select: none; -webkit-user-select: none; touch-action: none; transition: transform .12s, border-color .3s, box-shadow .3s; overflow: hidden; }
+  .flow { fill: none; stroke: rgb(var(--accent-rgb)); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 5 8; animation: dash 1.6s linear infinite; transition: opacity .6s; }
+  @keyframes dash { to { stroke-dashoffset: -52; } }
+  .node { fill: rgba(255,255,255,.04); stroke: rgba(255,255,255,.18); stroke-width: 1; }
+
+  .pedal { position: relative; width: 100%; padding: 1.4rem 1rem; border-radius: 22px; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(180deg, #202125, #0b0b0d); font-family: 'Syncopate', sans-serif; font-weight: 700; letter-spacing: .16em; font-size: .72rem; text-transform: uppercase; user-select: none; -webkit-user-select: none; touch-action: none; transition: transform .12s, border-color .3s, box-shadow .3s; overflow: hidden; }
   .pedal.on { transform: translateY(3px) scale(.985); border-color: rgb(var(--accent-rgb)); box-shadow: 0 0 40px -6px rgb(var(--accent-rgb) / .8), inset 0 0 30px rgb(var(--accent-rgb) / .25); }
   .pedal::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px); }
 
-  /* Matrix */
   .mx-row { transition: background-color .4s; }
   .mx-row:hover { background: rgba(255,255,255,.025); }
-  .mx-cell { position: relative; display: block; padding: .9rem 1.4rem; transition: background-color .35s, color .35s; }
+  .mx-cell { position: relative; display: block; padding: .9rem 1.2rem; transition: background-color .35s; min-width: 0; }
   .mx-cell.hot { background: rgb(var(--accent-rgb) / .07); }
   .mx-cell.sub { box-shadow: inset 0 0 0 1px rgb(var(--accent-rgb) / .3); background: rgb(var(--accent-rgb) / .05); }
   .mx-bar { display: block; height: 2px; margin-top: .7rem; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
@@ -183,203 +203,253 @@
   .mx-drawer { display: grid; transition: grid-template-rows .6s cubic-bezier(.2,.8,.2,1); }
   .mx-plus { transition: transform .5s cubic-bezier(.2,.8,.2,1), border-color .3s, color .3s; }
 
-  /* Form */
   .field { position: relative; }
   .field input, .field select, .field textarea { width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(255,255,255,.2); padding: 1.65rem 0 .6rem; color: #fff; font-size: .95rem; outline: none; border-radius: 0; transition: border-color .3s; appearance: none; -webkit-appearance: none; font-family: inherit; }
   .field textarea { resize: none; }
   .field select { cursor: pointer; padding-right: 1.6rem; }
   .field option { background: #0b0b0d; color: #fff; }
-  .field label { position: absolute; left: 0; top: 1.45rem; font-size: .9rem; color: rgba(255,255,255,.45); pointer-events: none; transition: top .25s, font-size .25s, letter-spacing .25s, color .25s; }
-  .field input:focus ~ label, .field input:not(:placeholder-shown) ~ label,
-  .field textarea:focus ~ label, .field textarea:not(:placeholder-shown) ~ label,
-  .field select:focus ~ label, .field select.filled ~ label { top: .3rem; font-size: .6rem; letter-spacing: .24em; text-transform: uppercase; color: rgb(var(--accent-rgb)); }
+  .field label { position: absolute; left: 0; top: 1.45rem; font-size: .9rem; color: rgba(255,255,255,.45); pointer-events: none; transition: top .25s, font-size .25s, letter-spacing .25s, color .25s; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .field input:focus ~ label, .field input:not(:placeholder-shown) ~ label, .field textarea:focus ~ label, .field textarea:not(:placeholder-shown) ~ label, .field select:focus ~ label, .field select.filled ~ label { top: .3rem; font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: rgb(var(--accent-rgb)); }
   .field .ln { position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: rgb(var(--accent-rgb)); box-shadow: 0 0 10px rgb(var(--accent-rgb)); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
   .field input:focus ~ .ln, .field select:focus ~ .ln, .field textarea:focus ~ .ln { transform: scaleX(1); }
   .field.err input, .field.err select { border-bottom-color: #ff5a4d; }
   .field .caret { position: absolute; right: 2px; bottom: .85rem; pointer-events: none; color: rgba(255,255,255,.5); }
   .err-msg { color: #ff7a6e; font-size: .72rem; margin-top: .4rem; }
-  .opt { display: inline-flex; align-items: center; padding: .6rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.16); font-size: .74rem; letter-spacing: .06em; transition: border-color .3s, background-color .3s, color .3s; }
+  .opt { display: inline-flex; align-items: center; padding: .6rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.16); font-size: .74rem; letter-spacing: .04em; transition: border-color .3s, background-color .3s; }
   .opt:hover { border-color: rgba(255,255,255,.4); }
   .opt[aria-pressed="true"] { border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .12); color: #fff; }
-
   .check-ring { stroke-dasharray: 166; stroke-dashoffset: 166; }
   .check-tick { stroke-dasharray: 48; stroke-dashoffset: 48; }
 
   .progress { position: fixed; left: 0; top: 0; height: 2px; width: 100%; z-index: 95; background: rgb(var(--accent-rgb)); box-shadow: 0 0 14px rgb(var(--accent-rgb)); transform: scaleX(0); transform-origin: left; }
 
-  .rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); }
-
   @media (prefers-reduced-motion: reduce) {
-    .marquee-track, .hs-ring, .hud-corner, .scroll-cue::after { animation: none !important; }
+    .marquee-track, .hs-ring, .hud-corner, .scroll-cue::after, .flow { animation: none !important; }
     html { scroll-behavior: auto !important; }
   }
 </style>
 </head>
 
 <body>
-<noscript><p style="padding:2rem;text-align:center">This experience requires JavaScript.</p></noscript>
+<noscript><p style="padding:2rem;text-align:center">Cette expérience nécessite JavaScript.</p></noscript>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
-<!-- ============================ NAV ============================ -->
+<!-- ============================ NAVIGATION ============================ -->
 <header x-data="{ open: false, scrolled: false }" @scroll.window.passive.throttle.100ms="scrolled = window.scrollY > 40"
         class="fixed inset-x-0 top-0 z-50 transition-colors duration-500"
         :class="(scrolled || open) ? 'bg-obsidian/80 backdrop-blur-xl border-b border-white/5' : 'border-b border-transparent'">
-  <div class="mx-auto max-w-[1800px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-3 font-display font-bold text-[11px] md:text-xs tracking-[.32em]" aria-label="F80 Private Showroom — top">
+  <div class="mx-auto max-w-[2200px] px-4 sm:px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3 font-display font-bold text-[11px] md:text-xs tracking-[.28em]" aria-label="Revuelto — retour en haut de page">
       <span class="inline-block w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_14px_rgb(var(--accent-rgb))]"></span>
-      F80 <span class="text-white/35 hidden sm:inline">/ Private Showroom</span>
+      REVUELTO <span class="text-white/35 hidden sm:inline">/ Salon privé</span>
     </a>
-    <nav class="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[.26em] text-white/60" aria-label="Primary">
-      <a class="hover:text-white transition-colors" href="#showcase">Showcase</a>
-      <a class="hover:text-white transition-colors" href="#sound">Sound</a>
-      <a class="hover:text-white transition-colors" href="#engineering">Engineering</a>
-      <a class="hover:text-white transition-colors" href="#reserve">Reserve</a>
+    <nav class="hidden lg:flex items-center gap-9 text-[11px] uppercase tracking-[.24em] text-white/60" aria-label="Navigation principale">
+      <a class="hover:text-white transition-colors" href="#eclate">Vue éclatée</a>
+      <a class="hover:text-white transition-colors" href="#configurateur">Configurateur</a>
+      <a class="hover:text-white transition-colors" href="#sensations">Sensations</a>
+      <a class="hover:text-white transition-colors" href="#ingenierie">Ingénierie</a>
+      <a class="hover:text-white transition-colors" href="#reserver">Réserver</a>
     </nav>
-    <div class="hidden md:block"><a href="#reserve" class="btn btn-ghost !py-2.5 !px-5">Request allocation</a></div>
-    <button class="md:hidden w-10 h-10 grid place-items-center" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+    <div class="hidden lg:block"><a href="#reserver" class="btn btn-ghost !py-2.5 !px-5">Demander une allocation</a></div>
+    <button class="lg:hidden w-10 h-10 grid place-items-center" @click="open = !open" :aria-expanded="open" aria-label="Ouvrir ou fermer le menu">
       <span class="relative block w-6 h-3">
         <span class="absolute left-0 top-0 h-px w-full bg-white transition-transform duration-300" :class="open ? 'translate-y-[6px] rotate-45' : ''"></span>
         <span class="absolute left-0 bottom-0 h-px w-full bg-white transition-transform duration-300" :class="open ? '-translate-y-[5px] -rotate-45' : ''"></span>
       </span>
     </button>
   </div>
-  <nav x-show="open" x-cloak x-transition.opacity class="md:hidden px-5 pb-8 pt-2 flex flex-col gap-1" aria-label="Mobile">
-    <a @click="open=false" href="#showcase" class="py-4 border-b border-white/10 font-display text-sm tracking-[.2em] uppercase">Showcase</a>
-    <a @click="open=false" href="#sound" class="py-4 border-b border-white/10 font-display text-sm tracking-[.2em] uppercase">Sound</a>
-    <a @click="open=false" href="#engineering" class="py-4 border-b border-white/10 font-display text-sm tracking-[.2em] uppercase">Engineering</a>
-    <a @click="open=false" href="#reserve" class="mt-6 btn btn-accent">Request allocation</a>
+  <nav x-show="open" x-cloak x-transition.opacity class="lg:hidden px-4 sm:px-6 pb-8 pt-2 flex flex-col gap-1" aria-label="Navigation mobile">
+    <a @click="open=false" href="#eclate" class="py-4 border-b border-white/10 font-display text-sm tracking-[.18em] uppercase">Vue éclatée</a>
+    <a @click="open=false" href="#configurateur" class="py-4 border-b border-white/10 font-display text-sm tracking-[.18em] uppercase">Configurateur</a>
+    <a @click="open=false" href="#sensations" class="py-4 border-b border-white/10 font-display text-sm tracking-[.18em] uppercase">Sensations</a>
+    <a @click="open=false" href="#ingenierie" class="py-4 border-b border-white/10 font-display text-sm tracking-[.18em] uppercase">Ingénierie</a>
+    <a @click="open=false" href="#reserver" class="mt-6 btn btn-accent">Demander une allocation</a>
   </nav>
 </header>
 
 <main>
-<!-- ============================ HERO ============================ -->
-<section id="top" class="relative min-h-screen overflow-hidden" aria-label="Introduction">
+<!-- ============================ HÉROS ============================ -->
+<section id="top" class="relative min-h-screen overflow-hidden" aria-label="Présentation">
   <canvas id="hero-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
   <div class="absolute inset-0 hero-glow pointer-events-none"></div>
   <div class="absolute inset-0 carbon opacity-[.22] pointer-events-none" style="-webkit-mask-image: radial-gradient(ellipse at 70% 60%, #000 0%, transparent 65%); mask-image: radial-gradient(ellipse at 70% 60%, #000 0%, transparent 65%);"></div>
   <div class="absolute inset-0 hero-vignette pointer-events-none"></div>
-  <div class="ghost-word" aria-hidden="true">F80</div>
+  <div class="ghost-word" aria-hidden="true">V12</div>
 
-  <div class="relative z-10 mx-auto max-w-[1800px] px-5 md:px-10 pt-28 md:pt-32 pb-20 min-h-screen grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-    <div class="lg:col-span-7">
-      <p class="eyebrow mb-6 md:mb-8" data-hero="fade">Maranello &nbsp;·&nbsp; Private Allocation 2026</p>
-      <h1 class="font-display font-bold uppercase leading-[.98] tracking-tight" style="font-size: clamp(2.5rem, 8vw, 7rem);">
-        <span class="line"><span class="line-inner">Ferrari</span></span>
-        <span class="line"><span class="line-inner text-accent" style="text-shadow: 0 0 60px rgb(var(--accent-rgb) / .45)">F80</span></span>
-        <span class="line"><span class="line-inner text-white/90">Unleashed</span></span>
+  <div class="relative z-10 mx-auto max-w-[2200px] px-4 sm:px-6 md:px-10 pt-28 md:pt-32 pb-14 min-h-screen flex flex-col justify-center gap-10 md:gap-14">
+    <div>
+      <p class="eyebrow mb-6 md:mb-8" data-hero="fade">Sant’Agata Bolognese &nbsp;·&nbsp; Allocation privée 2026</p>
+      <h1 class="font-display font-bold uppercase leading-[.98]" style="font-size: clamp(2.5rem, 8vw, 7rem); letter-spacing: -.05em;">
+        <span class="line"><span class="line-inner">Revuelto</span></span>
+        <span class="line"><span class="line-inner text-accent" style="text-shadow: 0 0 60px rgb(var(--accent-rgb) / .45)">V12</span></span>
+        <span class="line"><span class="line-inner text-white/90">Hybride</span></span>
       </h1>
       <p class="lede max-w-xl mt-8 md:mt-10" data-hero="fade">
-        Twelve hundred horsepower of hybrid fury, wrapped in a carbon monocoque and sculpted by the wind.
-        Limited to 799 examples worldwide — and by invitation only.
+        Un V12 atmosphérique de 6,5 litres, trois moteurs électriques et 1&nbsp;015 chevaux.
+        La première hypercar hybride rechargeable à V12 de Lamborghini redéfinit la démesure — sur invitation uniquement.
       </p>
       <div class="flex flex-wrap gap-4 mt-10" data-hero="fade">
-        <a href="#showcase" class="btn btn-accent">Enter the configurator</a>
-        <a href="#reserve" class="btn btn-ghost">Request allocation</a>
+        <a href="#eclate" class="btn btn-accent">Explorer la vue éclatée</a>
+        <a href="#reserver" class="btn btn-ghost">Demander une allocation</a>
       </div>
     </div>
 
-    <!-- Floating glassmorphism spec HUD -->
-    <div class="lg:col-span-5" x-data>
-      <div class="grid grid-cols-2 gap-3 md:gap-5 max-w-xl lg:max-w-none mx-auto" style="perspective: 1200px;">
+    <div x-data>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5" style="perspective: 1200px;">
         <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
           <span class="hud-corner"></span>
-          <p class="label">Top Speed</p>
-          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="350">350</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">km/h</small></p>
+          <p class="label">Vitesse maxi</p>
+          <p class="font-display font-bold text-2xl sm:text-3xl mt-3 leading-none"><span data-count="350" data-prefix="+">+350</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">km/h</small></p>
           <div class="bar"><i data-fill="100"></i></div>
         </div></div>
         <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
           <span class="hud-corner"></span>
           <p class="label">0 – 100 km/h</p>
-          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="2.15" data-dec="2">2.15</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">s</small></p>
-          <div class="bar"><i data-fill="94"></i></div>
+          <p class="font-display font-bold text-2xl sm:text-3xl mt-3 leading-none"><span data-count="2.5" data-dec="1">2,5</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">s</small></p>
+          <div class="bar"><i data-fill="92"></i></div>
         </div></div>
         <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
           <span class="hud-corner"></span>
-          <p class="label">Horsepower</p>
-          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="1200" data-sep="1">1,200</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">cv</small></p>
+          <p class="label">Puissance</p>
+          <p class="font-display font-bold text-2xl sm:text-3xl mt-3 leading-none"><span data-count="1015">1&#8239;015</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">ch</small></p>
           <div class="bar"><i data-fill="100"></i></div>
         </div></div>
         <div class="hud-float" data-hero="hud"><div class="hud-card glass" x-tilt>
           <span class="hud-corner"></span>
-          <p class="label">Downforce @ 250</p>
-          <p class="font-display font-bold text-3xl md:text-4xl mt-3 leading-none"><span data-count="1050" data-sep="1">1,050</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">kg</small></p>
-          <div class="bar"><i data-fill="88"></i></div>
+          <p class="label">Régime maxi</p>
+          <p class="font-display font-bold text-2xl sm:text-3xl mt-3 leading-none"><span data-count="9500">9&#8239;500</span><small class="text-[.5em] text-white/40 ml-1.5 tracking-widest">tr/min</small></p>
+          <div class="bar"><i data-fill="90"></i></div>
         </div></div>
       </div>
-      <p class="text-[.65rem] tracking-[.2em] uppercase text-white/30 mt-5 text-center lg:text-left">Peak figures · Corsa mode · indicative</p>
+      <p class="text-[.65rem] tracking-[.2em] uppercase text-white/30 mt-5">Valeurs constructeur arrondies · données indicatives</p>
     </div>
   </div>
 
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-3" data-hero="fade" aria-hidden="true">
-    <span class="label">Scroll</span><span class="scroll-cue"></span>
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden xl:flex flex-col items-center gap-3" data-hero="fade" aria-hidden="true">
+    <span class="label">Défiler</span><span class="scroll-cue"></span>
   </div>
 </section>
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>799 units <b>•</b> 1,200 cv <b>•</b> 350 km/h <b>•</b> 2.15 s <b>•</b> 1,050 kg downforce <b>•</b> carbon monocoque <b>•</b> hybrid V6 <b>•</b> by invitation only <b>•</b></span>
-    <span>799 units <b>•</b> 1,200 cv <b>•</b> 350 km/h <b>•</b> 2.15 s <b>•</b> 1,050 kg downforce <b>•</b> carbon monocoque <b>•</b> hybrid V6 <b>•</b> by invitation only <b>•</b></span>
+    <span>V12 6,5 L <b>•</b> 1&#8239;015 ch <b>•</b> +350 km/h <b>•</b> 0–100 en 2,5 s <b>•</b> 3 moteurs électriques <b>•</b> monocoque carbone <b>•</b> boîte 8 rapports <b>•</b> sur invitation <b>•</b></span>
+    <span>V12 6,5 L <b>•</b> 1&#8239;015 ch <b>•</b> +350 km/h <b>•</b> 0–100 en 2,5 s <b>•</b> 3 moteurs électriques <b>•</b> monocoque carbone <b>•</b> boîte 8 rapports <b>•</b> sur invitation <b>•</b></span>
   </div>
 </div>
 
-<!-- ============================ SHOWCASE / CONFIGURATOR ============================ -->
-<section id="showcase" class="relative py-24 md:py-36" x-data="showcase" aria-labelledby="showcase-title">
-  <div class="mx-auto max-w-[1800px] px-5 md:px-10">
+<!-- ============================ VUE ÉCLATÉE (SCROLLYTELLING) ============================ -->
+<section id="eclate" class="relative overflow-hidden bg-obsidian" style="height: 100vh; height: 100dvh;" aria-labelledby="eclate-title">
+  <canvas id="explode-canvas" class="absolute inset-0 w-full h-full" aria-label="Modèle 3D de la Revuelto qui se désassemble pièce par pièce au défilement"></canvas>
+  <div class="absolute inset-0 xv-vignette pointer-events-none"></div>
+
+  <div class="absolute left-4 top-20 md:left-10 md:top-28 z-10 pointer-events-none">
+    <p class="eyebrow mb-3">01 &nbsp;/&nbsp; Vue éclatée</p>
+    <h2 id="eclate-title" class="font-display font-bold uppercase text-sm md:text-base tracking-[.12em] text-white/70">Pièce par pièce</h2>
+  </div>
+
+  <div id="callouts" aria-hidden="true">
+    <div class="callout" data-step="0" data-anchor="front"><span class="dot"></span><span class="tag">Carbone forgé</span></div>
+    <div class="callout" data-step="0" data-anchor="wing" data-side="l"><span class="dot"></span><span class="tag">Aéro active</span></div>
+    <div class="callout" data-step="1" data-anchor="tub"><span class="dot"></span><span class="tag">Monofuselage carbone</span></div>
+    <div class="callout" data-step="1" data-anchor="susp" data-side="l"><span class="dot"></span><span class="tag">Suspensions push-rod</span></div>
+    <div class="callout" data-step="2" data-anchor="engine"><span class="dot"></span><span class="tag">V12 · 6,5 L · 825 ch</span></div>
+    <div class="callout" data-step="2" data-anchor="gearbox" data-side="l"><span class="dot"></span><span class="tag">Boîte 8 rapports</span></div>
+    <div class="callout" data-step="3" data-anchor="battery"><span class="dot"></span><span class="tag">Batterie · 3,8 kWh</span></div>
+    <div class="callout" data-step="3" data-anchor="cockpit" data-side="l"><span class="dot"></span><span class="tag">Cockpit aéronautique</span></div>
+  </div>
+
+  <div class="absolute z-10 left-4 right-4 bottom-5 md:left-10 md:right-auto md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:w-[min(430px,38vw)]">
+    <div class="grid">
+      <article class="fiche glass rounded-3xl p-5 md:p-8" data-fiche aria-label="Étape 1 : carrosserie">
+        <p class="eyebrow">Étape 01 / 04</p>
+        <h3 class="font-display font-bold uppercase text-lg md:text-2xl mt-3 leading-tight">Carrosserie en carbone forgé</h3>
+        <p class="lede !text-[.9rem] mt-4">Une peau de composite forgé, moulée sous pression : légère, rigide, et signée de la ligne en Y qui traverse chaque panneau. Les ouïes et l’aileron actif respirent avec la vitesse.</p>
+        <div class="flex flex-wrap gap-2 mt-5"><span class="chip">Carbone forgé</span><span class="chip">Aéro active</span><span class="chip">Ligne en Y</span></div>
+      </article>
+      <article class="fiche glass rounded-3xl p-5 md:p-8" data-fiche aria-label="Étape 2 : monocoque et suspensions">
+        <p class="eyebrow">Étape 02 / 04</p>
+        <h3 class="font-display font-bold uppercase text-lg md:text-2xl mt-3 leading-tight">Monocoque &amp; suspensions</h3>
+        <p class="lede !text-[.9rem] mt-4">Les panneaux s’écartent : le monofuselage en fibre de carbone apparaît, noyau de toute la voiture. Aux quatre coins, des doubles triangles et des ressorts push-rod gardent le pneu collé à l’asphalte.</p>
+        <div class="flex flex-wrap gap-2 mt-5"><span class="chip">Monofuselage</span><span class="chip">Double triangulation</span><span class="chip">Push-rod</span></div>
+      </article>
+      <article class="fiche glass rounded-3xl p-5 md:p-8" data-fiche aria-label="Étape 3 : bloc V12">
+        <p class="eyebrow">Étape 03 / 04</p>
+        <h3 class="font-display font-bold uppercase text-lg md:text-2xl mt-3 leading-tight">Le V12 thermique, isolé</h3>
+        <p class="lede !text-[.9rem] mt-4">Six litres et demi, douze cylindres à 65°, 825 ch à plus de 9&#8239;000 tr/min : un V12 atmosphérique qui monte comme un moteur de course. Il pivote derrière l’habitacle, boîte à huit rapports en position transversale.</p>
+        <div class="flex flex-wrap gap-2 mt-5"><span class="chip">V12 65°</span><span class="chip">6,5 L</span><span class="chip">Boîte 8 rapports</span></div>
+      </article>
+      <article class="fiche glass rounded-3xl p-5 md:p-8" data-fiche aria-label="Étape 4 : batterie, flux d’énergie et cockpit">
+        <p class="eyebrow">Étape 04 / 04</p>
+        <h3 class="font-display font-bold uppercase text-lg md:text-2xl mt-3 leading-tight">Batterie, flux &amp; cockpit</h3>
+        <p class="lede !text-[.9rem] mt-4">Au cœur du tunnel central, 3,8 kWh alimentent deux moteurs électriques à l’avant et un troisième à l’arrière. L’énergie circule en continu, récupérée au freinage — et le pilote s’installe dans un cockpit pensé comme celui d’un chasseur.</p>
+        <div class="flex flex-wrap gap-2 mt-5"><span class="chip">3 moteurs électriques</span><span class="chip">3,8 kWh</span><span class="chip">Récupération</span></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-10 hidden sm:flex flex-col items-end gap-4" aria-hidden="true">
+    <p class="font-display font-bold text-2xl md:text-4xl leading-none tabular-nums"><span id="xv-num">01</span><span class="text-white/25 text-base md:text-xl"> / 04</span></p>
+    <div class="flex flex-col gap-2 items-end">
+      <span class="xv-tick on"></span><span class="xv-tick"></span><span class="xv-tick"></span><span class="xv-tick"></span>
+    </div>
+    <p class="label mt-2">Défilez</p>
+  </div>
+</section>
+
+<!-- ============================ CONFIGURATEUR ============================ -->
+<section id="configurateur" class="relative py-24 md:py-36" x-data="showcase" aria-labelledby="config-title">
+  <div class="mx-auto max-w-[2200px] px-4 sm:px-6 md:px-10">
     <div class="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16" data-reveal>
       <div class="lg:col-span-7">
-        <p class="eyebrow mb-5">01 &nbsp;/&nbsp; Showcase &amp; Configurator</p>
-        <h2 id="showcase-title" class="h2">Three characters.<br><span class="text-white/35">One machine.</span></h2>
+        <p class="eyebrow mb-5">02 &nbsp;/&nbsp; Configurateur</p>
+        <h2 id="config-title" class="h2">Trois caractères.<br><span class="text-white/35">Une seule bête.</span></h2>
       </div>
-      <p class="lede lg:col-span-5">Switch the manettino and the whole room reacts — light, aero, power delivery. Drag to orbit, then tap a pulsing point to inspect the chassis.</p>
+      <p class="lede lg:col-span-5">Tournez le sélecteur et tout le salon réagit : lumière, aérodynamique, courbes de puissance, flux d’énergie. Faites glisser pour orbiter, puis touchez un point pulsant pour inspecter le châssis.</p>
     </div>
 
     <div class="grid lg:grid-cols-12 gap-5 md:gap-6">
-      <!-- 3D Stage -->
-      <div class="lg:col-span-8 relative stage rounded-[26px] md:rounded-[32px] overflow-hidden border border-white/10 self-start lg:sticky lg:top-24" id="stage" data-reveal>
-        <canvas id="car-canvas" class="block w-full h-[60vh] min-h-[400px] lg:h-[740px]" aria-label="Interactive 3D model of the car. Drag to rotate."></canvas>
+      <div class="lg:col-span-8 min-w-0 relative stage rounded-[26px] md:rounded-[32px] overflow-hidden border border-white/10 self-start lg:sticky lg:top-24" id="stage" data-reveal>
+        <canvas id="car-canvas" class="block w-full h-[60vh] min-h-[400px] lg:h-[720px]" aria-label="Modèle 3D interactif de la Revuelto. Faites glisser pour la faire pivoter."></canvas>
         <div class="absolute inset-0 stage-vignette pointer-events-none"></div>
 
         <div class="absolute left-4 top-4 md:left-7 md:top-7 pointer-events-none">
-          <p class="label mb-2">Active mode</p>
-          <p class="font-display font-bold text-xl md:text-3xl uppercase text-accent leading-none" x-text="mode.label + ' / ' + mode.sub"></p>
+          <p class="label mb-2">Mode actif</p>
+          <p class="font-display font-bold text-lg md:text-2xl uppercase text-accent leading-none" x-text="mode.label + ' / ' + mode.sub"></p>
         </div>
         <div class="absolute right-4 top-4 md:right-7 md:top-7 pointer-events-none hidden sm:block text-right">
-          <p class="label">Drag · orbit &nbsp;|&nbsp; Scroll · zoom</p>
+          <p class="label">Glisser · orbiter &nbsp;|&nbsp; Molette · zoom</p>
         </div>
 
-        <!-- Hotspots -->
-        <div class="absolute inset-0 pointer-events-none overflow-hidden" role="group" aria-label="Inspection points">
+        <div class="absolute inset-0 pointer-events-none overflow-hidden" role="group" aria-label="Points d’inspection">
           <template x-for="h in $store.drawer.items" :key="h.id">
-            <button type="button" data-hotspot :data-id="h.id" class="hotspot" @click="$store.drawer.open(h.id)" :aria-label="'Inspect: ' + h.title">
+            <button type="button" data-hotspot :data-id="h.id" class="hotspot" @click="$store.drawer.open(h.id)" :aria-label="'Inspecter : ' + h.title">
               <span class="hs-ring"></span><span class="hs-dot"></span>
               <span class="hs-label" x-text="h.num + ' · ' + h.title"></span>
             </button>
           </template>
         </div>
 
-        <!-- Camera presets -->
         <div class="absolute inset-x-0 bottom-4 md:bottom-7 flex justify-center px-3">
-          <div class="glass rounded-full p-1.5 flex gap-1 max-w-full overflow-x-auto" role="group" aria-label="Camera angle">
+          <div class="glass rounded-full p-1.5 flex gap-1 max-w-full overflow-x-auto" role="group" aria-label="Angle de caméra">
             <template x-for="v in views" :key="v.id">
-              <button type="button" @click="setView(v.id)" class="px-4 md:px-5 py-2.5 rounded-full text-[10px] md:text-[11px] uppercase tracking-[.2em] font-semibold whitespace-nowrap transition-colors duration-300"
+              <button type="button" @click="setView(v.id)" class="px-4 md:px-5 py-2.5 rounded-full text-[10px] md:text-[11px] uppercase tracking-[.18em] font-semibold whitespace-nowrap transition-colors duration-300"
                       :class="view === v.id ? 'bg-accent text-black' : 'text-white/65 hover:text-white'" :aria-pressed="view === v.id" x-text="v.label"></button>
             </template>
           </div>
         </div>
       </div>
 
-      <!-- Control panel -->
-      <div class="lg:col-span-4 flex flex-col gap-5 md:gap-6" data-reveal>
+      <div class="lg:col-span-4 min-w-0 flex flex-col gap-5 md:gap-6" data-reveal>
         <div class="glass rounded-[26px] p-5 md:p-7">
-          <p class="label mb-4">Drive mode</p>
-          <div class="relative grid grid-cols-3 p-1 rounded-full border border-white/10 bg-black/40" role="group" aria-label="Driving mode">
+          <p class="label mb-4">Mode de conduite</p>
+          <div class="relative grid grid-cols-3 p-1 rounded-full border border-white/10 bg-black/40" role="group" aria-label="Mode de conduite">
             <div class="absolute top-1 bottom-1 left-1 w-[calc((100%-.5rem)/3)] rounded-full bg-accent transition-transform duration-500 ease-out" :style="`transform: translateX(${$store.drive.idx * 100}%)`"></div>
             <template x-for="id in $store.drive.order" :key="id">
-              <button type="button" @click="$store.drive.set(id)" class="relative z-10 py-3 text-[10px] md:text-[11px] uppercase tracking-[.2em] font-bold transition-colors duration-300"
+              <button type="button" @click="$store.drive.set(id)" class="relative z-10 py-3 text-[10px] md:text-[11px] uppercase tracking-[.18em] font-bold transition-colors duration-300"
                       :class="$store.drive.id === id ? 'text-black' : 'text-white/70 hover:text-white'" :aria-pressed="$store.drive.id === id" x-text="$store.drive.modes[id].label"></button>
             </template>
           </div>
-          <div class="mt-6 min-h-[8.5rem]">
+          <div class="mt-6 min-h-[9rem]">
             <p class="font-display font-bold text-sm md:text-base uppercase tracking-wide" x-text="mode.tagline"></p>
             <p class="lede !text-sm mt-3" x-text="mode.desc"></p>
           </div>
@@ -391,20 +461,20 @@
         </div>
 
         <div class="glass rounded-[26px] p-5 md:p-7">
-          <p class="label mb-5">Performance envelope</p>
+          <p class="label mb-5">Enveloppe de performance</p>
           <div class="grid grid-cols-2 gap-x-6 gap-y-6">
-            <div><p class="label !text-[.58rem]">Power</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.hp"></span> <small class="text-xs text-white/40">cv</small></p><div class="meter mt-3"><i :style="`width:${bars.hp}%`"></i></div></div>
-            <div><p class="label !text-[.58rem]">0–100 km/h</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.zero"></span> <small class="text-xs text-white/40">s</small></p><div class="meter mt-3"><i :style="`width:${bars.zero}%`"></i></div></div>
-            <div><p class="label !text-[.58rem]">Top speed</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.top"></span> <small class="text-xs text-white/40">km/h</small></p><div class="meter mt-3"><i :style="`width:${bars.top}%`"></i></div></div>
-            <div><p class="label !text-[.58rem]">Downforce</p><p class="font-display font-bold text-2xl mt-2"><span x-text="stats.down"></span> <small class="text-xs text-white/40">kg</small></p><div class="meter mt-3"><i :style="`width:${bars.down}%`"></i></div></div>
+            <div><p class="label !text-[.58rem]">Puissance</p><p class="font-display font-bold text-xl md:text-2xl mt-2"><span x-text="stats.hp"></span> <small class="text-xs text-white/40">ch</small></p><div class="meter mt-3"><i :style="`width:${bars.hp}%`"></i></div></div>
+            <div><p class="label !text-[.58rem]">0–100 km/h</p><p class="font-display font-bold text-xl md:text-2xl mt-2"><span x-text="stats.zero"></span> <small class="text-xs text-white/40">s</small></p><div class="meter mt-3"><i :style="`width:${bars.zero}%`"></i></div></div>
+            <div><p class="label !text-[.58rem]">Vitesse maxi</p><p class="font-display font-bold text-xl md:text-2xl mt-2"><span x-text="stats.top"></span> <small class="text-xs text-white/40">km/h</small></p><div class="meter mt-3"><i :style="`width:${bars.top}%`"></i></div></div>
+            <div><p class="label !text-[.58rem]">Couple</p><p class="font-display font-bold text-xl md:text-2xl mt-2"><span x-text="stats.nm"></span> <small class="text-xs text-white/40">Nm</small></p><div class="meter mt-3"><i :style="`width:${bars.nm}%`"></i></div></div>
           </div>
 
           <div class="mt-7 pt-6 border-t border-white/10">
-            <div class="flex items-center justify-between mb-3">
-              <p class="label">Power &amp; torque curve</p>
-              <p class="text-[.6rem] tracking-[.18em] uppercase text-white/40"><span class="inline-block w-3 h-[2px] bg-accent align-middle mr-1.5"></span>cv &nbsp;<span class="inline-block w-3 border-t border-dashed border-white/60 align-middle mr-1.5 ml-2"></span>Nm</p>
+            <div class="flex items-center justify-between mb-3 gap-3">
+              <p class="label">Courbes puissance &amp; couple</p>
+              <p class="text-[.58rem] tracking-[.16em] uppercase text-white/40 whitespace-nowrap"><span class="inline-block w-3 h-[2px] bg-accent align-middle mr-1.5"></span>ch &nbsp;<span class="inline-block w-3 border-t border-dashed border-white/60 align-middle mr-1.5 ml-2"></span>Nm</p>
             </div>
-            <svg viewBox="0 0 400 190" class="w-full h-auto overflow-visible" role="img" aria-label="Power and torque curve versus engine speed for the selected mode">
+            <svg viewBox="0 0 400 190" class="w-full h-auto overflow-visible" role="img" aria-label="Courbes de puissance et de couple en fonction du régime moteur pour le mode sélectionné">
               <defs>
                 <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0" class="stop-accent" stop-opacity=".42"/>
@@ -413,20 +483,42 @@
               </defs>
               <g stroke="rgba(255,255,255,.07)" stroke-width="1">
                 <line x1="0" y1="10" x2="400" y2="10"/><line x1="0" y1="52" x2="400" y2="52"/><line x1="0" y1="94" x2="400" y2="94"/><line x1="0" y1="136" x2="400" y2="136"/><line x1="0" y1="170" x2="400" y2="170" stroke="rgba(255,255,255,.2)"/>
-                <line x1="133" y1="10" x2="133" y2="170"/><line x1="266" y1="10" x2="266" y2="170"/><line x1="399" y1="10" x2="399" y2="170"/>
+                <line x1="126" y1="10" x2="126" y2="170"/><line x1="252" y1="10" x2="252" y2="170"/><line x1="399" y1="10" x2="399" y2="170"/>
               </g>
               <path :d="curve.area" fill="url(#areaG)"/>
               <path :d="curve.tq" fill="none" stroke="#c9ced5" stroke-width="1.4" stroke-dasharray="4 4" stroke-linecap="round" opacity=".8"/>
               <path :d="curve.hp" fill="none" class="stroke-accent" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgb(var(--accent-rgb) / .8))"/>
               <g fill="rgba(255,255,255,.4)" font-size="9" letter-spacing="1.5" font-family="Plus Jakarta Sans, sans-serif">
-                <text x="0" y="186">0</text><text x="125" y="186">3000</text><text x="258" y="186">6000</text><text x="372" y="186">9000 rpm</text>
+                <text x="0" y="186">0</text><text x="118" y="186">3 000</text><text x="244" y="186">6 000</text><text x="338" y="186">9 500 tr/min</text>
               </g>
             </svg>
           </div>
         </div>
 
         <div class="glass rounded-[26px] p-5 md:p-7">
-          <p class="label mb-4">Exterior · <span class="text-white/85 normal-case tracking-normal font-medium text-[.8rem]" x-text="paints.find(p => p.id === paint).name"></span></p>
+          <p class="label mb-4">Flux d’énergie hybride</p>
+          <svg viewBox="0 0 400 210" class="w-full h-auto" role="img" aria-label="Schéma animé des flux d’énergie entre la batterie, les moteurs électriques, le V12 et les roues selon le mode de conduite">
+            <g class="node">
+              <rect x="150" y="14" width="100" height="38" rx="10"/><rect x="10" y="14" width="100" height="38" rx="10"/><rect x="290" y="14" width="100" height="38" rx="10"/>
+              <rect x="150" y="86" width="100" height="38" rx="10"/><rect x="10" y="158" width="100" height="38" rx="10"/><rect x="290" y="158" width="100" height="38" rx="10"/>
+              <rect x="150" y="158" width="100" height="38" rx="10"/>
+            </g>
+            <g fill="rgba(255,255,255,.75)" font-size="10" font-family="Plus Jakarta Sans, sans-serif" font-weight="600" text-anchor="middle" letter-spacing=".5">
+              <text x="200" y="37">Batterie 3,8 kWh</text><text x="60" y="37">Moteurs AV</text><text x="340" y="37">Roues AV</text>
+              <text x="200" y="109">Moteur AR + boîte</text><text x="60" y="181">Récupération</text><text x="340" y="181">Roues AR</text><text x="200" y="181">V12 6,5 L</text>
+            </g>
+            <path class="flow" d="M150 33 H110" :style="flowStyle(f.bf)"/>
+            <path class="flow" d="M250 33 H290" :style="flowStyle(f.bf)"/>
+            <path class="flow" d="M200 52 V86" :style="flowStyle(f.br)"/>
+            <path class="flow" d="M200 158 V124" :style="flowStyle(f.v12)"/>
+            <path class="flow" d="M250 105 C 275 105, 275 177, 290 177" :style="flowStyle(f.rear)"/>
+            <path class="flow" d="M110 177 C 120 177, 140 140, 160 124" :style="flowStyle(f.rec)"/>
+          </svg>
+          <p class="text-[.72rem] text-white/45 mt-3 leading-relaxed" x-text="mode.flowNote"></p>
+        </div>
+
+        <div class="glass rounded-[26px] p-5 md:p-7">
+          <p class="label mb-4">Extérieur · <span class="text-white/85 normal-case tracking-normal font-medium text-[.8rem]" x-text="paints.find(p => p.id === paint).name"></span></p>
           <div class="flex flex-wrap gap-3">
             <template x-for="p in paints" :key="p.id">
               <button type="button" class="swatch" :style="`background:${p.hex}`" :aria-label="p.name" :aria-pressed="paint === p.id" @click="setPaint(p.id)"></button>
@@ -438,79 +530,78 @@
   </div>
 </section>
 
-<!-- ============================ SOUND LAB ============================ -->
-<section id="sound" class="relative py-24 md:py-36 border-t border-white/5" x-data="soundLab" aria-labelledby="sound-title">
+<!-- ============================ SENSATIONS ============================ -->
+<section id="sensations" class="relative py-24 md:py-36 border-t border-white/5" x-data="soundLab" aria-labelledby="sound-title">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 50% at 50% 0%, rgb(var(--accent-rgb) / .08), transparent 70%);"></div>
-  <div class="relative mx-auto max-w-[1800px] px-5 md:px-10">
+  <div class="relative mx-auto max-w-[2200px] px-4 sm:px-6 md:px-10">
     <div class="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16" data-reveal>
       <div class="lg:col-span-7">
-        <p class="eyebrow mb-5">02 &nbsp;/&nbsp; Sound &amp; Sensory</p>
-        <h2 id="sound-title" class="h2">Hear it<br><span class="text-white/35">before you own it.</span></h2>
+        <p class="eyebrow mb-5">03 &nbsp;/&nbsp; Sensations</p>
+        <h2 id="sound-title" class="h2">Écoutez-la<br><span class="text-white/35">avant de la posséder.</span></h2>
       </div>
-      <p class="lede lg:col-span-5">A synthetic engine, generated live in your browser with the Web Audio API. Ignite it, then hold the throttle — the note, the turbo and the crackle follow the drive mode you picked above.</p>
+      <p class="lede lg:col-span-5">Un V12 synthétique, généré en direct dans votre navigateur avec l’API Web Audio, et le sifflement des moteurs électriques. Démarrez, puis maintenez la pédale : la note, le souffle d’admission et les claquements suivent le mode de conduite choisi plus haut.</p>
     </div>
 
     <div class="glass rounded-[26px] md:rounded-[32px] p-4 md:p-8 grid lg:grid-cols-12 gap-6 md:gap-8" data-reveal>
-      <div class="lg:col-span-8">
+      <div class="lg:col-span-8 min-w-0">
         <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-black/60">
-          <canvas x-ref="viz" class="block w-full h-[250px] md:h-[360px]" aria-label="Live audio frequency visualizer"></canvas>
-          <div class="absolute left-4 top-4 flex items-center gap-3 pointer-events-none">
-            <span class="chip"><span class="w-1.5 h-1.5 rounded-full" :class="on ? 'bg-accent animate-pulse' : 'bg-white/30'"></span><span x-text="on ? 'Engine running' : 'Engine off'"></span></span>
+          <canvas x-ref="viz" class="block w-full h-[250px] md:h-[360px]" aria-label="Visualiseur de fréquences audio en direct"></canvas>
+          <div class="absolute left-3 top-3 md:left-4 md:top-4 flex items-center gap-2 md:gap-3 pointer-events-none">
+            <span class="chip"><span class="w-1.5 h-1.5 rounded-full" :class="on ? 'bg-accent animate-pulse' : 'bg-white/30'"></span><span x-text="on ? 'Moteur en marche' : 'Moteur coupé'"></span></span>
             <span class="chip hidden sm:inline-flex" x-text="$store.drive.modes[$store.drive.id].label"></span>
           </div>
-          <p class="absolute right-4 bottom-3 text-[.58rem] tracking-[.22em] uppercase text-white/30 pointer-events-none">Synthetic · 3.0 V6 hybrid · 120°</p>
+          <p class="absolute right-3 bottom-3 md:right-4 text-[.56rem] tracking-[.2em] uppercase text-white/30 pointer-events-none">Synthèse · V12 6,5 L · 65° + e-moteurs</p>
         </div>
       </div>
 
-      <div class="lg:col-span-4 flex flex-col gap-5">
+      <div class="lg:col-span-4 min-w-0 flex flex-col gap-5">
         <div class="relative mx-auto w-full max-w-[280px]">
           <svg viewBox="0 0 200 150" class="w-full h-auto" aria-hidden="true">
             <path d="M 30.72 140 A 80 80 0 1 1 169.28 140" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="8" stroke-linecap="round"/>
-            <path d="M 30.72 140 A 80 80 0 1 1 169.28 140" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-dasharray="1.5 7" transform="translate(0 0) scale(1)" opacity=".0"/>
             <path x-ref="arc" d="M 30.72 140 A 80 80 0 1 1 169.28 140" fill="none" class="stroke-accent" stroke-width="8" stroke-linecap="round" stroke-dasharray="335.1" stroke-dashoffset="335.1" style="filter: drop-shadow(0 0 8px rgb(var(--accent-rgb) / .9))"/>
           </svg>
           <div class="absolute inset-0 flex flex-col items-center justify-center pt-2">
-            <p x-ref="rpm" class="font-display font-bold text-4xl md:text-[2.6rem] leading-none tabular-nums">0000</p>
-            <p class="label mt-2">rpm</p>
+            <p x-ref="rpm" class="font-display font-bold text-3xl md:text-[2.4rem] leading-none tabular-nums">0000</p>
+            <p class="label mt-2">tr/min</p>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
-          <div><p class="label !text-[.58rem]">Throttle</p><div class="meter mt-2.5"><i x-ref="thr" style="width:0%"></i></div></div>
-          <div><p class="label !text-[.58rem]">Boost</p><div class="meter mt-2.5"><i x-ref="boost" style="width:0%"></i></div></div>
+          <div><p class="label !text-[.58rem]">Accélérateur</p><div class="meter mt-2.5"><i x-ref="thr" style="width:0%"></i></div></div>
+          <div><p class="label !text-[.58rem]">Admission</p><div class="meter mt-2.5"><i x-ref="boost" style="width:0%"></i></div></div>
         </div>
 
-        <button type="button" class="btn w-full" :class="on ? 'btn-ghost' : 'btn-accent'" @click="toggle()" x-text="on ? 'Shut down engine' : 'Ignite engine'"></button>
+        <button type="button" class="btn w-full" :class="on ? 'btn-ghost' : 'btn-accent'" @click="toggle()" x-text="on ? 'Couper le moteur' : 'Démarrer le moteur'"></button>
 
-        <button type="button" class="pedal" :class="pressed ? 'on' : ''" :disabled="false"
+        <button type="button" class="pedal" :class="pressed ? 'on' : ''"
                 @pointerdown.prevent="press()" @pointerup="release()" @pointerleave="release()" @pointercancel="release()" @contextmenu.prevent
                 @keydown.space.prevent="press()" @keyup.space="release()" @keydown.enter.prevent="press()" @keyup.enter="release()" @blur="release()"
-                aria-label="Throttle pedal. Press and hold to rev the engine.">
-          <span class="relative" x-text="pressed ? 'Full throttle' : 'Hold to rev'"></span>
+                aria-label="Pédale d’accélérateur. Maintenez appuyé pour faire rugir le moteur.">
+          <span class="relative" x-text="pressed ? 'Plein gaz' : 'Maintenir pour accélérer'"></span>
         </button>
-        <p class="text-[.66rem] text-white/35 leading-relaxed text-center">Tip: lift off at high revs in Sport or Corsa for the exhaust crackle. Audio starts only after you interact; keep volume reasonable.</p>
+        <p class="text-[.66rem] text-white/35 leading-relaxed text-center">Astuce : levez le pied à haut régime en Sport ou en Corsa pour entendre les claquements d’échappement. Le son ne démarre qu’après votre action ; réglez un volume raisonnable.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================ ENGINEERING MATRIX ============================ -->
-<section id="engineering" class="relative py-24 md:py-36 border-t border-white/5" x-data="matrix" aria-labelledby="eng-title">
-  <div class="mx-auto max-w-[1800px] px-5 md:px-10">
+<!-- ============================ INGÉNIERIE ============================ -->
+<section id="ingenierie" class="relative py-24 md:py-36 border-t border-white/5" x-data="matrix" aria-labelledby="eng-title">
+  <div class="mx-auto max-w-[2200px] px-4 sm:px-6 md:px-10">
     <div class="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16" data-reveal>
       <div class="lg:col-span-7">
-        <p class="eyebrow mb-5">03 &nbsp;/&nbsp; Engineering Matrix</p>
-        <h2 id="eng-title" class="h2">Measured against<br><span class="text-white/35">its own legends.</span></h2>
+        <p class="eyebrow mb-5">04 &nbsp;/&nbsp; Matrice d’ingénierie</p>
+        <h2 id="eng-title" class="h2">Mesurée face<br><span class="text-white/35">à ses rivales.</span></h2>
       </div>
-      <p class="lede lg:col-span-5">The F80 beside the two hybrid hypercars that came before it. Tap any row to open the engineering notes.</p>
+      <p class="lede lg:col-span-5">La Revuelto face à son aînée à V12 et à sa grande rivale hybride de Maranello. Touchez une ligne pour ouvrir les notes d’ingénierie.</p>
     </div>
 
-    <div class="rounded-[22px] md:rounded-[28px] border border-white/10 bg-carbon/70 overflow-hidden" data-reveal>
-      <div class="hidden md:grid grid-cols-[210px_repeat(3,minmax(0,1fr))] border-b border-white/10 bg-white/[.02]">
-        <div class="px-6 py-5 label self-end">Specification</div>
+    <div class="rounded-[22px] md:rounded-[28px] border border-white/10 bg-titane/40 overflow-hidden" data-reveal>
+      <div class="hidden md:grid grid-cols-[200px_repeat(3,minmax(0,1fr))] border-b border-white/10 bg-white/[.02]">
+        <div class="px-6 py-5 label self-end">Spécification</div>
         <template x-for="(c, ci) in cars" :key="c.name">
-          <div class="px-[1.4rem] py-5" :class="ci === 0 ? 'bg-accent/[.07]' : ''" @mouseenter="hc = ci" @mouseleave="hc = null">
-            <p class="font-display font-bold text-[.8rem] uppercase tracking-wider" :class="ci === 0 ? 'text-accent' : 'text-white'" x-text="c.name"></p>
+          <div class="px-5 py-5 min-w-0" :class="ci === 0 ? 'bg-accent/[.07]' : ''" @mouseenter="hc = ci" @mouseleave="hc = null">
+            <p class="font-display font-bold text-[.74rem] uppercase tracking-wider break-words" :class="ci === 0 ? 'text-accent' : 'text-white'" x-text="c.name"></p>
             <p class="label !text-[.56rem] mt-1.5" x-text="c.tag"></p>
           </div>
         </template>
@@ -518,27 +609,27 @@
 
       <template x-for="(r, i) in rows" :key="r.k">
         <div class="border-b border-white/10 last:border-b-0 mx-row">
-          <button type="button" class="w-full text-left md:grid md:grid-cols-[210px_repeat(3,minmax(0,1fr))] items-stretch group" @click="toggle(i)" :aria-expanded="open === i" :aria-controls="'mx-d-' + i">
+          <button type="button" class="w-full text-left md:grid md:grid-cols-[200px_repeat(3,minmax(0,1fr))] items-stretch group" @click="toggle(i)" :aria-expanded="open === i" :aria-controls="'mx-d-' + i">
             <span class="flex items-center justify-between md:justify-start gap-4 px-5 md:px-6 py-5 md:py-6">
-              <span class="font-display font-bold text-[.72rem] uppercase tracking-[.18em] group-hover:text-accent transition-colors" x-text="r.k"></span>
-              <span class="mx-plus grid place-items-center w-7 h-7 rounded-full border border-white/20 text-white/70 group-hover:border-accent group-hover:text-accent" :class="open === i ? 'rotate-45 !border-accent !text-accent' : ''">
+              <span class="font-display font-bold text-[.68rem] uppercase tracking-[.14em] group-hover:text-accent transition-colors break-words min-w-0" x-text="r.k"></span>
+              <span class="mx-plus grid place-items-center w-7 h-7 shrink-0 rounded-full border border-white/20 text-white/70 group-hover:border-accent group-hover:text-accent" :class="open === i ? 'rotate-45 !border-accent !text-accent' : ''">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 0v10M0 5h10"/></svg>
               </span>
             </span>
             <template x-for="(c, ci) in r.cells" :key="ci">
               <span class="mx-cell" :class="[ci === 0 ? 'sub' : '', hc === ci ? 'hot' : '']" @mouseenter="hc = ci" @mouseleave="hc = null">
                 <span class="md:hidden label !text-[.56rem] block mb-1.5" x-text="cars[ci].name"></span>
-                <span class="block text-[.92rem] font-semibold text-white" x-text="c.v"></span>
-                <span class="block text-[.74rem] text-white/45 mt-1 leading-snug" x-text="c.s"></span>
+                <span class="block text-[.9rem] font-semibold text-white break-words" x-text="c.v"></span>
+                <span class="block text-[.74rem] text-white/45 mt-1 leading-snug break-words" x-text="c.s"></span>
                 <span class="mx-bar" x-show="c.p" aria-hidden="true"><i :style="`width:${(open === i || ready) ? c.p : 0}%`"></i></span>
               </span>
             </template>
           </button>
           <div class="mx-drawer" :id="'mx-d-' + i" :style="open === i ? 'grid-template-rows:1fr' : 'grid-template-rows:0fr'">
             <div class="overflow-hidden">
-              <div class="px-5 md:px-6 py-6 md:py-8 grid md:grid-cols-[210px_1fr] gap-4 md:gap-0 border-t border-white/5 bg-black/30">
-                <p class="label md:pt-1">Engineering notes</p>
-                <div class="grid lg:grid-cols-3 gap-6 md:pl-[1.4rem]">
+              <div class="px-5 md:px-6 py-6 md:py-8 grid md:grid-cols-[176px_1fr] gap-4 md:gap-0 border-t border-white/5 bg-black/30">
+                <p class="label md:pt-1">Notes d’ingénierie</p>
+                <div class="grid lg:grid-cols-3 gap-6">
                   <p class="lede !text-[.9rem] lg:col-span-2" x-text="r.note"></p>
                   <ul class="text-[.8rem] text-white/70 space-y-2.5">
                     <template x-for="b in r.bullets" :key="b"><li class="flex gap-3"><span class="mt-[.55rem] w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span><span x-text="b"></span></li></template>
@@ -550,30 +641,30 @@
         </div>
       </template>
     </div>
-    <p class="text-[.7rem] text-white/30 mt-5 leading-relaxed" data-reveal>Figures are rounded approximations compiled from public manufacturer information and shown for illustration only.</p>
+    <p class="text-[.7rem] text-white/30 mt-5 leading-relaxed" data-reveal>Chiffres arrondis, compilés à partir d’informations publiques des constructeurs et fournis à titre purement illustratif.</p>
   </div>
 </section>
 
-<!-- ============================ RESERVATION ============================ -->
-<section id="reserve" class="relative py-24 md:py-36 border-t border-white/5 overflow-hidden" x-data="reserve" aria-labelledby="reserve-title">
+<!-- ============================ CONCIERGERIE PRIVÉE ============================ -->
+<section id="reserver" class="relative py-24 md:py-36 border-t border-white/5 overflow-hidden" x-data="reserve" aria-labelledby="reserve-title">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 60% at 85% 70%, rgb(var(--accent-rgb) / .12), transparent 70%);"></div>
-  <div class="relative mx-auto max-w-[1800px] px-5 md:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-    <div class="lg:col-span-5 lg:sticky lg:top-32" data-reveal>
-      <p class="eyebrow mb-5">04 &nbsp;/&nbsp; Private Concierge</p>
-      <h2 id="reserve-title" class="h2">Request your<br><span class="text-accent">allocation.</span></h2>
-      <p class="lede mt-7 max-w-md">There are 799 cars and a great many people who want one. Allocation is personal: tell us who you are and where you are, and your dedicated concierge will reply within 48 hours.</p>
+  <div class="relative mx-auto max-w-[2200px] px-4 sm:px-6 md:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <div class="lg:col-span-5 min-w-0 lg:sticky lg:top-32" data-reveal>
+      <p class="eyebrow mb-5">05 &nbsp;/&nbsp; Conciergerie privée</p>
+      <h2 id="reserve-title" class="h2">Demandez votre<br><span class="text-accent">allocation.</span></h2>
+      <p class="lede mt-7 max-w-md">Les Revuelto sont attribuées, jamais vendues sur catalogue. Dites-nous qui vous êtes et où vous vivez : votre conseiller dédié vous répond sous 48 heures.</p>
 
       <ol class="mt-10 space-y-6">
-        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">01</span><div><p class="font-semibold text-[.95rem]">Submit your request</p><p class="text-[.82rem] text-white/45 mt-1">Your details and the country quota you will be registered under.</p></div></li>
-        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">02</span><div><p class="font-semibold text-[.95rem]">Private atelier call</p><p class="text-[.82rem] text-white/45 mt-1">A personal call to discuss specification, colour and delivery.</p></div></li>
-        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">03</span><div><p class="font-semibold text-[.95rem]">Allocation confirmed</p><p class="text-[.82rem] text-white/45 mt-1">Your build slot is locked and your car enters production.</p></div></li>
+        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">01</span><div><p class="font-semibold text-[.95rem]">Déposez votre demande</p><p class="text-[.82rem] text-white/45 mt-1">Vos coordonnées et le pays dont dépend votre quota.</p></div></li>
+        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">02</span><div><p class="font-semibold text-[.95rem]">Appel privé à l’atelier</p><p class="text-[.82rem] text-white/45 mt-1">Un échange personnel sur la configuration, la teinte et la livraison.</p></div></li>
+        <li class="flex gap-5"><span class="font-display font-bold text-accent text-sm pt-0.5">03</span><div><p class="font-semibold text-[.95rem]">Allocation confirmée</p><p class="text-[.82rem] text-white/45 mt-1">Votre créneau de production est verrouillé.</p></div></li>
       </ol>
 
       <div class="mt-10 glass rounded-2xl p-5">
-        <div class="flex items-end justify-between">
-          <div><p class="label !text-[.58rem]">VIP quota · <span x-text="form.country || 'select a country'"></span></p>
-            <p class="font-display font-bold text-3xl mt-2"><span x-text="selected ? selected.q : '—'"></span><small class="text-xs text-white/40 ml-2 tracking-widest" x-show="selected">remaining</small></p></div>
-          <p class="label !text-[.58rem]" x-show="selected" x-text="'of ' + (selected ? selected.t : 0)"></p>
+        <div class="flex items-end justify-between gap-4">
+          <div class="min-w-0"><p class="label !text-[.58rem]">Quota VIP · <span x-text="form.country || 'choisissez un pays'"></span></p>
+            <p class="font-display font-bold text-3xl mt-2"><span x-text="selected ? selected.q : '—'"></span><small class="text-xs text-white/40 ml-2 tracking-widest" x-show="selected">restantes</small></p></div>
+          <p class="label !text-[.58rem] whitespace-nowrap" x-show="selected" x-text="'sur ' + (selected ? selected.t : 0)"></p>
         </div>
         <div class="flex gap-1.5 mt-4" aria-hidden="true">
           <template x-for="n in 20" :key="n"><span class="h-1.5 flex-1 rounded-full transition-colors duration-500" :class="selected && n <= Math.ceil(20 * selected.q / selected.t) ? 'bg-accent' : 'bg-white/10'"></span></template>
@@ -581,46 +672,47 @@
       </div>
     </div>
 
-    <div class="lg:col-span-7" data-reveal>
-      <div class="glass rounded-[26px] md:rounded-[32px] p-6 md:p-10 relative overflow-hidden" x-ref="card">
+    <div class="lg:col-span-7 min-w-0" data-reveal>
+      <div class="glass rounded-[26px] md:rounded-[32px] p-5 sm:p-6 md:p-10 relative overflow-hidden" x-ref="card">
         <canvas x-ref="fx" class="absolute inset-0 w-full h-full pointer-events-none z-20" aria-hidden="true"></canvas>
 
-        <!-- FORM -->
-        <form x-show="!done" @submit.prevent="submit()" novalidate class="grid gap-7" x-ref="form" aria-label="Private allocation request">
-          <div class="flex items-center justify-between">
-            <p class="font-display font-bold text-xs md:text-sm uppercase tracking-[.2em]">Allocation request</p>
-            <span class="chip"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>Confidential</span>
+        <form x-show="!done" @submit.prevent="submit()" novalidate class="grid gap-7" x-ref="form" aria-label="Demande d’allocation privée">
+          <div class="flex items-center justify-between gap-3">
+            <p class="font-display font-bold text-xs md:text-sm uppercase tracking-[.16em]">Demande d’allocation</p>
+            <span class="chip"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>Confidentiel</span>
           </div>
 
           <div class="grid md:grid-cols-2 gap-x-8 gap-y-7">
             <div class="field" :class="errors.name && 'err'">
-              <input id="f-name" type="text" placeholder=" " autocomplete="name" x-model.trim="form.name" :aria-invalid="!!errors.name">
-              <label for="f-name">Full name</label><span class="ln"></span>
+              <input id="f-name" type="text" placeholder=" " autocomplete="name" maxlength="80" x-model.trim="form.name" :aria-invalid="!!errors.name">
+              <label for="f-name">Nom complet</label><span class="ln"></span>
               <p class="err-msg" x-show="errors.name" x-text="errors.name"></p>
             </div>
             <div class="field" :class="errors.email && 'err'">
-              <input id="f-email" type="email" placeholder=" " autocomplete="email" x-model.trim="form.email" :aria-invalid="!!errors.email">
-              <label for="f-email">Private email</label><span class="ln"></span>
+              <input id="f-email" type="email" placeholder=" " autocomplete="email" maxlength="120" x-model.trim="form.email" :aria-invalid="!!errors.email">
+              <label for="f-email">E-mail privé</label><span class="ln"></span>
               <p class="err-msg" x-show="errors.email" x-text="errors.email"></p>
             </div>
             <div class="field">
-              <input id="f-phone" type="tel" placeholder=" " autocomplete="tel" x-model.trim="form.phone">
-              <label for="f-phone">Phone (optional)</label><span class="ln"></span>
+              <input id="f-phone" type="tel" placeholder=" " autocomplete="tel" maxlength="24" x-model.trim="form.phone">
+              <label for="f-phone">Téléphone (facultatif)</label><span class="ln"></span>
             </div>
             <div class="field" :class="errors.country && 'err'">
               <select id="f-country" x-model="form.country" :class="form.country && 'filled'" :aria-invalid="!!errors.country">
                 <option value="" disabled hidden></option>
                 <template x-for="c in countries" :key="c.n"><option :value="c.n" x-text="c.n"></option></template>
               </select>
-              <label for="f-country">Country · VIP quota</label><span class="ln"></span>
+              <label for="f-country">Pays · quota VIP</label><span class="ln"></span>
               <svg class="caret" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4l4 4 4-4"/></svg>
               <p class="err-msg" x-show="errors.country" x-text="errors.country"></p>
             </div>
           </div>
 
+          <div class="sr-only" aria-hidden="true"><label for="f-site">Ne pas remplir</label><input id="f-site" type="text" tabindex="-1" autocomplete="off" x-model="form.hp"></div>
+
           <div>
-            <p class="label mb-3">Intended use</p>
-            <div class="flex flex-wrap gap-2.5" role="group" aria-label="Intended use">
+            <p class="label mb-3">Usage envisagé</p>
+            <div class="flex flex-wrap gap-2.5" role="group" aria-label="Usage envisagé">
               <template x-for="u in uses" :key="u">
                 <button type="button" class="opt" :aria-pressed="form.use === u" @click="form.use = u" x-text="u"></button>
               </template>
@@ -628,7 +720,7 @@
           </div>
 
           <div>
-            <p class="label mb-3">Preferred exterior · <span class="normal-case tracking-normal text-white/80 font-medium text-[.8rem]" x-text="swatches.find(s => s.id === form.color).name"></span></p>
+            <p class="label mb-3">Teinte souhaitée · <span class="normal-case tracking-normal text-white/80 font-medium text-[.8rem]" x-text="swatches.find(s => s.id === form.color).name"></span></p>
             <div class="flex flex-wrap gap-3">
               <template x-for="s in swatches" :key="s.id">
                 <button type="button" class="swatch" :style="`background:${s.hex}`" :aria-label="s.name" :aria-pressed="form.color === s.id" @click="form.color = s.id"></button>
@@ -637,43 +729,42 @@
           </div>
 
           <div class="field">
-            <textarea id="f-note" rows="2" placeholder=" " x-model="form.note"></textarea>
-            <label for="f-note">Message to your concierge (optional)</label><span class="ln"></span>
+            <textarea id="f-note" rows="2" placeholder=" " maxlength="400" x-model="form.note"></textarea>
+            <label for="f-note">Message à votre conseiller (facultatif)</label><span class="ln"></span>
           </div>
 
           <div>
             <label class="flex gap-3.5 items-start cursor-pointer text-[.78rem] text-white/55 leading-relaxed">
-              <input type="checkbox" class="mt-1 w-4 h-4 accent-[#ff2800] shrink-0" x-model="form.consent">
-              <span>I agree to be contacted privately about this allocation request.</span>
+              <input type="checkbox" class="mt-1 w-4 h-4 accent-[#10B981] shrink-0" x-model="form.consent">
+              <span>J’accepte d’être contacté de manière privée au sujet de cette demande d’allocation.</span>
             </label>
             <p class="err-msg" x-show="errors.consent" x-text="errors.consent"></p>
           </div>
 
           <div class="flex flex-col sm:flex-row sm:items-center gap-5">
             <button type="submit" class="btn btn-accent w-full sm:w-auto" :disabled="sending">
-              <svg x-show="sending" class="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/></svg>
-              <span x-text="sending ? stage : 'Secure my allocation'"></span>
+              <svg x-show="sending" class="animate-spin shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/></svg>
+              <span x-text="sending ? stage : 'Sécuriser mon allocation'"></span>
             </button>
-            <p class="text-[.68rem] text-white/30 leading-relaxed">Concept demonstration — nothing you type here leaves your browser.</p>
+            <p class="text-[.68rem] text-white/30 leading-relaxed">Démonstration : aucune donnée saisie ici ne quitte votre navigateur.</p>
           </div>
         </form>
 
-        <!-- SUCCESS -->
         <div x-show="done" x-cloak class="text-center py-6 md:py-10" x-ref="success" aria-live="polite">
           <svg class="mx-auto" width="92" height="92" viewBox="0 0 60 60" fill="none" aria-hidden="true">
             <circle class="check-ring stroke-accent" cx="30" cy="30" r="26.5" stroke-width="2.2" stroke-linecap="round" x-ref="ring"/>
             <path class="check-tick stroke-accent" d="M18 31l8 8 16-17" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" x-ref="tick"/>
           </svg>
-          <p class="eyebrow mt-7" data-s>Request received</p>
-          <h3 class="h2 mt-4 !text-[clamp(1.5rem,3.6vw,2.6rem)]" data-s>Allocation <span class="text-accent">reserved</span></h3>
-          <p class="lede max-w-md mx-auto mt-5" data-s>Thank you, <span class="text-white font-medium" x-text="form.name.split(' ')[0]"></span>. A private concierge will contact you within 48 hours to open your personal file.</p>
+          <p class="eyebrow mt-7" data-s>Demande reçue</p>
+          <h3 class="h2 mt-4 !text-[clamp(1.4rem,3.4vw,2.4rem)]" data-s>Allocation <span class="text-accent">réservée</span></h3>
+          <p class="lede max-w-md mx-auto mt-5" data-s>Merci, <span class="text-white font-medium" x-text="firstName"></span>. Un conseiller privé vous contactera sous 48 heures pour ouvrir votre dossier personnel.</p>
 
           <div class="mt-9 grid sm:grid-cols-3 gap-3 text-left max-w-2xl mx-auto">
-            <div class="rounded-2xl border border-white/10 bg-black/40 p-4" data-s><p class="label !text-[.56rem]">Reference</p><p class="font-display font-bold text-[.85rem] mt-2 tracking-wider" x-text="ref"></p></div>
-            <div class="rounded-2xl border border-white/10 bg-black/40 p-4" data-s><p class="label !text-[.56rem]">Provisional slot</p><p class="font-display font-bold text-[.85rem] mt-2 tracking-wider" x-text="'№ ' + slot + ' / 799'"></p></div>
-            <div class="rounded-2xl border border-white/10 bg-black/40 p-4" data-s><p class="label !text-[.56rem]" x-text="form.country + ' quota'"></p><p class="font-display font-bold text-[.85rem] mt-2 tracking-wider text-accent" x-text="(selected ? selected.q : 0) + ' left'"></p></div>
+            <div class="rounded-2xl border border-white/10 bg-black/40 p-4 min-w-0" data-s><p class="label !text-[.56rem]">Référence</p><p class="font-display font-bold text-[.8rem] mt-2 tracking-wider break-words" x-text="ref"></p></div>
+            <div class="rounded-2xl border border-white/10 bg-black/40 p-4 min-w-0" data-s><p class="label !text-[.56rem]">Rang prioritaire</p><p class="font-display font-bold text-[.8rem] mt-2 tracking-wider" x-text="'n° ' + slot"></p></div>
+            <div class="rounded-2xl border border-white/10 bg-black/40 p-4 min-w-0" data-s><p class="label !text-[.56rem] break-words" x-text="'Quota · ' + form.country"></p><p class="font-display font-bold text-[.8rem] mt-2 tracking-wider text-accent" x-text="(selected ? selected.q : 0) + ' restantes'"></p></div>
           </div>
-          <button type="button" class="btn btn-ghost mt-9" data-s @click="reset()">New request</button>
+          <button type="button" class="btn btn-ghost mt-9" data-s @click="reset()">Nouvelle demande</button>
         </div>
       </div>
     </div>
@@ -681,43 +772,43 @@
 </section>
 </main>
 
-<!-- ============================ FOOTER ============================ -->
+<!-- ============================ PIED DE PAGE ============================ -->
 <footer class="border-t border-white/10 py-14 md:py-16">
-  <div class="mx-auto max-w-[1800px] px-5 md:px-10 grid md:grid-cols-12 gap-10">
+  <div class="mx-auto max-w-[2200px] px-4 sm:px-6 md:px-10 grid md:grid-cols-12 gap-10">
     <div class="md:col-span-5">
-      <p class="font-display font-bold text-sm tracking-[.3em] flex items-center gap-3"><span class="inline-block w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_14px_rgb(var(--accent-rgb))]"></span>F80 / Private Showroom</p>
-      <p class="text-[.8rem] text-white/40 mt-5 max-w-sm leading-relaxed">A cinematic web experience built with Three.js, GSAP, Alpine.js and the Web Audio API — one HTML file, zero build steps.</p>
+      <p class="font-display font-bold text-sm tracking-[.26em] flex items-center gap-3"><span class="inline-block w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_14px_rgb(var(--accent-rgb))]"></span>REVUELTO / Salon privé</p>
+      <p class="text-[.8rem] text-white/40 mt-5 max-w-sm leading-relaxed">Une expérience web cinématographique construite avec Three.js, GSAP, Alpine.js et l’API Web Audio — un seul fichier HTML, zéro compilation.</p>
     </div>
     <div class="md:col-span-7 md:text-right">
-      <p class="text-[.7rem] text-white/30 leading-relaxed md:ml-auto max-w-xl">Independent fan-made concept. Not affiliated with, authorised, endorsed or sponsored by Ferrari S.p.A. Ferrari and F80 are trademarks of their respective owner. All specifications are approximations from public sources. The allocation form is a non-functional demonstration.</p>
-      <a href="#top" class="inline-block mt-6 label hover:text-accent transition-colors">Back to top ↑</a>
+      <p class="text-[.7rem] text-white/30 leading-relaxed md:ml-auto max-w-xl">Concept indépendant réalisé par un passionné. Ce site n’est ni affilié, ni autorisé, ni parrainé par Automobili Lamborghini S.p.A. Lamborghini et Revuelto sont des marques de leurs propriétaires respectifs. Les spécifications sont des approximations issues de sources publiques. Le formulaire d’allocation est une démonstration non fonctionnelle.</p>
+      <a href="#top" class="inline-block mt-6 label hover:text-accent transition-colors">Retour en haut ↑</a>
     </div>
   </div>
 </footer>
 
-<!-- ============================ HOTSPOT DRAWER ============================ -->
+<!-- ============================ TIROIR DES POINTS D’INSPECTION ============================ -->
 <div x-data>
   <div x-show="$store.drawer.isOpen" x-cloak x-transition.opacity.duration.400ms class="fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm" @click="$store.drawer.close()" aria-hidden="true"></div>
   <aside x-show="$store.drawer.isOpen" x-cloak
          x-transition:enter="transition ease-[cubic-bezier(.2,.8,.2,1)] duration-[600ms]" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
          x-transition:leave="transition ease-in duration-400" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
          @keydown.escape.window="$store.drawer.close()"
-         class="fixed right-0 top-0 bottom-0 z-[85] w-full sm:w-[520px] md:w-[600px] overflow-y-auto bg-[#08080a] border-l border-white/10 shadow-[-40px_0_80px_rgba(0,0,0,.7)]"
+         class="fixed right-0 top-0 bottom-0 z-[85] w-full sm:w-[520px] md:w-[600px] max-w-full overflow-y-auto bg-[#08080a] border-l border-white/10 shadow-[-40px_0_80px_rgba(0,0,0,.7)]"
          role="dialog" aria-modal="true" aria-labelledby="drawer-title">
     <div class="absolute inset-x-0 top-0 h-px" style="background: linear-gradient(90deg, rgb(var(--accent-rgb)), transparent)"></div>
     <div class="p-6 sm:p-10 md:p-12" x-show="$store.drawer.item">
       <div class="flex items-start justify-between gap-6">
         <p class="eyebrow" x-text="'Inspection ' + $store.drawer.item?.num + ' / 0' + $store.drawer.items.length"></p>
-        <button id="drawer-close" type="button" @click="$store.drawer.close()" class="w-11 h-11 shrink-0 rounded-full border border-white/20 grid place-items-center hover:border-accent hover:text-accent transition-colors" aria-label="Close panel">
+        <button id="drawer-close" type="button" @click="$store.drawer.close()" class="w-11 h-11 shrink-0 rounded-full border border-white/20 grid place-items-center hover:border-accent hover:text-accent transition-colors" aria-label="Fermer le panneau">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l12 12M13 1L1 13"/></svg>
         </button>
       </div>
-      <h3 id="drawer-title" class="font-display font-bold uppercase text-2xl sm:text-3xl leading-[1.1] mt-8" x-text="$store.drawer.item?.title"></h3>
+      <h3 id="drawer-title" class="font-display font-bold uppercase text-xl sm:text-2xl leading-[1.12] mt-8 break-words" x-text="$store.drawer.item?.title"></h3>
       <p class="mt-6 text-lg text-white/80 font-light leading-relaxed" x-text="$store.drawer.item?.lede"></p>
 
       <div class="grid grid-cols-2 gap-3 mt-9">
         <template x-for="m in ($store.drawer.item?.metrics || [])" :key="m[0]">
-          <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4"><p class="label !text-[.56rem]" x-text="m[0]"></p><p class="font-display font-bold text-lg mt-2" x-text="m[1]"></p></div>
+          <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4 min-w-0"><p class="label !text-[.56rem]" x-text="m[0]"></p><p class="font-display font-bold text-base mt-2 break-words" x-text="m[1]"></p></div>
         </template>
       </div>
 
@@ -726,93 +817,104 @@
       </div>
 
       <blockquote class="mt-10 pl-5 border-l-2 border-accent">
-        <p class="font-display text-[.82rem] uppercase leading-relaxed tracking-wide" x-text="$store.drawer.item?.quote"></p>
+        <p class="font-display text-[.78rem] uppercase leading-relaxed tracking-wide" x-text="$store.drawer.item?.quote"></p>
       </blockquote>
 
       <div class="flex items-center justify-between mt-12 pt-7 border-t border-white/10">
-        <button type="button" @click="$store.drawer.step(-1)" class="label hover:text-accent transition-colors">← Previous</button>
-        <button type="button" @click="$store.drawer.step(1)" class="label hover:text-accent transition-colors">Next →</button>
+        <button type="button" @click="$store.drawer.step(-1)" class="label hover:text-accent transition-colors">← Précédent</button>
+        <button type="button" @click="$store.drawer.step(1)" class="label hover:text-accent transition-colors">Suivant →</button>
       </div>
     </div>
   </aside>
 </div>
 
 <!-- ============================ SCRIPTS ============================ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-/* ------------------------------------------------------------------
-   Page logic: Alpine stores/components, audio engine, scroll motion
-------------------------------------------------------------------- */
 (function () {
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var gsap = window.gsap;
+  var nf = function (v, d) { return v.toLocaleString('fr-FR', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); };
 
   var MODES = {
     strada: {
-      id: 'strada', label: 'Strada', sub: 'E-Mode', rgb: [143, 211, 255],
-      hp: 780, zero: 3.1, top: 285, down: 420, tq: 650, up: 0.56, ut: 0.2,
-      tagline: 'Silent. Electric. Effortless.',
-      desc: 'Front-axle electric motors lead, the V6 sleeps until you ask for it. Suspension relaxes, the wing lies flat and the cabin turns into a quiet lounge at any speed.',
-      traits: [['Powertrain', 'eDrive · V6 on demand'], ['Suspension', 'Comfort · lifted nose'], ['Aero', 'Low drag · wing stowed'], ['Shifts', 'Smooth · 90 ms']]
+      id: 'strada', label: 'Strada', sub: 'E-Mode', rgb: [125, 211, 252],
+      hp: 520, zero: 3.4, top: 280, nm: 520, up: 0.52, ut: 0.22,
+      tagline: 'Silence. Électricité. Aisance.',
+      desc: 'Les moteurs électriques mènent la danse, le V12 sommeille jusqu’à ce que vous le réclamiez. La suspension se détend, l’aileron se range et l’habitacle devient un salon silencieux à toutes les allures.',
+      traits: [['Propulsion', 'Électrique · V12 à la demande'], ['Suspension', 'Confort · nez relevé'], ['Aéro', 'Traînée mini · aileron rangé'], ['Passages', 'Souples · 90 ms']],
+      flowNote: 'Mode Strada : la batterie alimente l’essieu avant et le moteur arrière ; le V12 reste au repos.'
     },
     sport: {
-      id: 'sport', label: 'Sport', sub: 'Dynamic', rgb: [255, 40, 0],
-      hp: 1000, zero: 2.6, top: 320, down: 760, tq: 780, up: 0.72, ut: 0.4,
-      tagline: 'The everyday weapon.',
-      desc: 'Combustion and electric power blend in full harmony. Throttle response sharpens, the dampers firm up and the active wing opens to its balanced mid position.',
-      traits: [['Powertrain', 'Hybrid · torque fill'], ['Suspension', 'Sport · adaptive'], ['Aero', 'Balanced · wing mid'], ['Shifts', 'Crisp · 60 ms']]
+      id: 'sport', label: 'Sport', sub: 'Dynamique', rgb: [16, 185, 129],
+      hp: 850, zero: 2.8, top: 320, nm: 700, up: 0.7, ut: 0.4,
+      tagline: 'L’arme de tous les jours.',
+      desc: 'Thermique et électrique s’accordent en pleine harmonie. La réponse à l’accélérateur se durcit, les amortisseurs se raffermissent et l’aileron actif s’ouvre à mi-course pour un équilibre parfait.',
+      traits: [['Propulsion', 'Hybride · couple combiné'], ['Suspension', 'Sport · adaptative'], ['Aéro', 'Équilibrée · aileron à mi-course'], ['Passages', 'Nets · 60 ms']],
+      flowNote: 'Mode Sport : le V12 pousse l’essieu arrière, la batterie comble les trous de couple et récupère au freinage.'
     },
     corsa: {
-      id: 'corsa', label: 'Corsa', sub: 'Pista', rgb: [255, 196, 0],
-      hp: 1200, zero: 2.15, top: 350, down: 1050, tq: 900, up: 0.88, ut: 0.58,
-      tagline: 'No compromise. Only lap time.',
-      desc: 'All 1,200 cv released. The car drops onto its springs, the rear wing rises to its maximum angle and launch control arms. This is the car the engineers actually wanted to build.',
-      traits: [['Powertrain', 'Full hybrid · peak boost'], ['Suspension', 'Track · lowered'], ['Aero', 'Max downforce · wing high'], ['Shifts', 'Violent · 40 ms']]
+      id: 'corsa', label: 'Corsa', sub: 'Pista', rgb: [255, 106, 0],
+      hp: 1015, zero: 2.5, top: 350, nm: 807, up: 0.86, ut: 0.58,
+      tagline: 'Aucun compromis. Que du chrono.',
+      desc: 'Les 1 015 chevaux sont libérés. La voiture se plaque sur ses ressorts, l’aileron arrière monte à son angle maximal et le launch control s’arme. C’est la voiture que les ingénieurs voulaient vraiment construire.',
+      traits: [['Propulsion', 'Hybride total · boost maxi'], ['Suspension', 'Piste · abaissée'], ['Aéro', 'Appui maxi · aileron haut'], ['Passages', 'Violents · 40 ms']],
+      flowNote: 'Mode Corsa : V12 et trois moteurs électriques délivrent leur puissance en même temps, sans aucune récupération.'
     }
+  };
+  var FLOWS = {
+    strada: { bf: 1, br: 0.85, v12: 0.02, rear: 0.5, rec: 0 },
+    sport: { bf: 0.7, br: 0.5, v12: 0.85, rear: 0.8, rec: 0.55 },
+    corsa: { bf: 1, br: 1, v12: 1, rear: 1, rec: 0 }
   };
 
   var HOTSPOTS = [
-    { id: 'aero', num: '01', title: 'Active Aerodynamics', metrics: [['Downforce @ 250 km/h', '1,050 kg'], ['Rear wing', 'Active · 3 positions'], ['Front flaps', 'Independent'], ['Underbody', 'Venturi tunnels']],
-      lede: 'The F80 does not fight the wind. It negotiates with it — hundreds of times a second.',
-      body: ['Where earlier cars used fixed surfaces, the F80 treats air as a variable. A rear wing that changes its angle, movable elements at the nose and a heavily sculpted underbody work together as one system, shifting the aerodynamic balance between the axles as speed, steering and braking demand.',
-             'In low-drag trim the wing lies flush with the bodywork and the car slips through the air. Under braking it rises steeply, adding stability when you need it most; through a fast corner it holds the rear planted while the nose keeps its bite. Ground-effect tunnels do the heavy lifting, creating suction without the penalty of a giant wing.'],
-      quote: '“Downforce is not a number. It is the confidence to arrive at a corner faster than reason suggests.”' },
-    { id: 'engine', num: '02', title: 'V6 Hybrid Powertrain', metrics: [['Engine', '3.0 L V6 · 120°'], ['Combined output', '1,200 cv'], ['Electric motors', '3 · axle-mounted'], ['Redline', '9,000 rpm']],
-      lede: 'A turbocharged heart that screams like a racing engine, with an electric surge that arrives before you finish the thought.',
-      body: ['The twin-turbo V6 is a direct descendant of Ferrari’s endurance-racing programme: compact, light and happy to spin far beyond what a road-car engine should. Mounted low behind the cabin, it forms a stressed part of the structure and keeps the centre of gravity close to the ground.',
-             'Three electric motors — two on the front axle, one at the rear — fill every gap in the power band and enable true torque vectoring. They fire the car out of corners, recover energy under braking and let it glide silently through town in Strada mode. Power is delivered through an eight-speed dual-clutch gearbox that shifts faster than you can blink.'],
-      quote: '“Two hearts, one pulse. The electric motors never replace the sound — they make sure it arrives sooner.”' },
-    { id: 'mono', num: '03', title: 'Carbon Monocoque', metrics: [['Structure', 'Carbon composite'], ['Material', 'Aerospace grade'], ['Cure', 'Autoclave'], ['Safety cell', 'Integrated']],
-      lede: 'The quietest part of the car, and the most important. Everything else is bolted to it.',
-      body: ['At the centre of the F80 sits a single moulded carbon-fibre tub, built from aerospace-grade composites and cured under heat and pressure. It is extraordinarily stiff and astonishingly light, giving the suspension a perfectly stable platform to work from — which is what makes the car feel so direct beneath your hands.',
-             'The same structure doubles as a survival cell. Crash structures, the battery and the powertrain are all designed around it, and its strength allows the cabin to remain compact, low and visually clean. Look closely at the exposed weave and you are looking at hundreds of hand-laid layers.'],
-      quote: '“Stiffness is the foundation of feel. If the chassis does not flex, the driver hears every word the road says.”' },
-    { id: 'wheels', num: '04', title: 'Forged Carbon Wheels', metrics: [['Material', 'Carbon composite'], ['Wheel weight', 'Substantially lower'], ['Brakes', 'Carbon-ceramic'], ['Tyres', 'Semi-slick option']],
-      lede: 'The lightest mass on the car is also the most important: the part that touches the road.',
-      body: ['Unsprung weight is the enemy of grip, so the wheels are made from carbon fibre. Compared with forged aluminium they are dramatically lighter, which lets the suspension react faster, the tyres stay in contact with the road and the steering feel sharper and more detailed.',
-             'Behind each spoke sits a carbon-ceramic brake system capable of repeated stops from extreme speed without fade. The wheels are shaped to pull hot air away from the discs and pass it smoothly along the flanks, so that even the rotating parts of the car contribute to its aerodynamic efficiency.'],
-      quote: '“Every gram you remove from the wheels is worth several grams removed from the body.”' }
+    { id: 'aero', num: '01', title: 'Aérodynamique active', metrics: [['Aileron', 'Actif · 3 positions'], ['Volets avant', 'Indépendants'], ['Fond plat', 'Tunnels Venturi'], ['Refroidissement', 'Ouïes en Y']],
+      lede: 'La Revuelto ne combat pas le vent. Elle négocie avec lui, plusieurs centaines de fois par seconde.',
+      body: ['Là où les anciennes hypercars se contentaient de surfaces fixes, la Revuelto traite l’air comme une variable. Un aileron arrière dont l’angle change, des éléments mobiles au niveau du museau et un fond travaillé en tunnels agissent comme un seul système, déplaçant l’équilibre aérodynamique entre les essieux selon la vitesse, le braquage et le freinage.',
+             'En configuration basse traînée, l’aileron se plaque contre la carrosserie et la voiture glisse. Au freinage, il se dresse pour stabiliser l’arrière ; dans une courbe rapide, il garde le train arrière planté tandis que le nez conserve son mordant. Les ouïes en Y évacuent la chaleur du V12 sans sacrifier l’appui.'],
+      quote: '« L’appui n’est pas un chiffre. C’est la confiance d’aborder un virage plus vite que la raison ne le suggère. »' },
+    { id: 'v12', num: '02', title: 'V12 hybride', metrics: [['Moteur', 'V12 6,5 L · 65°'], ['Puissance totale', '1 015 ch'], ['Moteurs électriques', '3 · deux avant, un arrière'], ['Régime maxi', '9 500 tr/min']],
+      lede: 'Un cœur atmosphérique qui hurle comme un moteur de course, et une poussée électrique qui arrive avant que vous ayez fini d’y penser.',
+      body: ['Le V12 de 6,5 litres est la signature de la marque : douze cylindres, aucune suralimentation, et une montée en régime qui ne finit jamais. Installé bas derrière l’habitacle, longitudinalement, il participe à la structure et rapproche le centre de gravité du sol.',
+             'Trois moteurs électriques — deux à l’avant, un à l’arrière — comblent chaque creux de la plage de puissance et permettent un vrai vectoriel de couple. Ils propulsent la voiture en sortie de virage, récupèrent l’énergie au freinage et la font glisser en silence en ville, en mode Strada. La puissance passe par une boîte à huit rapports qui change de rapport plus vite que vous ne clignez des yeux.'],
+      quote: '« Deux cœurs, un seul pouls. Les moteurs électriques ne remplacent pas le son : ils le font arriver plus tôt. »' },
+    { id: 'mono', num: '03', title: 'Monocoque carbone', metrics: [['Structure', 'Monofuselage carbone'], ['Matériau', 'Composite aéronautique'], ['Cuisson', 'Autoclave'], ['Cellule', 'Sécurité intégrée']],
+      lede: 'La partie la plus silencieuse de la voiture, et la plus importante. Tout le reste y est fixé.',
+      body: ['Au centre de la Revuelto repose un monofuselage en fibre de carbone, moulé en une seule pièce à partir de composites de qualité aéronautique et cuit sous chaleur et pression. Il est d’une rigidité extraordinaire pour un poids étonnamment faible, offrant aux suspensions une plateforme parfaitement stable — ce qui donne à la voiture son ressenti si direct sous les mains.',
+             'La même structure fait office de cellule de survie. Les structures de déformation, la batterie et la chaîne cinématique sont conçues autour d’elle, et sa résistance permet de garder un habitacle compact, bas et visuellement épuré. En regardant de près la trame apparente, vous contemplez des centaines de couches posées à la main.'],
+      quote: '« La rigidité est le socle du ressenti. Si le châssis ne plie pas, le pilote entend chaque mot que dit la route. »' },
+    { id: 'jantes', num: '04', title: 'Jantes en carbone', metrics: [['Matériau', 'Composite carbone'], ['Masse des jantes', 'Fortement réduite'], ['Fixation', 'Écrou central'], ['Pneus', 'Semi-slicks en option']],
+      lede: 'La masse la plus légère de la voiture est aussi la plus décisive : celle qui touche la route.',
+      body: ['Les masses non suspendues sont l’ennemi de l’adhérence : les jantes sont donc réalisées en fibre de carbone. Comparées à de l’aluminium forgé, elles sont nettement plus légères, ce qui permet à la suspension de réagir plus vite, aux pneus de rester en contact avec la route et à la direction de gagner en précision.',
+             'Leur dessin ajouré chasse l’air chaud des disques et le guide le long des flancs : même les pièces en rotation contribuent à l’efficacité aérodynamique de la voiture. Chaque jante est équilibrée à la main avant de rejoindre son essieu.'],
+      quote: '« Chaque gramme retiré des roues vaut plusieurs grammes retirés de la carrosserie. »' },
+    { id: 'freins', num: '05', title: 'Freins carbone-céramique', metrics: [['Disques', 'Carbone-céramique'], ['Étriers', 'Monobloc · multi-pistons'], ['Résistance', 'Sans fading'], ['Récupération', 'Régénératif couplé']],
+      lede: 'Arrêter 1 015 chevaux est un art aussi exigeant que de les libérer.',
+      body: ['Derrière chaque jante se cache un système de freinage en carbone-céramique capable de répéter des freinages depuis des vitesses extrêmes sans la moindre perte d’efficacité. Les disques ne gauchissent pas, ne rouillent pas et résistent à des températures qui feraient fondre l’acier.',
+             'Ce freinage mécanique travaille main dans la main avec la récupération électrique : au lever de pied, les moteurs de l’essieu avant ralentissent la voiture et rechargent la batterie, tandis que les disques n’interviennent que pour le coup de grâce. Le résultat est une pédale constante, progressive, et une énergie qui n’est jamais perdue.'],
+      quote: '« Un grand freinage ne se remarque pas. On remarque seulement la confiance qu’il donne. »' }
   ];
 
-  var ACCENT = { r: 255, g: 40, b: 0 };
+  var ACCENT = { r: 16, g: 185, b: 129 };
   var accentTween = null;
   function applyAccent() {
     document.documentElement.style.setProperty('--accent-rgb', (ACCENT.r | 0) + ' ' + (ACCENT.g | 0) + ' ' + (ACCENT.b | 0));
   }
 
-  /* ---------------- Synthetic V6 engine (Web Audio) ---------------- */
+  /* ---------------- Moteur V12 synthétique (Web Audio) ---------------- */
   var AUDIO = {
-    strada: { k: 3, cut: 0.5, vol: 0.62, whine: 0.9, turbo: 0.15, g: [0.5, 0.25, 0.4, 0.1], rate: 1.2 },
-    sport:  { k: 9, cut: 0.9, vol: 0.85, whine: 0.25, turbo: 0.45, g: [0.6, 0.45, 0.5, 0.25], rate: 2.0 },
-    corsa:  { k: 22, cut: 1.25, vol: 1.0, whine: 0.1, turbo: 0.8, g: [0.65, 0.6, 0.55, 0.4], rate: 3.0 }
+    strada: { k: 3, cut: 0.5, vol: 0.62, whine: 1.0, g: [0.5, 0.25, 0.4, 0.1], rate: 1.2 },
+    sport: { k: 9, cut: 0.9, vol: 0.85, whine: 0.3, g: [0.6, 0.45, 0.5, 0.25], rate: 2.0 },
+    corsa: { k: 22, cut: 1.25, vol: 1.0, whine: 0.15, g: [0.65, 0.6, 0.55, 0.4], rate: 3.0 }
   };
 
   function EngineSim() {
-    this.ctx = null; this.running = false; this.rpm = 0; this.idle = 1100; this.redline = 9000;
-    this.throttle = 0; this.thrTarget = 0; this.mode = 'sport'; this.cut = 0; this.boost = 0; this.pops = [];
+    this.ctx = null; this.running = false; this.rpm = 0; this.idle = 1000; this.redline = 9500;
+    this.throttle = 0; this.thrTarget = 0; this.mode = 'sport'; this.cut = 0; this.boost = 0; this.popping = false;
     this.curves = {};
   }
   EngineSim.prototype.makeCurve = function (k) {
@@ -823,33 +925,29 @@
   EngineSim.prototype.build = function () {
     var AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return false;
-    var c = this.ctx = new AC();
+    var c = this.ctx = new AC(), self = this;
     this.master = c.createGain(); this.master.gain.value = 0;
     this.comp = c.createDynamicsCompressor();
     this.comp.threshold.value = -16; this.comp.ratio.value = 6; this.comp.attack.value = 0.005; this.comp.release.value = 0.2;
     this.analyser = c.createAnalyser(); this.analyser.fftSize = 1024; this.analyser.smoothingTimeConstant = 0.78;
     this.filter = c.createBiquadFilter(); this.filter.type = 'lowpass'; this.filter.Q.value = 1.1; this.filter.frequency.value = 600;
     this.shaper = c.createWaveShaper(); this.shaper.oversample = '2x';
-    this.bus = c.createGain(); this.bus.gain.value = 1;
-
-    var self = this, kinds = ['sawtooth', 'sawtooth', 'square', 'triangle'];
-    this.oscs = kinds.map(function (t, i) {
-      var o = c.createOscillator(); o.type = t; o.frequency.value = 60; if (i === 1) o.detune.value = 9;
+    this.bus = c.createGain();
+    this.oscs = ['sawtooth', 'sawtooth', 'square', 'triangle'].map(function (t, i) {
+      var o = c.createOscillator(); o.type = t; o.frequency.value = 80; if (i === 1) o.detune.value = 9;
       var g = c.createGain(); g.gain.value = 0; o.connect(g); g.connect(self.bus); o.start();
       return { o: o, g: g };
     });
     this.bus.connect(this.shaper); this.shaper.connect(this.filter); this.filter.connect(this.master);
 
-    // Turbo / intake noise
     var len = c.sampleRate * 2, buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
     for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
     this.noiseBuf = buf;
     this.noise = c.createBufferSource(); this.noise.buffer = buf; this.noise.loop = true;
-    this.turboF = c.createBiquadFilter(); this.turboF.type = 'bandpass'; this.turboF.Q.value = 1.4; this.turboF.frequency.value = 1500;
-    this.turboG = c.createGain(); this.turboG.gain.value = 0;
-    this.noise.connect(this.turboF); this.turboF.connect(this.turboG); this.turboG.connect(this.master); this.noise.start();
+    this.intakeF = c.createBiquadFilter(); this.intakeF.type = 'bandpass'; this.intakeF.Q.value = 1.2; this.intakeF.frequency.value = 900;
+    this.intakeG = c.createGain(); this.intakeG.gain.value = 0;
+    this.noise.connect(this.intakeF); this.intakeF.connect(this.intakeG); this.intakeG.connect(this.master); this.noise.start();
 
-    // Electric whine
     this.whine = c.createOscillator(); this.whine.type = 'sine'; this.whine.frequency.value = 600;
     this.whineG = c.createGain(); this.whineG.gain.value = 0;
     this.whine.connect(this.whineG); this.whineG.connect(this.master); this.whine.start();
@@ -887,41 +985,37 @@
     s.onended = function () { s.disconnect(); f.disconnect(); g.disconnect(); };
   };
   EngineSim.prototype.update = function (dt) {
-    var p = AUDIO[this.mode], prevThr = this.throttle;
+    var p = AUDIO[this.mode], prevThr = this.throttle, self = this;
     this.throttle += (this.thrTarget - this.throttle) * (1 - Math.exp(-9 * dt));
     if (!this.running) { this.rpm += (0 - this.rpm) * Math.min(1, dt * 3); this.boost *= 0.95; return; }
 
     var target = this.idle + this.throttle * (this.redline - this.idle);
     if (this.cut > 0) { this.cut -= dt; target = this.redline * 0.9; }
     else if (this.rpm > this.redline - 130 && this.throttle > 0.5) { this.cut = 0.09; }
-    var rate = target > this.rpm ? p.rate : 1.1;
-    this.rpm += (target - this.rpm) * (1 - Math.exp(-rate * dt));
+    this.rpm += (target - this.rpm) * (1 - Math.exp(-(target > this.rpm ? p.rate : 1.1) * dt));
 
-    // Lift-off crackle
-    if (this.ctx && prevThr > 0.65 && this.throttle < prevThr - 0.04 && this.rpm > 4500 && this.mode !== 'strada' && this.thrTarget < 0.2 && this.pops.length === 0) {
+    if (this.ctx && !this.popping && prevThr > 0.65 && this.throttle < prevThr - 0.04 && this.rpm > 4500 && this.mode !== 'strada' && this.thrTarget < 0.2) {
       var n = this.mode === 'corsa' ? 5 + (Math.random() * 4 | 0) : 2 + (Math.random() * 3 | 0), tt = 0.05;
-      for (var i = 0; i < n; i++) { tt += 0.04 + Math.random() * 0.16; this.pops.push(tt); }
-      for (var j = 0; j < this.pops.length; j++) this.pop(this.pops[j]);
-      var self = this; setTimeout(function () { self.pops.length = 0; }, tt * 1000 + 100);
+      for (var i = 0; i < n; i++) { tt += 0.04 + Math.random() * 0.16; this.pop(tt); }
+      this.popping = true; setTimeout(function () { self.popping = false; }, tt * 1000 + 100);
     }
 
-    var rn = Math.min(1, this.rpm / this.redline), t = this.ctx.currentTime, f = this.rpm / 60 * 3;
+    var rn = Math.min(1, this.rpm / this.redline), t = this.ctx.currentTime, f = this.rpm / 60 * 6;
     for (var k = 0; k < 4; k++) {
-      var fr = k === 2 ? f / 2 : k === 3 ? f * 2 : f;
-      this.oscs[k].o.frequency.setTargetAtTime(fr, t, 0.03);
-      this.oscs[k].g.gain.setTargetAtTime(p.g[k] * 0.22, t, 0.08);
+      this.oscs[k].o.frequency.setTargetAtTime(k === 2 ? f / 2 : k === 3 ? f * 2 : f, t, 0.03);
+      this.oscs[k].g.gain.setTargetAtTime(p.g[k] * 0.2, t, 0.08);
     }
-    this.filter.frequency.setTargetAtTime((350 + this.rpm * 0.6 + this.throttle * 1800) * p.cut, t, 0.05);
+    this.filter.frequency.setTargetAtTime((350 + this.rpm * 0.5 + this.throttle * 1600) * p.cut, t, 0.05);
     this.master.gain.setTargetAtTime((0.14 + 0.32 * this.throttle + 0.06 * rn) * p.vol, t, 0.05);
-    this.boost += ((p.turbo * this.throttle * rn) - this.boost) * Math.min(1, dt * 2.5);
-    this.turboG.gain.setTargetAtTime(this.boost * 0.14, t, 0.08);
-    this.turboF.frequency.setTargetAtTime(1200 + rn * 4800, t, 0.1);
+    this.boost += ((this.throttle * rn) - this.boost) * Math.min(1, dt * 2.5);
+    this.intakeG.gain.setTargetAtTime(this.boost * 0.08, t, 0.08);
+    this.intakeF.frequency.setTargetAtTime(800 + rn * 3600, t, 0.1);
     this.whine.frequency.setTargetAtTime(500 + this.rpm * 0.95, t, 0.05);
     this.whineG.gain.setTargetAtTime(p.whine * 0.05 * (0.35 + rn), t, 0.08);
   };
   EngineSim.prototype.dispose = function () {
-    if (this.ctx) { try { this.ctx.close(); } catch (e) {} this.ctx = null; }
-    this.running = false;
+    if (this.ctx) { this.ctx.close().catch(function () {}); }
+    this.ctx = null; this.running = false;
   };
 
   /* ---------------- Alpine ---------------- */
@@ -963,7 +1057,6 @@
       step: function (d) { this.open(this.items[(this.idx + d + this.items.length) % this.items.length].id); }
     });
 
-    /* HUD card tilt */
     Alpine.directive('tilt', function (el, _v, utils) {
       if (reduce || window.matchMedia('(hover: none)').matches) return;
       var rx = gsap.quickTo(el, 'rotationX', { duration: 0.5, ease: 'power3.out' });
@@ -989,9 +1082,8 @@
       });
     });
 
-    /* Showcase */
     Alpine.data('showcase', function () {
-      var cs = { hp: 1000, zero: 2.6, top: 320, down: 760, tq: 780, up: 0.72, ut: 0.4 };
+      var cs = { hp: 850, zero: 2.8, top: 320, nm: 700, tq: 700, up: 0.7, ut: 0.4 };
       var tw = null;
       function g(u, c, sl, sr) { var d = u - c, s = d < 0 ? sl : sr; return Math.exp(-(d * d) / (2 * s * s)); }
       function buildCurves() {
@@ -1005,39 +1097,42 @@
         var hp = '', tq = '';
         for (i = 0; i <= N; i++) {
           var x = (i / N * W).toFixed(1);
-          var yp = (bot - (hpPts[i] / maxP) * (cs.hp / 1250) * (bot - top)).toFixed(1);
-          var yt = (bot - (tqPts[i] / maxT) * (cs.tq / 950) * (bot - top)).toFixed(1);
+          var yp = (bot - (hpPts[i] / maxP) * (cs.hp / 1050) * (bot - top)).toFixed(1);
+          var yt = (bot - (tqPts[i] / maxT) * (cs.tq / 850) * (bot - top)).toFixed(1);
           hp += (i ? 'L' : 'M') + x + ' ' + yp; tq += (i ? 'L' : 'M') + x + ' ' + yt;
         }
         return { hp: hp, tq: tq, area: hp + 'L' + W + ' ' + bot + 'L0 ' + bot + 'Z' };
       }
       return {
-        views: [{ id: 'front', label: 'Front ¾' }, { id: 'side', label: 'Profile' }, { id: 'rear', label: 'Rear ¾' }, { id: 'top', label: 'Plan' }],
-        view: 'front', paint: 'rosso',
+        views: [{ id: 'front', label: 'Avant ¾' }, { id: 'side', label: 'Profil' }, { id: 'rear', label: 'Arrière ¾' }, { id: 'top', label: 'Plan' }],
+        view: 'front', paint: 'verde',
         paints: [
-          { id: 'rosso', name: 'Rosso Corsa', hex: '#d10a0a' }, { id: 'giallo', name: 'Giallo Modena', hex: '#f2c200' },
-          { id: 'nero', name: 'Nero Daytona', hex: '#0d0d10' }, { id: 'bianco', name: 'Bianco Avus', hex: '#e9e9e6' },
-          { id: 'titanio', name: 'Grigio Titanio', hex: '#80858e' }
+          { id: 'verde', name: 'Verde Mantis', hex: '#12a05c' }, { id: 'arancio', name: 'Arancio Borealis', hex: '#ff6a00' },
+          { id: 'giallo', name: 'Giallo Inti', hex: '#f5d200' }, { id: 'nero', name: 'Nero Noctis', hex: '#0d0d10' },
+          { id: 'bianco', name: 'Bianco Isanello', hex: '#ececea' }, { id: 'grigio', name: 'Grigio Titans', hex: '#7b808a' }
         ],
-        stats: { hp: '1,000', zero: '2.60', top: 320, down: 760 },
-        bars: { hp: 83, zero: 83, top: 91, down: 72 },
+        stats: { hp: '850', zero: '2,8', top: 320, nm: 700 },
+        bars: { hp: 80, zero: 89, top: 91, nm: 82 },
         curve: { hp: '', tq: '', area: '' },
+        f: FLOWS.sport,
         get mode() { return MODES[this.$store.drive.id]; },
+        flowStyle: function (v) { return { opacity: 0.12 + 0.88 * v, animationDuration: (2.6 - 2 * v).toFixed(2) + 's', display: v < 0.04 ? 'none' : '' }; },
         init: function () {
           var self = this;
           this.applyMode(this.$store.drive.id, true);
           this.$watch('$store.drive.id', function (id) { self.applyMode(id, false); });
-          window.addEventListener('showroom:view', function (e) { if (['front', 'side', 'rear', 'top'].indexOf(e.detail.id) > -1) self.view = e.detail.id; else self.view = ''; });
+          window.addEventListener('showroom:view', function (e) { self.view = ['front', 'side', 'rear', 'top'].indexOf(e.detail.id) > -1 ? e.detail.id : ''; });
         },
         applyMode: function (id, instant) {
-          var self = this, m = MODES[id], target = { hp: m.hp, zero: m.zero, top: m.top, down: m.down, tq: m.tq, up: m.up, ut: m.ut };
+          var self = this, m = MODES[id], target = { hp: m.hp, zero: m.zero, top: m.top, nm: m.nm, tq: m.nm, up: m.up, ut: m.ut };
+          this.f = FLOWS[id];
           if (tw) tw.kill();
           if (instant || reduce) { Object.assign(cs, target); this.sync(); return; }
           tw = gsap.to(cs, Object.assign({ duration: 1.1, ease: 'power3.inOut', onUpdate: function () { self.sync(); } }, target));
         },
         sync: function () {
-          this.stats = { hp: Math.round(cs.hp).toLocaleString('en-US'), zero: cs.zero.toFixed(2), top: Math.round(cs.top), down: Math.round(cs.down) };
-          this.bars = { hp: Math.min(100, cs.hp / 12), zero: Math.min(100, 2.15 / cs.zero * 100), top: Math.min(100, cs.top / 3.5), down: Math.min(100, cs.down / 10.5) };
+          this.stats = { hp: nf(Math.round(cs.hp)), zero: nf(cs.zero, 1), top: Math.round(cs.top), nm: Math.round(cs.nm) };
+          this.bars = { hp: Math.min(100, cs.hp / 10.15), zero: Math.min(100, 2.5 / cs.zero * 100), top: Math.min(100, cs.top / 3.5), nm: Math.min(100, cs.nm / 8.07) };
           this.curve = buildCurves();
         },
         setView: function (id) {
@@ -1047,19 +1142,18 @@
         setPaint: function (id) {
           this.paint = id;
           var p = this.paints.find(function (x) { return x.id === id; });
-          window.dispatchEvent(new CustomEvent('showroom:paint', { detail: { hex: p.hex, id: id } }));
+          window.dispatchEvent(new CustomEvent('showroom:paint', { detail: { hex: p.hex } }));
         }
       };
     });
 
-    /* Sound lab */
     Alpine.data('soundLab', function () {
-      var sim = new EngineSim(), raf = 0, last = 0, visible = false, ctx2d = null, cw = 0, ch = 0, dpr = 1;
+      var sim = new EngineSim(), raf = 0, last = 0, visible = false, ctx2d = null, cw = 0, ch = 0;
       var bars = 56, disp = new Float32Array(bars), peaks = new Float32Array(bars), ro = null, io = null;
-      var rpmEl, arcEl, thrEl, boostEl, canvas, self;
+      var rpmEl, arcEl, thrEl, boostEl, canvas;
 
       function size() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
         cw = canvas.clientWidth; ch = canvas.clientHeight;
         canvas.width = Math.max(1, cw * dpr); canvas.height = Math.max(1, ch * dpr);
         ctx2d.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1097,7 +1191,6 @@
           ctx2d.fillRect(x, mid - peaks[i] * mid * 0.95 - 4, bw - gap, 1.5);
         }
 
-        // Waveform trace
         var amp = (0.05 + 0.4 * Math.max(sim.throttle, rn * 0.4)) * (sim.running ? 1 : 0.12) * h * 0.25;
         var cyc = 2 + rn * 10, ph = t * 0.012 * (1 + rn * 3);
         ctx2d.beginPath(); ctx2d.lineWidth = 1.6; ctx2d.strokeStyle = 'rgba(255,255,255,0.85)';
@@ -1127,7 +1220,7 @@
       return {
         on: false, pressed: false,
         init: function () {
-          self = this; canvas = this.$refs.viz; ctx2d = canvas.getContext('2d');
+          canvas = this.$refs.viz; ctx2d = canvas.getContext('2d');
           rpmEl = this.$refs.rpm; arcEl = this.$refs.arc; thrEl = this.$refs.thr; boostEl = this.$refs.boost;
           size();
           sim.setMode(this.$store.drive.id);
@@ -1135,57 +1228,60 @@
           ro = new ResizeObserver(function () { size(); }); ro.observe(canvas);
           io = new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) run(); else halt(); }, { rootMargin: '100px' });
           io.observe(canvas);
-          document.addEventListener('visibilitychange', function () { if (document.hidden) { halt(); if (sim.running) { sim.thrTarget = 0; } } else run(); });
-          window.addEventListener('pagehide', function () { halt(); sim.dispose(); if (ro) ro.disconnect(); if (io) io.disconnect(); });
+          document.addEventListener('visibilitychange', function () { if (document.hidden) { halt(); sim.thrTarget = 0; } else run(); });
+          window.addEventListener('pagehide', function () { halt(); sim.dispose(); ro.disconnect(); io.disconnect(); });
         },
         toggle: function () {
           var s = this;
           if (this.on) { sim.stop(); this.on = false; this.release(); return Promise.resolve(); }
-          return sim.start().then(function (ok) { s.on = !!ok; if (!ok) s.on = false; });
+          return sim.start().then(function (ok) { s.on = !!ok; });
         },
         press: function () {
           var s = this;
+          this.pressed = true;
           if (!sim.ctx || !sim.running) {
-            this.pressed = true;
             sim.start().then(function (ok) { s.on = !!ok; if (ok && s.pressed) sim.thrTarget = 1; });
             return;
           }
-          this.pressed = true; sim.thrTarget = 1;
+          sim.thrTarget = 1;
         },
         release: function () { this.pressed = false; sim.thrTarget = 0; }
       };
     });
 
-    /* Engineering matrix */
     Alpine.data('matrix', function () {
       return {
         open: null, hc: null, ready: false,
         cars: [
-          { name: 'Ferrari F80', tag: '2025 · Subject' },
-          { name: 'LaFerrari', tag: '2013 · Predecessor' },
-          { name: 'SF90 Stradale', tag: '2019 · Plug-in hybrid' }
+          { name: 'Lamborghini Revuelto', tag: '2023 · Sujet' },
+          { name: 'Aventador SVJ', tag: '2018 · Devancière' },
+          { name: 'Ferrari SF90 Stradale', tag: '2019 · Rivale hybride' }
         ],
         rows: [
-          { k: 'Engine',
-            cells: [{ v: '3.0 L V6 twin-turbo', s: '120° · racing-derived · 9,000 rpm + 3 e-motors' }, { v: '6.3 L V12 naturally aspirated', s: '65° · 9,250 rpm + HY-KERS' }, { v: '4.0 L V8 twin-turbo', s: '90° · 8,000 rpm + 3 e-motors' }],
-            note: 'The F80 trades cylinders for revs and boost. Its compact V6 comes straight from Ferrari’s endurance-racing programme and is paired with three electric motors, making it the most powerful road-going Ferrari of its generation.',
-            bullets: ['Race-derived turbocharged architecture', 'Electric torque fill on both axles', 'Motors enable true torque vectoring'] },
-          { k: 'Output',
-            cells: [{ v: '1,200 cv', s: 'Combined · peak', p: 100 }, { v: '963 cv', s: 'Combined · peak', p: 80 }, { v: '1,000 cv', s: 'Combined · peak', p: 83 }],
-            note: 'More than any Ferrari road car before it, delivered without a single pause in power thanks to instant electric torque.',
-            bullets: ['Combined thermal and electric peak', 'Power delivery varies by drive mode'] },
-          { k: 'Transmission',
-            cells: [{ v: '8-speed dual-clutch', s: 'Rear-biased · front e-axle', }, { v: '7-speed dual-clutch', s: 'Rear-wheel drive' }, { v: '8-speed dual-clutch', s: 'Four-wheel drive · e-axle' }],
-            note: 'A compact eight-speed dual-clutch gearbox keeps the drivetrain short and low, and shifts in a few hundredths of a second while the electric motors fill the torque gap between gears.',
-            bullets: ['Shifts without interrupting torque', 'Integrated reverse via electric motor', 'Tight ratios tuned for track use'] },
-          { k: 'Dry Weight',
-            cells: [{ v: '≈ 1,525 kg', s: 'Lightest of the three per cv', p: 95 }, { v: '≈ 1,255 kg', s: 'Lightest overall', p: 78 }, { v: '≈ 1,570 kg', s: 'Heaviest of the three', p: 98 }],
-            note: 'The F80 carries a heavier hybrid system than the LaFerrari, but with 1,200 cv its power-to-weight ratio is the best of the trio.',
-            bullets: ['Power-to-weight is the headline figure', 'Battery positioned low for balance'] },
-          { k: 'Chassis',
-            cells: [{ v: 'Carbon monocoque', s: 'Aerospace-grade composites · integrated cell' }, { v: 'Carbon monocoque', s: 'Four types of carbon fibre' }, { v: 'Aluminium + carbon', s: 'Aluminium spaceframe · carbon body' }],
-            note: 'A full carbon-fibre tub is the rigid core of the F80. The structure carries the powertrain as a stressed member and doubles as the main safety cell, so the car can stay light, stiff and low.',
-            bullets: ['Hundreds of hand-laid layers', 'Stressed powertrain mounting', 'Integrated crash structures'] }
+          { k: 'Moteur thermique',
+            cells: [{ v: 'V12 atmosphérique 6,5 L', s: '65° · 825 ch · jusqu’à 9 500 tr/min' }, { v: 'V12 atmosphérique 6,5 L', s: '65° · 770 ch · 8 500 tr/min' }, { v: 'V8 biturbo 4,0 L', s: '90° · 780 ch · 8 000 tr/min' }],
+            note: 'La Revuelto conserve l’âme de la marque : un V12 atmosphérique de 6,5 litres, entièrement redessiné et monté longitudinalement derrière l’habitacle. Il offre davantage de puissance que son prédécesseur tout en tournant plus haut.',
+            bullets: ['Aucune suralimentation : réponse immédiate', 'Régime maximal supérieur à 9 000 tr/min', 'Montage longitudinal, centre de gravité abaissé'] },
+          { k: 'Propulsion électrique',
+            cells: [{ v: '3 moteurs · batterie 3,8 kWh', s: 'Deux à l’avant, un à l’arrière · rechargeable', p: 48 }, { v: 'Aucune', s: 'Thermique pur', p: 0 }, { v: '3 moteurs · batterie 7,9 kWh', s: 'Deux à l’avant, un à l’arrière · rechargeable', p: 100 }],
+            note: 'Trois moteurs électriques ajoutent une poussée instantanée, une traction aux quatre roues virtuelle, la marche arrière et un fonctionnement 100 % électrique en ville. La recharge s’effectue sur prise, mais l’énergie est aussi récupérée à chaque freinage. La barre indique la capacité de batterie relative.',
+            bullets: ['Mode Strada 100 % électrique', 'Vectoriel de couple sur l’essieu avant', 'Récupération au freinage couplée aux disques'] },
+          { k: 'Transmission 8 rapports',
+            cells: [{ v: 'Double embrayage · 8 rapports', s: 'Boîte transversale · transmission intégrale hybride' }, { v: 'Robotisée · 7 rapports', s: 'Quatre roues motrices' }, { v: 'Double embrayage · 8 rapports', s: 'Transmission intégrale hybride' }],
+            note: 'Une boîte à double embrayage à huit rapports, montée en position transversale, raccourcit la chaîne cinématique et la place très bas. Les moteurs électriques comblent l’intervalle entre deux rapports : le couple ne s’interrompt jamais.',
+            bullets: ['Passages sans rupture de couple', 'Marche arrière assurée par un moteur électrique', 'Rapports resserrés pour la piste'] },
+          { k: 'Poids à sec',
+            cells: [{ v: '≈ 1 772 kg', s: 'Plus lourde, bien plus puissante', p: 100 }, { v: '≈ 1 525 kg', s: 'La plus légère du trio', p: 86 }, { v: '≈ 1 570 kg', s: 'Légère malgré l’hybridation', p: 89 }],
+            note: 'L’hybridation a un coût en kilogrammes : la Revuelto est plus lourde que l’Aventador SVJ. Avec 1 015 ch, son rapport poids-puissance reste pourtant nettement meilleur et sa réponse bien plus incisive.',
+            bullets: ['Rapport poids-puissance en nette progression', 'Batterie placée bas dans le tunnel central', 'Structure carbone allégée'] },
+          { k: 'Répartition des masses',
+            cells: [{ v: '≈ 44 % AV / 56 % AR', s: 'Batterie logée dans le tunnel' }, { v: '≈ 43 % AV / 57 % AR', s: 'Moteur central arrière' }, { v: '≈ 44 % AV / 56 % AR', s: 'Moteurs électriques à l’avant' }],
+            note: 'Le centre de gravité très bas et la batterie placée dans le tunnel central maintiennent un équilibre idéal entre les essieux, gage d’agilité à l’entrée de courbe et de motricité à la sortie.',
+            bullets: ['Batterie dans le plan central de la voiture', 'Moteurs avant : masse déplacée vers l’essieu avant'] },
+          { k: 'Réservoir',
+            cells: [{ v: '≈ 82 L', s: 'Essence · autonomie combinée élargie' }, { v: '≈ 90 L', s: 'Essence' }, { v: '≈ 68 L', s: 'Essence' }],
+            note: 'Le réservoir de la Revuelto est contenu pour libérer de la place à la batterie. L’électricité réduit la consommation en ville, et le V12 prend le relais dès que l’on demande davantage.',
+            bullets: ['Volume optimisé pour loger la batterie', 'Autonomie électrique courte, usage urbain silencieux'] }
         ],
         init: function () {
           var s = this;
@@ -1196,26 +1292,27 @@
       };
     });
 
-    /* Reservation */
     Alpine.data('reserve', function () {
+      var blank = function () { return { name: '', email: '', phone: '', country: '', use: 'Collection privée', color: 'verde', note: '', consent: false, hp: '' }; };
       return {
-        countries: [['Monaco', 6, 12], ['United Arab Emirates', 24, 45], ['United States', 92, 150], ['United Kingdom', 38, 70], ['Germany', 41, 75], ['Switzerland', 22, 40], ['France', 29, 50], ['Italy', 34, 60], ['Japan', 27, 48], ['China', 55, 90], ['Saudi Arabia', 16, 30], ['Singapore', 14, 25], ['Hong Kong', 12, 22], ['Australia', 15, 28], ['Other regions', 20, 40]]
+        countries: [['Monaco', 6, 12], ['Émirats arabes unis', 24, 45], ['États-Unis', 92, 150], ['Royaume-Uni', 38, 70], ['Allemagne', 41, 75], ['Suisse', 22, 40], ['France', 29, 50], ['Italie', 34, 60], ['Japon', 27, 48], ['Chine', 55, 90], ['Arabie saoudite', 16, 30], ['Singapour', 14, 25], ['Hong Kong', 12, 22], ['Australie', 15, 28], ['Autres régions', 20, 40]]
           .map(function (c) { return { n: c[0], q: c[1], t: c[2] }; }),
-        uses: ['Private collection', 'Track programme', 'Concours & display', 'Gift for a collector'],
+        uses: ['Collection privée', 'Programme piste', 'Concours d’élégance', 'Cadeau pour un collectionneur'],
         swatches: [
-          { id: 'rosso', name: 'Rosso Corsa', hex: '#d10a0a' }, { id: 'giallo', name: 'Giallo Modena', hex: '#f2c200' },
-          { id: 'nero', name: 'Nero Daytona', hex: '#0d0d10' }, { id: 'bianco', name: 'Bianco Avus', hex: '#e9e9e6' },
-          { id: 'titanio', name: 'Grigio Titanio', hex: '#80858e' }
+          { id: 'verde', name: 'Verde Mantis', hex: '#12a05c' }, { id: 'arancio', name: 'Arancio Borealis', hex: '#ff6a00' },
+          { id: 'giallo', name: 'Giallo Inti', hex: '#f5d200' }, { id: 'nero', name: 'Nero Noctis', hex: '#0d0d10' },
+          { id: 'bianco', name: 'Bianco Isanello', hex: '#ececea' }, { id: 'grigio', name: 'Grigio Titans', hex: '#7b808a' }
         ],
-        form: { name: '', email: '', phone: '', country: '', use: 'Private collection', color: 'rosso', note: '', consent: false },
+        form: blank(),
         errors: {}, sending: false, done: false, stage: '', ref: '', slot: '',
         get selected() { var c = this.form.country; return this.countries.find(function (x) { return x.n === c; }) || null; },
+        get firstName() { return this.form.name.split(' ')[0]; },
         validate: function () {
           var e = {}, f = this.form;
-          if (f.name.length < 2) e.name = 'Please enter your full name.';
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email)) e.email = 'Please enter a valid email address.';
-          if (!f.country) e.country = 'Select the country of your allocation quota.';
-          if (!f.consent) e.consent = 'Consent is required to process your request.';
+          if (f.name.length < 2) e.name = 'Veuillez saisir votre nom complet.';
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email)) e.email = 'Veuillez saisir une adresse e-mail valide.';
+          if (!f.country) e.country = 'Choisissez le pays dont dépend votre quota.';
+          if (!f.consent) e.consent = 'Votre consentement est nécessaire pour traiter la demande.';
           this.errors = e; return Object.keys(e).length === 0;
         },
         submit: function () {
@@ -1227,17 +1324,17 @@
             if (!reduce) gsap.fromTo(this.$refs.form, { x: -8 }, { x: 0, duration: 0.6, ease: 'elastic.out(1,.25)' });
             return;
           }
-          this.sending = true; this.stage = 'Verifying identity…';
-          setTimeout(function () { s.stage = 'Checking quota…'; }, 700);
-          setTimeout(function () { s.stage = 'Locking allocation…'; }, 1400);
+          if (this.form.hp) { this.reset(); return; }
+          this.sending = true; this.stage = 'Vérification de l’identité…';
+          setTimeout(function () { s.stage = 'Contrôle du quota…'; }, 700);
+          setTimeout(function () { s.stage = 'Verrouillage de l’allocation…'; }, 1400);
           setTimeout(function () { s.finish(); }, 2200);
         },
         finish: function () {
           var s = this, sel = this.selected;
           if (sel && sel.q > 0) sel.q -= 1;
-          var abc = Math.random().toString(36).slice(2, 6).toUpperCase();
-          this.ref = 'F80-' + abc + '-' + String(1000 + (Math.random() * 8999 | 0));
-          this.slot = String(1 + (Math.random() * 798 | 0)).padStart(3, '0');
+          this.ref = 'REV-' + Math.random().toString(36).slice(2, 6).toUpperCase() + '-' + String(1000 + (Math.random() * 8999 | 0));
+          this.slot = String(1 + (Math.random() * 398 | 0)).padStart(3, '0');
           this.sending = false; this.done = true;
           this.$nextTick(function () { s.celebrate(); });
         },
@@ -1258,7 +1355,6 @@
           var g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
           var rr = ACCENT.r | 0, gg = ACCENT.g | 0, bb = ACCENT.b | 0, P = [], i;
           for (i = 0; i < 100; i++) { var a = Math.random() * 6.283, sp = 2 + Math.random() * 8; P.push({ x: w / 2, y: h * 0.2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 2.5, l: 1, d: 0.01 + Math.random() * 0.014, r: 1 + Math.random() * 2.2 }); }
-          var id = 0;
           function step() {
             g.clearRect(0, 0, w, h); var alive = 0;
             for (var j = 0; j < P.length; j++) {
@@ -1267,22 +1363,20 @@
               g.fillStyle = 'rgba(' + rr + ',' + gg + ',' + bb + ',' + Math.max(p.l, 0).toFixed(3) + ')';
               g.beginPath(); g.arc(p.x, p.y, p.r, 0, 6.283); g.fill();
             }
-            if (alive) id = requestAnimationFrame(step); else g.clearRect(0, 0, w, h);
+            if (alive) requestAnimationFrame(step); else g.clearRect(0, 0, w, h);
           }
           step();
         },
-        reset: function () {
-          this.done = false; this.errors = {};
-          this.form = { name: '', email: '', phone: '', country: '', use: 'Private collection', color: 'rosso', note: '', consent: false };
-        }
+        reset: function () { this.done = false; this.errors = {}; this.form = blank(); }
       };
     });
   });
 
-  /* ---------------- Scroll / entrance motion ---------------- */
+  /* ---------------- Mouvement à l’entrée / au défilement ---------------- */
   function boot() {
     if (!gsap) return;
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     var fills = document.querySelectorAll('[data-fill]');
     var counts = document.querySelectorAll('[data-count]');
@@ -1300,10 +1394,9 @@
         .to(fills, { width: function (i, el) { return el.dataset.fill + '%'; }, duration: 1.6, ease: 'power3.out', stagger: 0.1 }, 1.0);
 
       counts.forEach(function (el) {
-        var end = parseFloat(el.dataset.count), dec = parseInt(el.dataset.dec || '0', 10), sep = el.dataset.sep === '1', o = { v: 0 };
-        gsap.to(o, { v: end, duration: 2.2, delay: 0.9, ease: 'power3.out', onUpdate: function () {
-          var s = o.v.toFixed(dec); el.textContent = sep ? Number(s).toLocaleString('en-US') : s;
-        }, onComplete: function () { el.textContent = sep ? end.toLocaleString('en-US') : end.toFixed(dec); } });
+        var end = parseFloat(el.dataset.count), dec = parseInt(el.dataset.dec || '0', 10), pre = el.dataset.prefix || '', o = { v: 0 };
+        var show = function (v) { el.textContent = pre + nf(v, dec); };
+        gsap.to(o, { v: end, duration: 2.2, delay: 0.9, ease: 'power3.out', onUpdate: function () { show(o.v); }, onComplete: function () { show(end); } });
       });
 
       document.querySelectorAll('.hud-float').forEach(function (el, i) {
@@ -1332,9 +1425,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const gsap = window.gsap;
+const ScrollTrigger = window.ScrollTrigger;
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const disposers = [];
-const accent = { r: 255, g: 40, b: 0 };
+const accent = { r: 16, g: 185, b: 129 };
 const accentSubs = [];
 let accentTween = null;
 
@@ -1346,15 +1440,14 @@ window.addEventListener('drive:mode', (e) => {
 
 const $ = (id) => document.getElementById(id);
 const setC = (color, a) => color.setRGB(a.r / 255, a.g / 255, a.b / 255, THREE.SRGBColorSpace);
+const smooth = (t) => t * t * (3 - 2 * t);
 
 /* ============================================================
-   HERO — particle dust + carbon matrix
+   HÉROS — poussière + matrice carbone
 ============================================================ */
 function initHero() {
   const canvas = $('hero-canvas'), section = $('top');
-  let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' }); }
-  catch (err) { return; }
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   renderer.setPixelRatio(dpr);
   renderer.setClearColor(0x000000, 0);
@@ -1364,14 +1457,10 @@ function initHero() {
   camera.position.set(0, 0, 8);
 
   const mouse = new THREE.Vector2(), mouseT = new THREE.Vector2(), mouseW = new THREE.Vector2();
-  const U = {
-    uTime: { value: 0 }, uMouse: { value: mouseW }, uMouseN: { value: mouse }, uPx: { value: dpr },
-    uColor: { value: new THREE.Color() }
-  };
+  const U = { uTime: { value: 0 }, uMouse: { value: mouseW }, uMouseN: { value: mouse }, uPx: { value: dpr }, uColor: { value: new THREE.Color() } };
   const syncColor = () => setC(U.uColor.value, accent);
   syncColor(); accentSubs.push(syncColor);
 
-  // Dust
   const small = window.innerWidth < 768, N = small ? 1500 : 4200;
   const pos = new Float32Array(N * 3), seed = new Float32Array(N), size = new Float32Array(N), acc = new Float32Array(N);
   for (let i = 0; i < N; i++) {
@@ -1408,14 +1497,11 @@ function initHero() {
       void main() {
         float d = length(gl_PointCoord - 0.5);
         float a = smoothstep(0.5, 0.0, d) * vA;
-        vec3 c = mix(vec3(0.72, 0.75, 0.8), uColor, vAcc);
-        gl_FragColor = vec4(c, a);
+        gl_FragColor = vec4(mix(vec3(0.72, 0.75, 0.8), uColor, vAcc), a);
       }`
   });
-  const dust = new THREE.Points(dustGeo, dustMat);
-  scene.add(dust);
+  scene.add(new THREE.Points(dustGeo, dustMat));
 
-  // Carbon matrix floor
   const cols = small ? 44 : 72, rows = small ? 26 : 40, sp = 0.5;
   const gp = new Float32Array(cols * rows * 3);
   for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
@@ -1447,8 +1533,7 @@ function initHero() {
         vec2 q = abs(gl_PointCoord - 0.5);
         float shape = smoothstep(0.5, 0.18, q.x + q.y);
         float a = shape * (0.12 + 0.5 * vD) + shape * vG * 0.6;
-        vec3 c = mix(vec3(0.5, 0.53, 0.58), uColor, clamp(vG * 1.6, 0.0, 1.0));
-        gl_FragColor = vec4(c, a);
+        gl_FragColor = vec4(mix(vec3(0.5, 0.53, 0.58), uColor, clamp(vG * 1.6, 0.0, 1.0)), a);
       }`
   });
   const grid = new THREE.Points(gridGeo, gridMat);
@@ -1480,7 +1565,7 @@ function initHero() {
   }
   const run = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } };
   const halt = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
-  const io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; visible ? run() : halt(); }, { rootMargin: '50px' });
+  const io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; if (visible) run(); else halt(); }, { rootMargin: '50px' });
   io.observe(section);
   const onVis = () => (document.hidden ? halt() : run());
   document.addEventListener('visibilitychange', onVis);
@@ -1495,7 +1580,7 @@ function initHero() {
 }
 
 /* ============================================================
-   SHOWCASE — procedural supercar
+   VOITURE PROCÉDURALE (partagée par la vue éclatée et le configurateur)
 ============================================================ */
 function spline(keys) {
   const n = keys.length, m = [];
@@ -1512,41 +1597,48 @@ function spline(keys) {
   };
 }
 
-const L = 4.7;
+const L = 4.7, ET = 3.0, EB = 4.0;
 const P = {
-  yb: spline([[0, 0.24], [0.1, 0.2], [0.5, 0.2], [0.9, 0.26], [1, 0.34]]),
-  yt: spline([[0, 0.34], [0.08, 0.42], [0.25, 0.58], [0.4, 0.68], [0.55, 0.76], [0.72, 0.86], [0.86, 0.84], [1, 0.7]]),
-  w: spline([[0, 0.55], [0.1, 0.78], [0.25, 0.9], [0.4, 0.84], [0.55, 0.86], [0.7, 0.98], [0.85, 0.92], [1, 0.7]]),
+  yb: spline([[0, 0.22], [0.1, 0.19], [0.5, 0.19], [0.9, 0.24], [1, 0.3]]),
+  yt: spline([[0, 0.3], [0.08, 0.36], [0.25, 0.5], [0.38, 0.6], [0.5, 0.7], [0.7, 0.82], [0.86, 0.8], [1, 0.62]]),
+  w: spline([[0, 0.5], [0.1, 0.8], [0.25, 0.92], [0.4, 0.86], [0.55, 0.88], [0.7, 1.0], [0.85, 0.95], [1, 0.72]]),
   cb: spline([[0, 0], [0.1, 0.12], [0.3, 0.3], [0.5, 0.38], [0.7, 0.34], [0.88, 0.2], [1, 0.02]]),
-  cw: spline([[0, 0.5], [0.2, 0.68], [0.5, 0.72], [0.8, 0.62], [1, 0.4]])
+  cw: spline([[0, 0.5], [0.2, 0.68], [0.5, 0.72], [0.8, 0.62], [1, 0.4]]),
+  tubTop: spline([[0.29, 0.5], [0.4, 0.62], [0.55, 0.7], [0.71, 0.6]]),
+  tubW: spline([[0.29, 0.36], [0.5, 0.46], [0.71, 0.4]])
 };
-const EB = 2.4, ET = 2.4;
 const sNorm = (x) => (L / 2 - x) / L;
 const surfY = (s, z) => {
   const yb = P.yb(s), yt = P.yt(s), w = P.w(s), zf = Math.min(0.999, Math.abs(z) / w);
   return (yb + yt) / 2 + ((yt - yb) / 2) * Math.pow(1 - Math.pow(zf, ET), 1 / ET);
 };
+const FWX = 1.38, RWX = -1.3;
 
-function loft(prof, { n = 96, m = 56, s0 = 0, s1 = 1, eT = 2.4, eB = 3.2 } = {}) {
-  const R = n + 3, pos = new Float32Array(R * m * 3), idx = [];
+function loft(prof, { n = 60, m = 56, s0 = 0, s1 = 1, a0 = 0, a1 = Math.PI * 2, eT = ET, eB = EB, capStart = false, capEnd = false } = {}) {
+  const closed = a1 - a0 >= Math.PI * 2 - 1e-6, cols = closed ? m : m + 1;
+  const rs = [];
+  if (capStart) rs.push({ i: 0, cap: true });
+  for (let i = 0; i <= n; i++) rs.push({ i, cap: false });
+  if (capEnd) rs.push({ i: n, cap: true });
+  const R = rs.length, pos = new Float32Array(R * cols * 3), uv = new Float32Array(R * cols * 2), idx = [];
   const sg = Math.sign, ab = Math.abs, pw = Math.pow;
-  for (let r = 0; r < R; r++) {
-    const cap = r === 0 || r === R - 1;
-    const i = r === 0 ? 0 : r === R - 1 ? n : r - 1;
-    const s = s0 + (s1 - s0) * (i / n), { yb, yt, w } = prof(s);
-    const cy = (yb + yt) / 2, hy = (yt - yb) / 2, x = L / 2 - s * L, k = cap ? 0.0001 : 1;
-    for (let j = 0; j < m; j++) {
-      const a = (j / m) * Math.PI * 2, ca = Math.cos(a), sa = Math.sin(a), e = sa >= 0 ? eT : eB;
-      const z = w * sg(ca) * pw(ab(ca), 2 / e), y = cy + hy * sg(sa) * pw(ab(sa), 2 / e), o = (r * m + j) * 3;
+  rs.forEach((r, ri) => {
+    const s = s0 + (s1 - s0) * (r.i / n), { yb, yt, w } = prof(s);
+    const cy = (yb + yt) / 2, hy = (yt - yb) / 2, x = L / 2 - s * L, k = r.cap ? 0.0001 : 1;
+    for (let j = 0; j < cols; j++) {
+      const a = a0 + (a1 - a0) * (j / m), ca = Math.cos(a), sa = Math.sin(a), e = sa >= 0 ? eT : eB;
+      const z = w * sg(ca) * pw(ab(ca), 2 / e), y = cy + hy * sg(sa) * pw(ab(sa), 2 / e), o = (ri * cols + j) * 3;
       pos[o] = x; pos[o + 1] = cy + (y - cy) * k; pos[o + 2] = z * k;
+      uv[(ri * cols + j) * 2] = (j / m) * 3; uv[(ri * cols + j) * 2 + 1] = (ri / R) * 5;
     }
-  }
-  for (let r = 0; r < R - 1; r++) for (let j = 0; j < m; j++) {
-    const a = r * m + j, b = r * m + ((j + 1) % m), c = (r + 1) * m + j, d = (r + 1) * m + ((j + 1) % m);
+  });
+  for (let r = 0; r < R - 1; r++) for (let j = 0; j < (closed ? cols : cols - 1); j++) {
+    const a = r * cols + j, b = r * cols + ((j + 1) % cols), c = (r + 1) * cols + j, d = (r + 1) * cols + ((j + 1) % cols);
     idx.push(a, b, c, b, d, c);
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
   g.setIndex(idx); g.computeVertexNormals();
   return g;
 }
@@ -1559,24 +1651,436 @@ function radialTex(stops, size = 256) {
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
 
-function initStage() {
-  const canvas = $('car-canvas'), stage = $('stage');
-  let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' }); }
-  catch (err) { stage.classList.add('no-webgl'); return; }
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  renderer.setPixelRatio(dpr);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+function forgedCarbonTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 512;
+  const g = c.getContext('2d');
+  g.fillStyle = '#0d0e10'; g.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 1500; i++) {
+    const x = Math.random() * 512, y = Math.random() * 512, s = 6 + Math.random() * 34, ang = Math.random() * Math.PI;
+    g.save(); g.translate(x, y); g.rotate(ang);
+    g.fillStyle = Math.random() < 0.55 ? `rgba(255,255,255,${(0.025 + Math.random() * 0.1).toFixed(3)})` : `rgba(0,0,0,${(0.2 + Math.random() * 0.4).toFixed(3)})`;
+    g.beginPath(); g.moveTo(-s, -s * 0.35); g.lineTo(s * 0.8, -s * 0.5); g.lineTo(s, s * 0.4); g.lineTo(-s * 0.7, s * 0.5); g.closePath(); g.fill();
+    g.strokeStyle = 'rgba(255,255,255,0.035)'; g.lineWidth = 1;
+    for (let k = -s; k < s; k += 3) { g.beginPath(); g.moveTo(k, -s * 0.4); g.lineTo(k + s * 0.2, s * 0.4); g.stroke(); }
+    g.restore();
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4;
+  return t;
+}
 
+function cellTexture() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 96;
+  const g = c.getContext('2d');
+  g.fillStyle = '#0a0d0c'; g.fillRect(0, 0, 256, 96);
+  for (let x = 0; x < 16; x++) for (let y = 0; y < 6; y++) {
+    g.fillStyle = '#12201b'; g.fillRect(x * 16 + 1.5, y * 16 + 1.5, 13, 13);
+    g.fillStyle = 'rgba(16,185,129,0.55)'; g.fillRect(x * 16 + 5, y * 16 + 5, 6, 6);
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+
+function lathe(rad, w) {
+  const pts = [[rad - 0.11, -w], [rad - 0.03, -w - 0.01], [rad, -w * 0.7], [rad + 0.005, 0], [rad, w * 0.7], [rad - 0.03, w + 0.01], [rad - 0.11, w]].map(([r, y]) => new THREE.Vector2(r, y));
+  return new THREE.LatheGeometry(pts, 56).rotateX(Math.PI / 2);
+}
+
+const UP = new THREE.Vector3(0, 1, 0);
+function rodMesh(geo, a, b, r, mat) {
+  const d = new THREE.Vector3().subVectors(b, a), len = d.length(), m = new THREE.Mesh(geo, mat);
+  m.position.copy(a).addScaledVector(d, 0.5); m.scale.set(r, len, r);
+  m.quaternion.setFromUnitVectors(UP, d.normalize());
+  return m;
+}
+
+/* Décalages [dx, dy, dz, opacité] par étape de la vue éclatée */
+const KF = {
+  front: [[0, 0, 0, 1], [1.7, 0.55, 0, 1], [2.5, 0.95, 0, 0.22], [3.1, 1.3, 0, 0]],
+  rear: [[0, 0, 0, 1], [-1.8, 0.7, 0, 1], [-2.6, 1.05, 0, 0.22], [-3.2, 1.4, 0, 0]],
+  side: [[0, 0, 0, 1], [0, 0.15, 1.4, 1], [0, 0.2, 2.1, 0.22], [0, 0.25, 2.7, 0]],
+  canopy: [[0, 0, 0, 1], [0, 1.5, 0, 1], [0, 2.3, 0, 0.2], [0, 3.1, 0, 0]],
+  wheel: [[0, 0, 0, 1], [0, 0, 0.5, 1], [0, 0, 0.95, 0.5], [0, 0, 1.3, 0.28]],
+  brake: [[0, 0, 0, 1], [0, 0, 0.25, 1], [0, 0, 0.6, 0.6], [0, 0, 0.95, 0.3]],
+  susp: [[0, 0, 0, 1], [0, -0.02, 0.12, 1], [0, -0.05, 0.6, 0.35], [0, -0.05, 0.95, 0.25]],
+  tub: [[0, 0, 0, 1], [0, 0, 0, 1], [0, -0.18, 0, 0.35], [0, -0.35, 0, 0.14]],
+  engine: [[0, 0, 0, 1], [0, 0, 0, 1], [-0.1, 0.75, 0, 1], [-0.5, 1.3, 0, 0.22]],
+  battery: [[0, 0, 0, 1], [0, 0, 0, 1], [0, -0.05, 0, 0.5], [0, 0.18, 0, 1]],
+  motors: [[0, 0, 0, 1], [0, 0, 0, 1], [0.3, 0, 0.1, 0.6], [0.9, -0.2, 0.15, 1]],
+  cockpit: [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0.25, 0, 0.35], [0, 0.8, 0, 1]]
+};
+const FLOW_OPACITY = [0, 0, 0.35, 1];
+
+function buildCar({ style, internals }) {
+  const group = new THREE.Group(), parts = {}, paintMats = [], accentMats = [], spinners = [], occluders = [], anchors = {};
+  const protos = {
+    paint: new THREE.MeshPhysicalMaterial({ color: 0x12a05c, metalness: 0.5, roughness: 0.26, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.25, side: THREE.DoubleSide }),
+    carbon: new THREE.MeshPhysicalMaterial({ map: style === 'carbon' ? forgedCarbonTexture() : null, color: 0xbfc3c8, metalness: 0.55, roughness: 0.34, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.3, side: THREE.DoubleSide }),
+    glass: new THREE.MeshPhysicalMaterial({ color: 0x040507, metalness: 0.2, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 1.8, side: THREE.DoubleSide }),
+    dark: new THREE.MeshStandardMaterial({ color: 0x0c0d0f, metalness: 0.7, roughness: 0.42, envMapIntensity: 0.9 }),
+    metal: new THREE.MeshStandardMaterial({ color: 0x9ea3ab, metalness: 1, roughness: 0.3, envMapIntensity: 1.3 }),
+    tyre: new THREE.MeshStandardMaterial({ color: 0x070708, metalness: 0.1, roughness: 0.85 }),
+    rim: new THREE.MeshStandardMaterial({ color: 0x1f2126, metalness: 0.9, roughness: 0.3, envMapIntensity: 1.2, side: THREE.DoubleSide }),
+    disc: new THREE.MeshStandardMaterial({ color: 0x35373c, metalness: 0.85, roughness: 0.4, envMapIntensity: 1 }),
+    accent: new THREE.MeshStandardMaterial({ color: 0x10b981, emissive: 0x10b981, emissiveIntensity: 0.8, metalness: 0.3, roughness: 0.4 }),
+    ledW: new THREE.MeshBasicMaterial({ color: 0xf2f6ff }),
+    ledR: new THREE.MeshBasicMaterial({ color: 0xff3a1a }),
+    wire: new THREE.MeshBasicMaterial({ color: 0x10b981, wireframe: true, transparent: true, opacity: 0.1 }),
+    cells: new THREE.MeshStandardMaterial({ map: internals ? cellTexture() : null, emissive: 0x0a3d2c, metalness: 0.5, roughness: 0.5 })
+  };
+  const unit = new THREE.CylinderGeometry(1, 1, 1, 12);
+  const part = (name, key, mul = [1, 1, 1]) => { const g = new THREE.Group(); group.add(g); parts[name] = { g, mats: [], key, mul }; return parts[name]; };
+  const mat = (p, proto, isAccent = false) => { const m = proto.clone(); p.mats.push(m); if (isAccent) accentMats.push(m); return m; };
+  const body = (p) => { if (style === 'carbon') return mat(p, protos.carbon); const m = mat(p, protos.paint); paintMats.push(m); return m; };
+  const add = (p, geo, m, x = 0, y = 0, z = 0) => { const o = new THREE.Mesh(geo, m); o.position.set(x, y, z); p.g.add(o); return o; };
+  const box = (p, w, h, d, m, x, y, z) => add(p, new THREE.BoxGeometry(w, h, d), m, x, y, z);
+  const anchor = (name, p, x, y, z) => { const o = new THREE.Object3D(); o.position.set(x, y, z); p.g.add(o); anchors[name] = o; };
+  const bodyProf = (s) => ({ yb: P.yb(s), yt: P.yt(s), w: P.w(s) });
+
+  // Panneau avant
+  const front = part('front', KF.front);
+  occluders.push(add(front, loft(bodyProf, { s0: 0, s1: 0.36, n: 40, capStart: true }), body(front)));
+  const dark = mat(front, protos.dark);
+  box(front, 0.6, 0.02, 1.6, dark, 2.15, 0.17, 0);
+  [-1, 1].forEach((sd) => {
+    box(front, 0.34, 0.012, 0.04, mat(front, protos.ledW), L / 2 - 0.12 * L, surfY(0.12, 0.5) + 0.005, sd * 0.5).rotation.y = sd * 0.5;
+    box(front, 0.22, 0.012, 0.04, mat(front, protos.ledW), L / 2 - 0.15 * L, surfY(0.15, 0.62) + 0.005, sd * 0.62).rotation.y = -sd * 0.7;
+    box(front, 0.35, 0.01, 0.2, dark, L / 2 - 0.22 * L, surfY(0.22, 0.34) + 0.004, sd * 0.34);
+  });
+  anchor('front', front, L / 2 - 0.2 * L, surfY(0.2, 0) + 0.04, 0);
+
+  // Flancs gauche / droit
+  [1, -1].forEach((sd) => {
+    const p = part(sd > 0 ? 'sideL' : 'sideR', KF.side, [1, 1, sd]);
+    const a0 = sd > 0 ? -Math.PI / 2 : Math.PI / 2;
+    occluders.push(add(p, loft(bodyProf, { s0: 0.34, s1: 0.68, n: 30, a0, a1: a0 + Math.PI }), body(p)));
+    const d = mat(p, protos.dark);
+    box(p, 0.9, 0.14, 0.03, d, L / 2 - 0.58 * L, 0.4, sd * (P.w(0.58) - 0.005));
+    box(p, 0.5, 0.1, 0.03, d, L / 2 - 0.3 * L, 0.34, sd * (P.w(0.3) - 0.005));
+    box(p, 0.14, 0.05, 0.16, body(p), 0.62, 0.62, sd * 0.76);
+  });
+
+  // Verrière
+  const cS0 = 0.34, cS1 = 0.7;
+  const canopy = part('canopy', KF.canopy);
+  occluders.push(add(canopy, loft((s) => {
+    const sh = P.yt(s), u = (s - cS0) / (cS1 - cS0);
+    return { yb: sh - 0.12, yt: sh + P.cb(u), w: P.w(s) * P.cw(u) };
+  }, { s0: cS0, s1: cS1, n: 44, eT: 2.4, eB: 3, capStart: true, capEnd: true }), mat(canopy, protos.glass)));
+  const roofS = sNorm(0.12);
+  anchor('roof', canopy, 0.12, P.yt(roofS) + P.cb((roofS - cS0) / (cS1 - cS0)) + 0.03, 0);
+
+  // Capot arrière + aileron actif
+  const rear = part('rear', KF.rear);
+  occluders.push(add(rear, loft(bodyProf, { s0: 0.66, s1: 1, n: 40, capEnd: true }), body(rear)));
+  const rd = mat(rear, protos.dark);
+  box(rear, 0.55, 0.07, 1.2, rd, -2.22, 0.27, 0).rotation.z = 0.25;
+  box(rear, 0.03, 0.03, 1.15, mat(rear, protos.ledR), -2.31, 0.62, 0);
+  [-1, 1].forEach((sd) => {
+    const hex = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.03, 6).rotateZ(Math.PI / 2), mat(rear, protos.ledR));
+    hex.position.set(-2.32, 0.5, sd * 0.42); rear.g.add(hex);
+    const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.18, 24).rotateZ(Math.PI / 2), rd);
+    pipe.position.set(-2.3, 0.4, sd * 0.2); rear.g.add(pipe);
+  });
+  for (let i = 0; i < 6; i++) { const s = 0.67 + i * 0.034; box(rear, 0.03, 0.012, 0.8, rd, L / 2 - s * L, surfY(s, 0) + 0.004, 0); }
+  const wing = new THREE.Group(); wing.position.set(-2.05, 0.95, 0); rear.g.add(wing);
+  const wd = mat(rear, protos.dark), wa = mat(rear, protos.accent, true);
+  wing.add(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.025, 1.55), wd));
+  [-1, 1].forEach((sd) => {
+    const pylon = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.34, 0.045), wd); pylon.position.set(0.05, -0.17, sd * 0.35); wing.add(pylon);
+    const plate = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.06, 0.02), wa); plate.position.set(0, 0.02, sd * 0.775); wing.add(plate);
+  });
+  const wingAnchor = new THREE.Object3D(); wingAnchor.position.set(0, 0.12, 0.5); wing.add(wingAnchor); anchors.wing = wingAnchor;
+  anchor('rearTop', rear, -1.1, surfY(sNorm(-1.1), 0) + 0.05, 0);
+
+  // Roues + freins
+  const tyreF = lathe(0.38, 0.15), tyreR = lathe(0.4, 0.19);
+  const rimF = new THREE.CylinderGeometry(0.27, 0.27, 0.3, 40, 1, true).rotateX(Math.PI / 2);
+  const rimR = new THREE.CylinderGeometry(0.28, 0.28, 0.38, 40, 1, true).rotateX(Math.PI / 2);
+  const spokeGeo = new THREE.BoxGeometry(0.2, 0.05, 0.025), capGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.03, 20).rotateX(Math.PI / 2);
+  const discGeo = new THREE.CylinderGeometry(0.245, 0.245, 0.03, 40).rotateX(Math.PI / 2), calGeo = new THREE.BoxGeometry(0.16, 0.2, 0.07);
+  [[FWX, false], [RWX, true]].forEach(([x, isRear]) => [1, -1].forEach((sd) => {
+    const w = isRear ? 0.38 : 0.3, y = isRear ? 0.4 : 0.38, z = sd * (P.w(sNorm(x)) - 0.02), id = (isRear ? 'R' : 'F') + (sd > 0 ? 'L' : 'R');
+    const wp = part('w' + id, KF.wheel, [1, 1, sd]);
+    const spin = new THREE.Group(); spin.position.set(x, y, z); wp.g.add(spin); spinners.push(spin);
+    spin.add(new THREE.Mesh(isRear ? tyreR : tyreF, mat(wp, protos.tyre)));
+    spin.add(new THREE.Mesh(isRear ? rimR : rimF, mat(wp, protos.rim)));
+    const sm = mat(wp, protos.metal), cm = mat(wp, protos.accent, true);
+    for (const face of [-1, 1]) {
+      for (let k = 0; k < 10; k++) {
+        const pv = new THREE.Group(); pv.rotation.z = (k / 10) * Math.PI * 2;
+        const sp = new THREE.Mesh(spokeGeo, sm); sp.position.set(0.15, 0, face * (w / 2 - 0.02)); pv.add(sp); spin.add(pv);
+      }
+      const cp = new THREE.Mesh(capGeo, cm); cp.position.z = face * (w / 2 - 0.005); spin.add(cp);
+    }
+    const bp = part('b' + id, KF.brake, [1, 1, sd]);
+    const bd = new THREE.Mesh(discGeo, mat(bp, protos.disc)); bd.position.set(x, y, z - sd * 0.04); bp.g.add(bd);
+    const cal = new THREE.Mesh(calGeo, mat(bp, protos.accent, true)); cal.position.set(x + 0.17, y + 0.06, z - sd * 0.01); bp.g.add(cal);
+    if (id === 'RL') anchor('wheel', wp, x, y + 0.3, z + 0.14);
+    if (id === 'FL') anchor('brake', bp, x + 0.12, y - 0.05, z + 0.02);
+  }));
+
+  if (internals) {
+    // Monofuselage
+    const tub = part('tub', KF.tub);
+    const tubGeo = loft((s) => ({ yb: 0.2, yt: P.tubTop(s), w: P.tubW(s) }), { s0: 0.29, s1: 0.71, n: 24, capStart: true, capEnd: true, eT: 2.6, eB: 3 });
+    add(tub, tubGeo, mat(tub, protos.dark)); add(tub, tubGeo, mat(tub, protos.wire));
+    const fsGeo = loft((s) => ({ yb: 0.24, yt: 0.44 + (s - 0.04) * 0.2, w: 0.3 + (s - 0.04) * 0.4 }), { s0: 0.04, s1: 0.29, n: 16, capStart: true, capEnd: true, eT: 2.6, eB: 3 });
+    add(tub, fsGeo, mat(tub, protos.dark)); add(tub, fsGeo, mat(tub, protos.wire));
+    const cradle = mat(tub, protos.metal);
+    [[-1, 0.3], [1, 0.3], [-1, 0.6], [1, 0.6]].forEach(([sd, y]) => tub.g.add(rodMesh(unit, new THREE.Vector3(-0.7, y, sd * 0.32), new THREE.Vector3(-2.15, y + 0.04, sd * 0.4), 0.018, cradle)));
+    anchor('tub', tub, 0.05, 0.7, 0);
+
+    // Suspensions push-rod
+    const helixCurve = new (class extends THREE.Curve { getPoint(t, target = new THREE.Vector3()) { const a = t * Math.PI * 2 * 6; return target.set(Math.cos(a) * 0.045, t, Math.sin(a) * 0.045); } })();
+    const springGeo = new THREE.TubeGeometry(helixCurve, 120, 0.011, 6, false);
+    [[FWX, 'F'], [RWX, 'R']].forEach(([x, k]) => [1, -1].forEach((sd) => {
+      const sp = part('s' + k + (sd > 0 ? 'L' : 'R'), KF.susp, [1, 1, sd]), v = (a, b, c) => new THREE.Vector3(a, b, sd * c);
+      const hubZ = P.w(sNorm(x)) - 0.15, mm = mat(sp, protos.metal), sa = mat(sp, protos.accent, true);
+      [[0.56, 0.52], [0.27, 0.26]].forEach(([yi, yo]) => [0.24, -0.24].forEach((dx) => sp.g.add(rodMesh(unit, v(x + dx, yi, 0.42), v(x, yo, hubZ), 0.017, mm))));
+      sp.g.add(rodMesh(unit, v(x, 0.26, hubZ), v(x, 0.52, hubZ), 0.03, mm));
+      sp.g.add(rodMesh(unit, v(x, 0.27, hubZ), v(x, 0.6, 0.3), 0.014, mm));
+      const sa0 = v(x - 0.06, 0.3, 0.12), sb0 = v(x - 0.06, 0.62, 0.3), sd0 = new THREE.Vector3().subVectors(sb0, sa0), spr = new THREE.Mesh(springGeo, sa);
+      spr.position.copy(sa0); spr.scale.set(1, sd0.length(), 1); spr.quaternion.setFromUnitVectors(UP, sd0.normalize()); sp.g.add(spr);
+      sp.g.add(rodMesh(unit, sa0, sb0, 0.022, mm));
+      if (k === 'F' && sd > 0) anchor('susp', sp, x, 0.45, hubZ - 0.1);
+    }));
+
+    // Moteur V12 + boîte + moteur électrique arrière
+    const eng = part('engine', KF.engine), em = mat(eng, protos.metal), ed = mat(eng, protos.dark), ea = mat(eng, protos.accent, true);
+    box(eng, 1.25, 0.26, 0.34, ed, -1.25, 0.36, 0);
+    box(eng, 1.1, 0.14, 0.2, em, -1.25, 0.6, 0);
+    const t = 0.567, cylGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.3, 20), vcGeo = new THREE.BoxGeometry(0.2, 0.05, 0.16);
+    [-1, 1].forEach((sd) => {
+      const dir = new THREE.Vector3(0, Math.cos(t), sd * Math.sin(t));
+      for (let i = 0; i < 6; i++) {
+        const x = -1.8 + i * 0.22, base = new THREE.Vector3(x, 0.46, sd * 0.07);
+        const cy = new THREE.Mesh(cylGeo, em); cy.position.copy(base).addScaledVector(dir, 0.15); cy.rotation.x = sd * t; eng.g.add(cy);
+        const vc = new THREE.Mesh(vcGeo, ea); vc.position.copy(base).addScaledVector(dir, 0.33); vc.rotation.x = sd * t; eng.g.add(vc);
+      }
+      [0, 3].forEach((i) => {
+        const x = -1.8 + i * 0.22, curve = new THREE.CatmullRomCurve3([new THREE.Vector3(x, 0.4, sd * 0.2), new THREE.Vector3(x - 0.25, 0.32, sd * 0.42), new THREE.Vector3(-2.1, 0.36, sd * 0.34)]);
+        eng.g.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 24, 0.03, 8), em));
+      });
+    });
+    box(eng, 0.45, 0.3, 0.85, ed, -2.05, 0.38, 0);
+    const rm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.3, 20).rotateX(Math.PI / 2), ea); rm.position.set(-2.05, 0.38, 0); eng.g.add(rm);
+    anchor('engine', eng, -1.25, 0.82, 0); anchor('gearbox', eng, -2.05, 0.55, 0.3);
+    anchor('flowEng', eng, -1.25, 0.5, 0); anchor('flowGear', eng, -2.05, 0.38, 0);
+
+    // Batterie
+    const bat = part('battery', KF.battery);
+    box(bat, 1.05, 0.12, 0.36, mat(bat, protos.cells), 0, 0.36, 0);
+    const ba = mat(bat, protos.accent, true);
+    [-1, 1].forEach((sd) => box(bat, 1.06, 0.012, 0.012, ba, 0, 0.43, sd * 0.18));
+    anchor('battery', bat, 0, 0.5, 0); anchor('flowBat', bat, 0, 0.4, 0);
+
+    // Moteurs électriques avant
+    [1, -1].forEach((sd) => {
+      const mp = part(sd > 0 ? 'motorL' : 'motorR', KF.motors, [1, 1, sd]);
+      const cy = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.34, 28).rotateX(Math.PI / 2), mat(mp, protos.metal)); cy.position.set(FWX, 0.38, sd * 0.4); mp.g.add(cy);
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.014, 8, 28), mat(mp, protos.accent, true)); ring.position.set(FWX, 0.38, sd * 0.57); mp.g.add(ring);
+      anchor('flowMotor' + (sd > 0 ? 'L' : 'R'), mp, FWX, 0.38, sd * 0.4);
+    });
+
+    // Cockpit
+    const ck = part('cockpit', KF.cockpit), cd = mat(ck, protos.dark), ca = mat(ck, protos.accent, true);
+    [-1, 1].forEach((sd) => {
+      box(ck, 0.4, 0.08, 0.42, cd, -0.15, 0.46, sd * 0.33);
+      box(ck, 0.07, 0.5, 0.4, cd, -0.36, 0.7, sd * 0.33).rotation.z = -0.25;
+      const hr = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.12, 16), cd); hr.position.set(-0.43, 0.98, sd * 0.33); ck.g.add(hr);
+      box(ck, 0.2, 0.012, 0.012, ca, -0.2, 0.505, sd * 0.33);
+    });
+    const sw = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.014, 10, 32), cd); sw.rotation.set(0, Math.PI / 2, 0.35); sw.position.set(0.5, 0.68, -0.33); ck.g.add(sw);
+    box(ck, 0.3, 0.14, 1.1, cd, 0.72, 0.52, 0).rotation.z = 0.3;
+    box(ck, 0.02, 0.1, 0.34, ca, 0.62, 0.6, -0.33);
+    box(ck, 0.9, 0.12, 0.12, cd, -0.1, 0.42, 0);
+    anchor('cockpit', ck, 0.1, 0.9, 0);
+  }
+
+  const setOpacity = (p, o) => {
+    const tr = o < 0.999;
+    for (const m of p.mats) { if (m.transparent !== tr) { m.transparent = tr; m.depthWrite = !tr; } m.opacity = o; }
+    p.g.visible = o > 0.01;
+  };
+  const tmp = [0, 0, 0, 1];
+  function setExplode(Pv) {
+    for (const k in parts) {
+      const p = parts[k], i = Math.min(p.key.length - 2, Math.max(0, Math.floor(Pv))), t = smooth(Math.min(1, Math.max(0, Pv - i))), a = p.key[i], b = p.key[i + 1];
+      for (let n = 0; n < 4; n++) tmp[n] = a[n] + (b[n] - a[n]) * t;
+      p.g.position.set(tmp[0] * p.mul[0], tmp[1] * p.mul[1], tmp[2] * p.mul[2]);
+      setOpacity(p, tmp[3]);
+    }
+  }
+
+  return { group, paintMats, accentMats, spinners, occluders, anchors, wing, setExplode };
+}
+
+function makeStage(canvas) {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x060607);
   scene.fog = new THREE.Fog(0x060607, 10, 26);
   const pmrem = new THREE.PMREMGenerator(renderer);
   const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04);
   scene.environment = envRT.texture;
-
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 80);
+
+  scene.add(new THREE.Mesh(new THREE.CircleGeometry(16, 96).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0x08080a, metalness: 0.15, roughness: 0.72, envMapIntensity: 0.25 })));
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.85 });
+  const ring1 = new THREE.Mesh(new THREE.RingGeometry(3.55, 3.575, 128).rotateX(-Math.PI / 2), ringMat); ring1.position.y = 0.004; scene.add(ring1);
+  const ring2 = new THREE.Mesh(new THREE.RingGeometry(5.2, 5.215, 128).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.08 })); ring2.position.y = 0.004; scene.add(ring2);
+  const glowMat = new THREE.MeshBasicMaterial({ map: radialTex([[0, 'rgba(255,255,255,1)'], [0.45, 'rgba(255,255,255,.35)'], [1, 'rgba(255,255,255,0)']]), color: 0x10b981, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false });
+  const glow = new THREE.Mesh(new THREE.PlaneGeometry(9, 9).rotateX(-Math.PI / 2), glowMat); glow.position.y = 0.006; scene.add(glow);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(6.8, 3.2).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: radialTex([[0, 'rgba(0,0,0,.85)'], [0.6, 'rgba(0,0,0,.45)'], [1, 'rgba(0,0,0,0)']]), transparent: true, depthWrite: false }));
+  shadow.position.y = 0.012; scene.add(shadow);
+
+  const key = new THREE.SpotLight(0xffffff, 520, 24, 0.55, 0.7, 2); key.position.set(4, 9, 3); key.target.position.set(0, 0.4, 0); scene.add(key, key.target);
+  const fill = new THREE.DirectionalLight(0xaec6ff, 0.7); fill.position.set(-5, 3, 4); scene.add(fill);
+  const rim1 = new THREE.PointLight(0x10b981, 38, 14, 2); rim1.position.set(-4, 1.6, -3.2); scene.add(rim1);
+  const rim2 = new THREE.PointLight(0x10b981, 30, 14, 2); rim2.position.set(4.2, 1.2, -3.8); scene.add(rim2);
+
+  const syncStage = () => { setC(ringMat.color, accent); setC(glowMat.color, accent); setC(rim1.color, accent); setC(rim2.color, accent); };
+  syncStage(); accentSubs.push(syncStage);
+
+  const dispose = () => {
+    scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); if (o.material) { const ms = Array.isArray(o.material) ? o.material : [o.material]; ms.forEach((m) => { if (m.map) m.map.dispose(); m.dispose(); }); } });
+    envRT.dispose(); pmrem.dispose(); renderer.dispose(); renderer.forceContextLoss();
+  };
+  return { renderer, scene, camera, dispose };
+}
+
+/* ============================================================
+   VUE ÉCLATÉE — pilotée par ScrollTrigger
+============================================================ */
+function initExplode() {
+  const section = $('eclate'), canvas = $('explode-canvas');
+  const st = makeStage(canvas);
+  const { renderer, scene, camera } = st;
+  const car = buildCar({ style: 'carbon', internals: true });
+  scene.add(car.group);
+
+  const syncAccent = () => car.accentMats.forEach((m) => { setC(m.color, accent); setC(m.emissive, accent); });
+  syncAccent(); accentSubs.push(syncAccent);
+  car.wing.position.y = 0.95; car.wing.rotation.z = 0.1;
+
+  // Flux d’énergie : perles + lignes entre les composants
+  const A = car.anchors, routes = [[A.flowBat, A.flowMotorL], [A.flowBat, A.flowMotorR], [A.flowBat, A.flowGear], [A.flowEng, A.flowGear]];
+  const PER = 14, LP = 24, beadMat = new THREE.MeshBasicMaterial({ color: 0x10b981, transparent: true, opacity: 1 });
+  const beads = new THREE.InstancedMesh(new THREE.SphereGeometry(0.028, 10, 8), beadMat, routes.length * PER);
+  beads.frustumCulled = false; scene.add(beads);
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.4 });
+  const lines = routes.map(() => {
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(LP * 3), 3));
+    const l = new THREE.Line(g, lineMat); l.frustumCulled = false; scene.add(l); return l;
+  });
+  const syncFlow = () => { setC(beadMat.color, accent); setC(lineMat.color, accent); };
+  syncFlow(); accentSubs.push(syncFlow);
+  const va = new THREE.Vector3(), vb = new THREE.Vector3(), vm = new THREE.Vector3(), vp = new THREE.Vector3(), mtx = new THREE.Matrix4();
+  function updateFlow(time, op) {
+    beadMat.opacity = op; lineMat.opacity = 0.4 * op;
+    beads.visible = op > 0.02; lines.forEach((l) => { l.visible = op > 0.02; });
+    if (op <= 0.02) return;
+    routes.forEach(([a, b], r) => {
+      a.getWorldPosition(va); b.getWorldPosition(vb);
+      vm.addVectors(va, vb).multiplyScalar(0.5); vm.y += 0.18;
+      const bez = (t, out) => { const u = 1 - t; return out.set(u * u * va.x + 2 * u * t * vm.x + t * t * vb.x, u * u * va.y + 2 * u * t * vm.y + t * t * vb.y, u * u * va.z + 2 * u * t * vm.z + t * t * vb.z); };
+      const attr = lines[r].geometry.attributes.position;
+      for (let i = 0; i < LP; i++) { bez(i / (LP - 1), vp); attr.setXYZ(i, vp.x, vp.y, vp.z); }
+      attr.needsUpdate = true;
+      for (let i = 0; i < PER; i++) { bez(((i / PER) + time * 0.35 + r * 0.17) % 1, vp); mtx.makeTranslation(vp.x, vp.y, vp.z); beads.setMatrixAt(r * PER + i, mtx); }
+    });
+    beads.instanceMatrix.needsUpdate = true;
+  }
+
+  const CAM = [[[5.6, 1.9, 5.4], [0, 0.5, 0]], [[7.4, 3.9, 6.8], [0, 0.6, 0]], [[-3.6, 3.3, 3.9], [-1.2, 0.9, 0]], [[2.6, 2.5, 2.4], [0, 0.45, 0]]];
+  const callouts = [...section.querySelectorAll('.callout')].map((el) => ({ el, step: +el.dataset.step, a: A[el.dataset.anchor], o: -1 }));
+  const fiches = [...section.querySelectorAll('[data-fiche]')].map((el) => ({ el, o: -1 }));
+  const ticks = [...section.querySelectorAll('.xv-tick')], num = $('xv-num');
+  let stepNow = -1;
+
+  const state = { P: 0 }, target = { P: 0 };
+  const v3 = new THREE.Vector3(), pr = new THREE.Vector3();
+  function applyProgress(Pv, time) {
+    car.setExplode(Pv);
+    const i = Math.min(2, Math.floor(Pv)), t = smooth(Math.min(1, Pv - i));
+    const c0 = CAM[i], c1 = CAM[i + 1];
+    camera.position.set(c0[0][0] + (c1[0][0] - c0[0][0]) * t, c0[0][1] + (c1[0][1] - c0[0][1]) * t, c0[0][2] + (c1[0][2] - c0[0][2]) * t);
+    camera.lookAt(c0[1][0] + (c1[1][0] - c0[1][0]) * t, c0[1][1] + (c1[1][1] - c0[1][1]) * t, c0[1][2] + (c1[1][2] - c0[1][2]) * t);
+    camera.updateMatrixWorld();
+    updateFlow(time, FLOW_OPACITY[i] + (FLOW_OPACITY[i + 1] - FLOW_OPACITY[i]) * t);
+
+    const stp = Math.min(3, Math.round(Pv));
+    if (stp !== stepNow) {
+      stepNow = stp; num.textContent = '0' + (stp + 1);
+      ticks.forEach((tk, k) => tk.classList.toggle('on', k === stp));
+    }
+    fiches.forEach((f, k) => {
+      const o = Math.max(0, 1 - Math.abs(Pv - k) * 2.4);
+      if (Math.abs(o - f.o) > 0.004) { f.o = o; f.el.style.opacity = o.toFixed(3); f.el.style.transform = `translateY(${((1 - o) * 26).toFixed(1)}px)`; f.el.style.pointerEvents = o > 0.5 ? 'auto' : 'none'; f.el.setAttribute('aria-hidden', o > 0.5 ? 'false' : 'true'); }
+    });
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    callouts.forEach((c) => {
+      const o = Math.max(0, 1 - Math.abs(Pv - c.step) * 2.6);
+      if (o <= 0.01) { if (c.o !== 0) { c.o = 0; c.el.style.opacity = '0'; } return; }
+      c.a.getWorldPosition(v3); pr.copy(v3).project(camera);
+      c.el.style.transform = `translate3d(${((pr.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-pr.y * 0.5 + 0.5) * h).toFixed(1)}px,0)`;
+      c.el.style.opacity = (pr.z > 1 ? 0 : o).toFixed(3); c.o = o;
+    });
+  }
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    const a = w / h; camera.aspect = a; camera.zoom = Math.min(1, Math.max(0.5, a * 0.95));
+    if (w < 768) camera.setViewOffset(w, h, 0, h * 0.16, w, h); else camera.setViewOffset(w, h, -w * 0.13, 0, w, h);
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  const ro = new ResizeObserver(() => resize()); ro.observe(canvas);
+
+  const trigger = ScrollTrigger.create({
+    trigger: section, start: 'top top', end: '+=420%', pin: true, anticipatePin: 1,
+    onUpdate: (self) => { target.P = self.progress * 3; if (reduce) state.P = target.P; }
+  });
+
+  let raf = 0, visible = false, last = performance.now(), time = 0;
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
+    state.P += (target.P - state.P) * (1 - Math.exp(-dt * 6));
+    applyProgress(state.P, time);
+    for (const s of car.spinners) s.rotation.z -= dt * 0.4;
+    renderer.render(scene, camera);
+  }
+  const run = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  const halt = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+  const io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; if (visible) run(); else halt(); }, { rootMargin: '80px' });
+  io.observe(section);
+  const onVis = () => (document.hidden ? halt() : run());
+  document.addEventListener('visibilitychange', onVis);
+  applyProgress(0, 0);
+
+  disposers.push(() => {
+    halt(); io.disconnect(); ro.disconnect(); trigger.kill(); document.removeEventListener('visibilitychange', onVis);
+    beads.geometry.dispose(); beadMat.dispose(); lineMat.dispose(); lines.forEach((l) => l.geometry.dispose());
+    st.dispose();
+  });
+}
+
+/* ============================================================
+   CONFIGURATEUR
+============================================================ */
+function initStage() {
+  const canvas = $('car-canvas'), stage = $('stage');
+  const st = makeStage(canvas);
+  const { renderer, scene, camera } = st;
   camera.position.set(5.4, 1.7, 4.6);
+  const car = buildCar({ style: 'paint', internals: false });
+  scene.add(car.group);
+  const A = car.anchors;
+
   const controls = new OrbitControls(camera, canvas);
   controls.target.set(0, 0.55, 0);
   controls.enableDamping = true; controls.dampingFactor = 0.06; controls.enablePan = false;
@@ -1584,135 +2088,27 @@ function initStage() {
   controls.autoRotate = !reduce; controls.autoRotateSpeed = 0.55;
   canvas.style.touchAction = 'pan-y';
 
-  // Materials
-  const paint = new THREE.MeshPhysicalMaterial({ color: new THREE.Color('#d10a0a'), metalness: 0.5, roughness: 0.26, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.25 });
-  const glass = new THREE.MeshPhysicalMaterial({ color: 0x040507, metalness: 0.2, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 1.8 });
-  const carbonM = new THREE.MeshStandardMaterial({ color: 0x0c0d0f, metalness: 0.7, roughness: 0.42, envMapIntensity: 0.9 });
-  const tyre = new THREE.MeshStandardMaterial({ color: 0x070708, metalness: 0.1, roughness: 0.85 });
-  const rimM = new THREE.MeshStandardMaterial({ color: 0x1f2126, metalness: 0.9, roughness: 0.3, envMapIntensity: 1.2 });
-  const spokeM = new THREE.MeshStandardMaterial({ color: 0x8b9098, metalness: 1, roughness: 0.25, envMapIntensity: 1.3 });
-  const accentM = new THREE.MeshStandardMaterial({ color: 0xff2800, emissive: 0xff2800, emissiveIntensity: 0.9, metalness: 0.3, roughness: 0.4 });
-  const ledW = new THREE.MeshBasicMaterial({ color: 0xf2f6ff });
-  const ledR = new THREE.MeshBasicMaterial({ color: 0xff1a1a });
-
-  const car = new THREE.Group(); scene.add(car);
-  const occluders = [];
-
-  const bodyGeo = loft((s) => ({ yb: P.yb(s), yt: P.yt(s), w: P.w(s) }), { eT: EB, eB: 3.2 });
-  const body = new THREE.Mesh(bodyGeo, paint); car.add(body); occluders.push(body);
-
-  const cS0 = 0.34, cS1 = 0.7;
-  const canopyGeo = loft((s) => {
-    const sh = P.yt(s), u = (s - cS0) / (cS1 - cS0);
-    return { yb: sh - 0.12, yt: sh + P.cb(u), w: P.w(s) * P.cw(u) };
-  }, { s0: cS0, s1: cS1, n: 56, eT: 2.2, eB: 3 });
-  const canopy = new THREE.Mesh(canopyGeo, glass); car.add(canopy); occluders.push(canopy);
-
-  // Details
-  const box = (w, h, d, mat, x, y, z, parent = car) => { const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); mesh.position.set(x, y, z); parent.add(mesh); return mesh; };
-  // splitter + diffuser
-  box(0.6, 0.02, 1.6, carbonM, 2.15, 0.17, 0);
-  const diff = box(0.55, 0.07, 1.2, carbonM, -2.22, 0.27, 0); diff.rotation.z = 0.25;
-  // headlights, tail light
-  [-1, 1].forEach((sd) => {
-    const hx = L / 2 - 0.12 * L, hl = box(0.3, 0.012, 0.045, ledW, hx, surfY(0.12, 0.5) + 0.005, sd * 0.5); hl.rotation.y = sd * 0.35;
-    box(0.35, 0.01, 0.2, carbonM, L / 2 - 0.22 * L, surfY(0.22, 0.34) + 0.004, sd * 0.34);
-    box(0.7 + 0.2, 0.14, 0.03, carbonM, L / 2 - 0.58 * L, 0.4, sd * (P.w(0.58) - 0.005));
-    box(0.5, 0.1, 0.03, carbonM, L / 2 - 0.3 * L, 0.34, sd * (P.w(0.3) - 0.005));
-  });
-  box(0.03, 0.03, 1.15, ledR, -2.31, 0.66, 0);
-  for (let i = 0; i < 6; i++) { const s = 0.62 + i * 0.034; box(0.03, 0.012, 0.8, carbonM, L / 2 - s * L, surfY(s, 0) + 0.004, 0); }
-  // exhaust
-  [-1, 1].forEach((sd) => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.18, 24), carbonM); p.rotation.z = Math.PI / 2; p.position.set(-2.3, 0.44, sd * 0.3); car.add(p); });
-  // mirrors
-  [-1, 1].forEach((sd) => box(0.14, 0.05, 0.16, paint, 0.62, 0.62, sd * 0.76));
-
-  // Rear active wing
-  const wing = new THREE.Group(); wing.position.set(-2.05, 0.95, 0); car.add(wing);
-  box(0.5, 0.025, 1.55, carbonM, 0, 0, 0, wing);
-  [-1, 1].forEach((sd) => { box(0.045, 0.34, 0.045, carbonM, 0.05, -0.17, sd * 0.35, wing); box(0.5, 0.06, 0.02, accentM, 0, 0.02, sd * 0.775, wing); });
-  const aeroAnchor = new THREE.Object3D(); aeroAnchor.position.set(0, 0.12, 0.5); wing.add(aeroAnchor);
-
-  // Wheels
-  const spinners = [], accentMats = [accentM];
-  const calM = new THREE.MeshStandardMaterial({ color: 0xff2800, emissive: 0xff2800, emissiveIntensity: 0.5, roughness: 0.4, metalness: 0.4 }); accentMats.push(calM);
-  const tyreGeoF = new THREE.CylinderGeometry(0.38, 0.38, 0.3, 56).rotateX(Math.PI / 2);
-  const tyreGeoR = new THREE.CylinderGeometry(0.4, 0.4, 0.38, 56).rotateX(Math.PI / 2);
-  const rimGeoF = new THREE.CylinderGeometry(0.27, 0.27, 0.31, 40).rotateX(Math.PI / 2);
-  const rimGeoR = new THREE.CylinderGeometry(0.28, 0.28, 0.39, 40).rotateX(Math.PI / 2);
-  const spokeGeo = new THREE.BoxGeometry(0.26, 0.045, 0.025);
-  const capGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.03, 20).rotateX(Math.PI / 2);
-  const calGeo = new THREE.BoxGeometry(0.16, 0.2, 0.06);
-  function wheel(x, rear, sd) {
-    const w = rear ? 0.38 : 0.3, grp = new THREE.Group();
-    const y = rear ? 0.4 : 0.38, s = sNorm(x), z = sd * (P.w(s) - 0.02);
-    grp.position.set(x, y, z);
-    const spin = new THREE.Group(); grp.add(spin);
-    spin.add(new THREE.Mesh(rear ? tyreGeoR : tyreGeoF, tyre));
-    spin.add(new THREE.Mesh(rear ? rimGeoR : rimGeoF, rimM));
-    for (const face of [-1, 1]) {
-      for (let k = 0; k < 10; k++) {
-        const p = new THREE.Group(); p.rotation.z = (k / 10) * Math.PI * 2;
-        const sp = new THREE.Mesh(spokeGeo, spokeM); sp.position.set(0.14, 0, face * (w / 2 + 0.002)); p.add(sp); spin.add(p);
-      }
-      const cp = new THREE.Mesh(capGeo, accentM); cp.position.z = face * (w / 2 + 0.01); spin.add(cp);
-    }
-    const cal = new THREE.Mesh(calGeo, calM); cal.position.set(0.17, 0.07, sd * (w / 2 - 0.08)); grp.add(cal);
-    car.add(grp); spinners.push(spin); return grp;
-  }
-  const fwx = 1.38, rwx = -1.3;
-  const wFL = wheel(fwx, false, 1); wheel(fwx, false, -1); wheel(rwx, true, 1); wheel(rwx, true, -1);
-  const wheelAnchor = new THREE.Object3D(); wheelAnchor.position.set(0, 0, 0.18); wFL.add(wheelAnchor);
-
-  const engAnchor = new THREE.Object3D(); engAnchor.position.set(-1.1, surfY(sNorm(-1.1), 0) + 0.05, 0); car.add(engAnchor);
-  const monoAnchor = new THREE.Object3D(); monoAnchor.position.set(0.12, P.yt(sNorm(0.12)) + P.cb((sNorm(0.12) - cS0) / (cS1 - cS0)) + 0.03, 0); car.add(monoAnchor);
-  const anchors = { aero: aeroAnchor, engine: engAnchor, mono: monoAnchor, wheels: wheelAnchor };
-
-  // Floor, rings, glow
-  const floor = new THREE.Mesh(new THREE.CircleGeometry(16, 96).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0x08080a, metalness: 0.15, roughness: 0.72, envMapIntensity: 0.25 }));
-  scene.add(floor);
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0xff2800, transparent: true, opacity: 0.85 });
-  const ring1 = new THREE.Mesh(new THREE.RingGeometry(3.55, 3.575, 128).rotateX(-Math.PI / 2), ringMat); ring1.position.y = 0.004; scene.add(ring1);
-  const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.08 });
-  const ring2 = new THREE.Mesh(new THREE.RingGeometry(5.2, 5.215, 128).rotateX(-Math.PI / 2), ring2Mat); ring2.position.y = 0.004; scene.add(ring2);
-  const glowTex = radialTex([[0, 'rgba(255,255,255,1)'], [0.45, 'rgba(255,255,255,.35)'], [1, 'rgba(255,255,255,0)']]);
-  const glowMat = new THREE.MeshBasicMaterial({ map: glowTex, color: 0xff2800, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false });
-  const glow = new THREE.Mesh(new THREE.PlaneGeometry(9, 9).rotateX(-Math.PI / 2), glowMat); glow.position.y = 0.006; scene.add(glow);
-  const shadowTex = radialTex([[0, 'rgba(0,0,0,.85)'], [0.6, 'rgba(0,0,0,.45)'], [1, 'rgba(0,0,0,0)']]);
-  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(6.8, 3.2).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
-  shadow.position.y = 0.012; scene.add(shadow);
-
-  // Lights
-  const key = new THREE.SpotLight(0xffffff, 520, 24, 0.55, 0.7, 2); key.position.set(4, 9, 3); key.target.position.set(0, 0.4, 0); scene.add(key, key.target);
-  const fill = new THREE.DirectionalLight(0xaec6ff, 0.7); fill.position.set(-5, 3, 4); scene.add(fill);
-  const rim1 = new THREE.PointLight(0xff2800, 38, 14, 2); rim1.position.set(-4, 1.6, -3.2); scene.add(rim1);
-  const rim2 = new THREE.PointLight(0xff2800, 30, 14, 2); rim2.position.set(4.2, 1.2, -3.8); scene.add(rim2);
-
-  // Mode state
-  const MODE3D = { strada: { wingY: 0.86, wingRot: 0, ride: 0.014 }, sport: { wingY: 0.95, wingRot: 0.1, ride: 0 }, corsa: { wingY: 1.05, wingRot: 0.3, ride: -0.02 } };
-  const st = { wingY: MODE3D.sport.wingY, wingRot: MODE3D.sport.wingRot, ride: 0, spin: 1.4 };
-  const applyState = () => { wing.position.y = st.wingY; wing.rotation.z = st.wingRot; car.position.y = st.ride; };
-  applyState();
-  const syncAccent = () => {
-    setC(ringMat.color, accent); setC(glowMat.color, accent); setC(rim1.color, accent); setC(rim2.color, accent);
-    accentMats.forEach((m) => { setC(m.color, accent); setC(m.emissive, accent); });
-  };
+  const syncAccent = () => car.accentMats.forEach((m) => { setC(m.color, accent); setC(m.emissive, accent); });
   syncAccent(); accentSubs.push(syncAccent);
+
+  const MODE3D = { strada: { wingY: 0.86, wingRot: 0, ride: 0.014, spin: 0.5 }, sport: { wingY: 0.95, wingRot: 0.1, ride: 0, spin: 1.4 }, corsa: { wingY: 1.05, wingRot: 0.3, ride: -0.02, spin: 2.8 } };
+  const ms = { wingY: 0.95, wingRot: 0.1, ride: 0, spin: 1.4 };
+  const applyState = () => { car.wing.position.y = ms.wingY; car.wing.rotation.z = ms.wingRot; car.group.position.y = ms.ride; };
+  applyState();
   let modeTw = null;
   window.addEventListener('drive:mode', (e) => {
-    const t = MODE3D[e.detail.id], spin = { strada: 0.5, sport: 1.4, corsa: 2.8 }[e.detail.id];
+    const t = MODE3D[e.detail.id];
     if (modeTw) modeTw.kill();
-    modeTw = gsap.to(st, { wingY: t.wingY, wingRot: t.wingRot, ride: t.ride, spin, duration: reduce ? 0 : 1.2, ease: 'power3.inOut', onUpdate: applyState });
+    modeTw = gsap.to(ms, { ...t, duration: reduce ? 0 : 1.2, ease: 'power3.inOut', onUpdate: applyState });
   });
   window.addEventListener('showroom:paint', (e) => {
     const c = new THREE.Color(e.detail.hex);
-    gsap.to(paint.color, { r: c.r, g: c.g, b: c.b, duration: reduce ? 0 : 0.7, ease: 'power2.out' });
+    car.paintMats.forEach((m) => gsap.to(m.color, { r: c.r, g: c.g, b: c.b, duration: reduce ? 0 : 0.7, ease: 'power2.out' }));
   });
 
-  // Camera views
   const VIEWS = {
     front: [[5.4, 1.7, 4.6], [0, 0.55, 0]], side: [[0.01, 1.0, 7.6], [0, 0.55, 0]], rear: [[-5.6, 1.9, -4.4], [0, 0.55, 0]], top: [[0.01, 9.2, 0.9], [0, 0.4, 0]],
-    aero: [[-5.0, 2.0, 3.6], [-1.8, 0.8, 0]], engine: [[-3.6, 3.0, 3.4], [-1.0, 0.75, 0]], mono: [[1.8, 1.9, 5.8], [0, 0.8, 0]], wheels: [[3.6, 0.85, 3.5], [1.35, 0.4, 0.9]]
+    aero: [[-5.0, 2.0, 3.6], [-1.8, 0.8, 0]], v12: [[-3.6, 3.0, 3.4], [-1.0, 0.75, 0]], mono: [[1.8, 1.9, 5.8], [0, 0.8, 0]], jantes: [[-3.4, 0.9, 3.6], [-1.3, 0.4, 0.9]], freins: [[3.6, 0.85, 3.5], [1.35, 0.4, 0.9]]
   };
   let camTw = null, idleT = 0;
   const armIdle = () => { clearTimeout(idleT); if (!reduce) idleT = setTimeout(() => { controls.autoRotate = true; }, 12000); };
@@ -1727,11 +2123,11 @@ function initStage() {
   const onStart = () => { controls.autoRotate = false; if (camTw) camTw.kill(); clearTimeout(idleT); };
   controls.addEventListener('start', onStart); controls.addEventListener('end', armIdle);
 
-  // Hotspot projection
+  const anchorMap = { aero: A.wing, v12: A.rearTop, mono: A.roof, jantes: A.wheel, freins: A.brake };
   const hs = [], v3 = new THREE.Vector3(), pr = new THREE.Vector3(), dir = new THREE.Vector3(), ray = new THREE.Raycaster();
   const refreshHs = () => {
     hs.length = 0;
-    stage.querySelectorAll('[data-hotspot]').forEach((el) => { const a = anchors[el.dataset.id]; if (a) hs.push({ el, a, hidden: null, occ: false }); });
+    stage.querySelectorAll('[data-hotspot]').forEach((el) => { const a = anchorMap[el.dataset.id]; if (a) hs.push({ el, a, hidden: null, occ: false }); });
   };
   function updateHotspots(frame) {
     if (!hs.length) { if (frame % 15 === 0) refreshHs(); return; }
@@ -1740,19 +2136,17 @@ function initStage() {
       o.a.getWorldPosition(v3);
       const dist = camera.position.distanceTo(v3);
       pr.copy(v3).project(camera);
-      const behind = pr.z > 1;
       o.el.style.transform = `translate3d(${((pr.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-pr.y * 0.5 + 0.5) * h).toFixed(1)}px,0)`;
       if (frame % 4 === 0) {
         dir.copy(v3).sub(camera.position).normalize(); ray.set(camera.position, dir);
-        const hit = ray.intersectObjects(occluders, false)[0];
+        const hit = ray.intersectObjects(car.occluders, false)[0];
         o.occ = !!hit && hit.distance < dist - 0.1;
       }
-      const hide = behind || o.occ;
+      const hide = pr.z > 1 || o.occ;
       if (hide !== o.hidden) { o.hidden = hide; o.el.style.opacity = hide ? '0' : '1'; o.el.style.pointerEvents = hide ? 'none' : 'auto'; }
     }
   }
 
-  // Resize + loop
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
     renderer.setSize(w, h, false);
@@ -1766,13 +2160,13 @@ function initStage() {
     raf = requestAnimationFrame(tick);
     const dt = Math.min(0.05, (now - last) / 1000); last = now; frame++;
     controls.update();
-    for (const s of spinners) s.rotation.z -= st.spin * dt * 1.2;
+    for (const s of car.spinners) s.rotation.z -= ms.spin * dt * 1.2;
     updateHotspots(frame);
     renderer.render(scene, camera);
   }
   const run = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(tick); } };
   const halt = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
-  const io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; visible ? run() : halt(); }, { rootMargin: '80px' });
+  const io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; if (visible) run(); else halt(); }, { rootMargin: '80px' });
   io.observe(canvas);
   const onVis = () => (document.hidden ? halt() : run());
   document.addEventListener('visibilitychange', onVis);
@@ -1783,17 +2177,17 @@ function initStage() {
     halt(); clearTimeout(idleT); io.disconnect(); ro.disconnect();
     document.removeEventListener('visibilitychange', onVis); canvas.removeEventListener('webglcontextlost', onLost);
     controls.removeEventListener('start', onStart); controls.removeEventListener('end', armIdle); controls.dispose();
-    scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); if (o.material) { const ms = Array.isArray(o.material) ? o.material : [o.material]; ms.forEach((m) => { if (m.map) m.map.dispose(); m.dispose(); }); } });
-    envRT.dispose(); pmrem.dispose(); renderer.dispose(); renderer.forceContextLoss();
+    st.dispose();
   });
 }
 
 function boot() {
-  try { initHero(); } catch (err) { console.warn('Hero scene unavailable:', err); }
-  try { initStage(); } catch (err) { console.warn('Showcase scene unavailable:', err); $('stage').classList.add('no-webgl'); }
+  try { initHero(); } catch (err) { $('top').classList.add('no-webgl'); }
+  try { initExplode(); } catch (err) { $('eclate').classList.add('no-webgl'); }
+  try { initStage(); } catch (err) { $('stage').classList.add('no-webgl'); }
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
-window.addEventListener('pagehide', () => { disposers.splice(0).forEach((fn) => { try { fn(); } catch (e) { /* noop */ } }); });
+window.addEventListener('pagehide', () => { disposers.splice(0).forEach((fn) => { try { fn(); } catch (err) { /* ressource déjà libérée */ } }); });
 </script>
 </body>
 </html>
