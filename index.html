@@ -1717,6 +1717,7 @@ function buildCar({ style, internals }) {
     carbon: new THREE.MeshPhysicalMaterial({ map: style === 'carbon' ? forgedCarbonTexture() : null, color: 0xbfc3c8, metalness: 0.55, roughness: 0.34, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.3, side: THREE.DoubleSide }),
     glass: new THREE.MeshPhysicalMaterial({ color: 0x040507, metalness: 0.2, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 1.8, side: THREE.DoubleSide }),
     dark: new THREE.MeshStandardMaterial({ color: 0x0c0d0f, metalness: 0.7, roughness: 0.42, envMapIntensity: 0.9 }),
+    seat: new THREE.MeshStandardMaterial({ color: 0x3a3d44, metalness: 0.4, roughness: 0.55, envMapIntensity: 1 }),
     metal: new THREE.MeshStandardMaterial({ color: 0x9ea3ab, metalness: 1, roughness: 0.3, envMapIntensity: 1.3 }),
     tyre: new THREE.MeshStandardMaterial({ color: 0x070708, metalness: 0.1, roughness: 0.85 }),
     rim: new THREE.MeshStandardMaterial({ color: 0x1f2126, metalness: 0.9, roughness: 0.3, envMapIntensity: 1.2, side: THREE.DoubleSide }),
@@ -1883,7 +1884,7 @@ function buildCar({ style, internals }) {
     });
 
     // Cockpit
-    const ck = part('cockpit', KF.cockpit), cd = mat(ck, protos.dark), ca = mat(ck, protos.accent, true);
+    const ck = part('cockpit', KF.cockpit), cd = mat(ck, protos.seat), ca = mat(ck, protos.accent, true);
     [-1, 1].forEach((sd) => {
       box(ck, 0.4, 0.08, 0.42, cd, -0.15, 0.46, sd * 0.33);
       box(ck, 0.07, 0.5, 0.4, cd, -0.36, 0.7, sd * 0.33).rotation.z = -0.25;
@@ -2048,8 +2049,8 @@ function initExplode() {
   let raf = 0, visible = false, last = performance.now(), time = 0;
   function frame(now) {
     raf = requestAnimationFrame(frame);
-    const dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
-    state.P += (target.P - state.P) * (1 - Math.exp(-dt * 6));
+    const raw = (now - last) / 1000, dt = Math.min(0.05, raw); last = now; time += dt;
+    state.P += (target.P - state.P) * (1 - Math.exp(-Math.min(0.4, raw) * 6));
     applyProgress(state.P, time);
     for (const s of car.spinners) s.rotation.z -= dt * 0.4;
     renderer.render(scene, camera);
